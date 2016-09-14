@@ -34,6 +34,8 @@ class GUI
                                     const int& value,
                                     const std::string& toolTip );
 
+        void setResizeable ( bool canResize );
+
         void update     ();
         void draw       ();
 
@@ -41,6 +43,16 @@ class GUI
 
     private:
         sf::RectangleShape  m_background;
+
+        sf::Vector2f getGUIOffset () const;
+
+        void reSize();
+
+         Button m_resizeButton;
+        bool m_isResizable   = false;
+        bool m_isHidden      = false;
+
+        constexpr static int m_topBarHeight = 10;
 
         std::vector<std::unique_ptr<GUI_Feature>> m_features;
 };

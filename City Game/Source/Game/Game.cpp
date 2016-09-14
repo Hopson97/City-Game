@@ -7,6 +7,7 @@
 #include "Util/Window.h"
 #include "Util/Mouse.h"
 #include "States/Splash_Screen.h"
+#include "States/Playing.h"
 
 //They are unique pointers so that the life time of these objects can
 //be controlled.
@@ -31,8 +32,9 @@ Game::Game()
     m_textureManager    = std::make_unique<Texture_Manager> ();
 
     loadFont( Res::getFont("rs"), Font_Name::Rs);
+    loadTexture( Res::getTexture( "GUI/Resize_Button" ), Texture_Name::GUI_Resize_Button);
 
-	pushState( std::make_unique<State::Splash_Screen>( *this ) );
+	pushState( std::make_unique<State::Playing>( *this ) );
 }
 
 void Game::run()

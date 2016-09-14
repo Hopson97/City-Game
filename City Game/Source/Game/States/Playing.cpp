@@ -20,6 +20,8 @@ Playing::Playing( Game & game )
     m_buildMenu.setBgColour( { 100, 100, 100 } );
     m_statsMenu.setBgColour( { 100, 100, 100 } );
 
+    m_statsMenu.setResizeable( true );
+
     setUpResourceGUI();
 
     m_game.changeSong( "euk" );
@@ -58,6 +60,7 @@ void Playing :: setBuildingMode( /* */ )
 void Playing :: setUpResourceGUI()
 {
     const int symbolSize = 32;
+    const int gap = 4;
     int symbolY = 1;
 
     m_statsMenu.addSymbolUpdateLabel( Game::getTexture( Texture_Name::Resource_Coins),
@@ -65,28 +68,28 @@ void Playing :: setUpResourceGUI()
                                      1, symbolY,
                                      m_resources.coins,
                                      "The amount of coins you have." );
-    symbolY += symbolSize + 5;
+    symbolY += symbolSize + gap;
 
     m_statsMenu.addSymbolUpdateLabel( Game::getTexture( Texture_Name::Resource_Logs),
                                      symbolSize, symbolSize,
                                      1, symbolY,
                                      m_resources.wood,
                                      "The amount of logs you have." );
-    symbolY += symbolSize + 5;
+    symbolY += symbolSize + gap;
 
     m_statsMenu.addSymbolUpdateLabel( Game::getTexture( Texture_Name::Resource_Stones),
                                      symbolSize, symbolSize,
                                      1, symbolY,
                                      m_resources.stone,
                                      "The amount of stone you have." );
-    symbolY += symbolSize + 5;
+    symbolY += symbolSize + gap;
 
     m_statsMenu.addSymbolUpdateLabel( Game::getTexture( Texture_Name::Resource_Metal),
                                      symbolSize, symbolSize,
                                      1, symbolY,
                                      m_resources.metal,
                                      "The amount of metal you have." );
-    symbolY += symbolSize + 5;
+    symbolY += symbolSize + gap;
 
     m_statsMenu.addSymbolUpdateLabel( Game::getTexture( Texture_Name::Resource_Food),
                                      symbolSize, symbolSize,

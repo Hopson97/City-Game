@@ -17,13 +17,18 @@ class Symbolled_Update_Label : public GUI_Feature
                                 const int& value,
                                 const std::string& toolTip );
 
-        void update () override;
-        void draw   () override;
+        void onUpdate   () override;
+        void draw       () override;
 
     private:
+        void drawToolTip ();
+
         sf::RectangleShape m_symbol;
-        sf::Text m_label;
-        sf::Text m_tooltip;
+        sf::Text    m_label;
+        sf::Text    m_tooltip;
+
+        sf::Clock   m_toolTipTimer;
+        bool        m_isToolTipActive = false;
 
         const int*    m_valueI;
 };

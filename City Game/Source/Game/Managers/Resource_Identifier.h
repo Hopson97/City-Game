@@ -44,6 +44,7 @@ enum class Texture_Name
     Active_Map,
 
     GUI_Brick,
+    GUI_Resize_Button,
 
     Resource_Coins,
     Resource_Logs,

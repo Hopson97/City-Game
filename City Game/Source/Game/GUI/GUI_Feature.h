@@ -2,6 +2,7 @@
 #define GUI_FEATURE_H
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 class GUI_Feature
 {
@@ -13,11 +14,16 @@ class GUI_Feature
                     const sf::Vector2f& guiOffset,
                     const sf::Texture& texture );
 
-        virtual void draw   () = 0;
-        virtual void update () = 0;
+        virtual void draw       () = 0;
+        virtual void onUpdate   () = 0;
+        void update ();
 
     protected:
+        void addRollOverFunction ( std::function<void(void)> f );
+
         sf::RectangleShape m_thing;
+        std::function<void(void)> m_rollOverfunction;
+        bool m_hasRollOverFunction = false;
 };
 
 #endif // GUI_FEATURE_H
