@@ -30,6 +30,8 @@ Game::Game()
     m_soundManager      = std::make_unique<Sound_Manager>   ();
     m_textureManager    = std::make_unique<Texture_Manager> ();
 
+    loadFont( Res::getFont("rs"), Font_Name::Rs);
+
 	pushState( std::make_unique<State::Splash_Screen>( *this ) );
 }
 
@@ -109,21 +111,28 @@ void Game :: popState()
         m_soundManager  ->popState();
         m_textureManager->popState();
     }
+    Log::logMessage( "Finished popping game state.", Log_Type::State_Switch );
 }
 
-void Game :: pushState ( StatePtr state )
+void Game::pushManagerStates()
 {
     m_fontManager   ->pushState();
     m_soundManager  ->pushState();
     m_textureManager->pushState();
+}
 
+void Game :: pushState ( StatePtr state )
+{
     m_stateHandler.pushState( std::move(state) );
+
+    Log::logMessage( "Finished pushing game state.", Log_Type::State_Switch );
 }
 
 void Game :: changeState ( StatePtr state )
 {
     popState();
     pushState( std::move ( state ) );
+    Log::logMessage( "Finished changing game state.", Log_Type::State_Switch );
 }
 
 Game::~Game()

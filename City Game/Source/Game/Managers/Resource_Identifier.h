@@ -28,7 +28,8 @@ namespace Res
 
 enum class Font_Name
 {
-	Arial
+	Arial,
+	Rs
 };
 
 enum class Sound_Name
@@ -43,6 +44,12 @@ enum class Texture_Name
     Active_Map,
 
     GUI_Brick,
+
+    Resource_Coins,
+    Resource_Logs,
+    Resource_Stones,
+    Resource_Metal,
+    Resource_Food,
 
     TEMP2
 };

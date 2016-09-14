@@ -61,8 +61,10 @@ class Resource_Manager
     private:
         void insert ( Key id, Resource_Type resource )
         {
-            Log::logMessage( "Resource inserted of ID: " + std::to_string ( static_cast<int> ( id ) ),
+            Log::logMessage( "Resource inserted of ID: " + std::to_string ( static_cast<int> ( id ) )
+                           + " during state "            + std::to_string ( m_gameState ),
                              Log_Type::Resource_Load );
+
             m_resources.insert( std::make_pair( id, resource ) );
         }
 

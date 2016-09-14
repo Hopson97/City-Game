@@ -9,8 +9,7 @@
 
 FPS_Counter :: FPS_Counter ()
 {
-    m_fpsFont.loadFromFile ( "Data/Fonts/rs.ttf" );
-    m_fpsText.setFont ( m_fpsFont );
+    m_fpsText.setFont ( Game::getFont( Font_Name::Rs ) );
     m_fpsText.setCharacterSize ( 20 );
 }
 

@@ -40,14 +40,17 @@ namespace State
         private:
             void setBuildingMode ( /* */ );
 
+            void setUpResourceGUI();
+
         private:
-            constexpr static float  MENU_SEC_Y  = 600, //Where the menu starts
-                                    MENU_WIDTH  = Window::WIDTH,
-                                    MENU_HEIGHT = 120;
+            constexpr static float  BUILD_MENU_SEC_Y  = 600, //Where the build menu starts
+                                    BUILD_MENU_WIDTH  = Window::WIDTH,
+                                    BUILD_MENU_HEIGHT = 120;
 
             Playing_State m_state = Playing_State::None;
 
             GUI         m_buildMenu;
+            GUI         m_statsMenu;
             Level       m_level;
             Resources   m_resources;
 

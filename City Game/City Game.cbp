@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add directory="Source/Game/Util" />
 					<Add directory="Source/Game/Main" />
+					<Add directory="Source/Game/GUI" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
@@ -35,6 +36,7 @@
 					<Add option="-std=c++14" />
 					<Add directory="Source/Game/Util" />
 					<Add directory="Source/Game/Main" />
+					<Add directory="Source/Game/GUI" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -81,6 +83,10 @@
 		<Unit filename="Source/Game/GUI/Button.h" />
 		<Unit filename="Source/Game/GUI/GUI.cpp" />
 		<Unit filename="Source/Game/GUI/GUI.h" />
+		<Unit filename="Source/Game/GUI/GUI_Feature.cpp" />
+		<Unit filename="Source/Game/GUI/GUI_Feature.h" />
+		<Unit filename="Source/Game/GUI/Symbolled_Update_Label.cpp" />
+		<Unit filename="Source/Game/GUI/Symbolled_Update_Label.h" />
 		<Unit filename="Source/Game/Game.cpp" />
 		<Unit filename="Source/Game/Game.h" />
 		<Unit filename="Source/Game/Main/Building_Type.cpp" />

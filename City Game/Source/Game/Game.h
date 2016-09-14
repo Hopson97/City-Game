@@ -11,6 +11,7 @@
 
 class Game
 {
+    friend class State::State_Base;
 	public:
 		Game		();
 
@@ -34,6 +35,8 @@ class Game
 
 	private:
 		State_Handler m_stateHandler;
+
+		static void pushManagerStates();
 };
 
 #endif // GAME_H_INCLUDED

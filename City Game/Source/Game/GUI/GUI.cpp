@@ -23,16 +23,52 @@ void GUI :: setBgColour ( const sf::Color& colour )
 }
 
 
-void GUI :: addButton(const sf::Texture t, int width, int height, int xPos, int yPos, std::function<void(void)>callback)
+//Add a button
+void GUI :: addButton(const sf::Texture& t,
+                      int width, int height,
+                      int xPos,  int yPos,
+                      std::function<void(void)>callback)
 {
-    m_buttons.emplace_back( t, width, height, xPos, yPos, callback, m_background.getPosition() );
+    m_features.push_back( std::make_unique<Button>
+                          ( t,
+                            width, height,
+                            xPos, yPos,
+                            callback,
+                            m_background.getPosition() ) );
+
+
 }
+
+
+//Add an update label
+void GUI :: addSymbolUpdateLabel(const sf::Texture& t,
+                                 int width, int height,
+                                 int xPos, int yPos,
+                                 const int& value,
+                                 const std::string& toolTip)
+{
+    Symbolled_Update_Label s( width, height,
+                            xPos, yPos,
+                            m_background.getPosition(),
+                            t,
+                            value,
+                            toolTip );
+
+    m_features.push_back( std::make_unique<Symbolled_Update_Label>
+                          ( width, height,
+                            xPos, yPos,
+                            m_background.getPosition(),
+                            t,
+                            value,
+                            toolTip ) );
+}
+
 
 void GUI :: update()
 {
-    for ( auto& button : m_buttons )
+    for ( auto& feature : m_features )
     {
-        button.checkForClick();
+        feature->update();
     }
 }
 
@@ -40,8 +76,8 @@ void GUI :: draw()
 {
     Window::draw( m_background );
 
-    for ( auto& button : m_buttons )
+    for ( auto& feature : m_features )
     {
-        Window::draw( button.m_button );
+        feature->draw();
     }
 }

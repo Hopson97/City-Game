@@ -26,7 +26,6 @@ class FPS_Counter
         int         frameCount      = 0;
         float       frameTimes10    = 0; //Shows average FPS every 10 secs
 
-        sf::Font m_fpsFont;
         sf::Text m_fpsText;
 };
 
