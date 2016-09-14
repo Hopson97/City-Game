@@ -20,6 +20,8 @@ Playing::Playing( Game & game )
     m_buildMenu.setBgColour( { 100, 100, 100 } );
     m_statsMenu.setBgColour( { 100, 100, 100 } );
 
+    setUpResourceGUI();
+
     m_game.changeSong( "euk" );
 
     Log::logMessage( "Switched to Playing state", Log_Type::State_Switch );
