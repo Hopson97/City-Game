@@ -14,7 +14,7 @@
 class GUI
 {
     public:
-        GUI             ( int width, int height, int xPos, int yPos );
+        GUI ( const sf::Vector2f& size, const sf::Vector2f& position );
 
         void setTexture     ( const sf::Texture& texture );
         void setBgColour    ( const sf::Color& colour );

@@ -4,14 +4,15 @@
 #include "Window.h"
 #include "../Game.h"
 
-GUI :: GUI ( int width, int height, int xPos, int yPos )
-:   m_background   ( { (float)width, (float)height + m_topBarHeight } )
-,   m_resizeButton ( { 20, m_topBarHeight }, { 2, 2 }, { (float)xPos, (float)yPos }, Game::getTexture( Texture_Name::GUI_Resize_Button), std::bind( GUI::reSize, this ) )
-{
-    m_background.setPosition( xPos, yPos );
-    m_background.setOutlineThickness( 2 );
-    m_background.setOutlineColor( sf::Color::Black );
-}
+GUI :: GUI( const sf::Vector2f& size, const sf::Vector2f& position)
+    :   m_background   ( size )
+    ,   m_resizeButton ( { 20, m_topBarHeight },
+                         { 2, 2 },
+                          position,
+                          Game::getTexture( Texture_Name::GUI_Resize_Button),
+                          std::bind( GUI::reSize, this ) )
+{ }
+
 
 void GUI :: setTexture(const sf::Texture& texture)
 {
@@ -32,7 +33,7 @@ void GUI :: addButton( const sf::Vector2f& size,
                        std::function<void(void)> callback )
 {
     m_features.push_back( std::make_unique<Button>
-                        ( size, position, getGUIOffset(), texture, callback ) );
+                          ( size, position, getGUIOffset(), texture, callback ) );
 }
 
 //Add an update label
@@ -43,7 +44,7 @@ void GUI :: addSymbolUpdateLabel(const sf::Vector2f& size,
                                  const std::string& toolTip )
 {
     m_features.push_back( std::make_unique<Symbolled_Update_Label>
-                        ( size, position, getGUIOffset(), symbol, value, toolTip ));
+                          ( size, position, getGUIOffset(), symbol, value, toolTip ));
 }
 
 void GUI :: setResizeable ( bool canResize )

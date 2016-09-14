@@ -7,8 +7,8 @@ namespace State
 
 Playing::Playing( Game & game )
 :	State_Base  ( game )
-,   m_buildMenu ( BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT, 0, BUILD_MENU_SEC_Y )
-,   m_statsMenu ( 100, 185, Window::WIDTH - 100, 0 )
+,   m_buildMenu ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
+,   m_statsMenu ( {100, 185}, {Window::WIDTH - 100, 0} )
 ,   m_level     ( "River City" )
 {
     Game::loadTexture( Res::getTexture( "Resource_Types/Gold" ),  Texture_Name::Resource_Coins  );
@@ -28,8 +28,6 @@ Playing::Playing( Game & game )
 
     Log::logMessage( "Switched to Playing state", Log_Type::State_Switch );
 }
-
-
 
 void Playing :: input( float dt )
 {
