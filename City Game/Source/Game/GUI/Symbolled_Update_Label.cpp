@@ -17,7 +17,8 @@ Symbolled_Update_Label :: Symbolled_Update_Label(   int xSize,
 {
     m_label  .setFont   ( Game::getFont( Font_Name::Rs ) );
     m_label.setPosition ( m_thing.getPosition().x + xSize + 5, m_thing.getPosition().y );
-    m_label.setString   ( std::to_string ( value ) );
+
+    update();
 
     m_tooltip.setFont( Game::getFont( Font_Name::Rs ) );
     m_tooltip.setString( toolTip );
@@ -28,7 +29,7 @@ Symbolled_Update_Label :: Symbolled_Update_Label(   int xSize,
 
 void Symbolled_Update_Label :: update()
 {
-
+    m_label.setString   ( std::to_string ( *m_valueI ) );
 }
 
 void Symbolled_Update_Label :: draw()

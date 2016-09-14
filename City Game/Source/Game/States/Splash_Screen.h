@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "../game.h"
-#include "state_base.h"
+#include "../Game.h"
+#include "State_Base.h"
 
-#include "../Util/window.h"
+#include "../Util/Window.h"
 
 namespace State
 {
