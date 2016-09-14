@@ -1,0 +1,18 @@
+*.dll
+*.7z
+*.zip
+*.txt
+
+
+Project/
+
+
+### CodeBlocks ###
+# specific to CodeBlocks IDE
+*.cbp
+*.layout
+*.depend
+
+# generated directories
+bin/
+obj/
