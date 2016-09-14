@@ -6,7 +6,7 @@
 
 GUI :: GUI ( int width, int height, int xPos, int yPos )
 :   m_background   ( { (float)width, (float)height + m_topBarHeight } )
-,   m_resizeButton ( Game::getTexture( Texture_Name::GUI_Resize_Button), 20, m_topBarHeight, 2, 2, std::bind( GUI::reSize, this ), { (float)xPos, (float)yPos } )
+,   m_resizeButton ( { 20, m_topBarHeight }, { 2, 2 }, { (float)xPos, (float)yPos }, Game::getTexture( Texture_Name::GUI_Resize_Button), std::bind( GUI::reSize, this ) )
 {
     m_background.setPosition( xPos, yPos );
     m_background.setOutlineThickness( 2 );
@@ -26,33 +26,24 @@ void GUI :: setBgColour ( const sf::Color& colour )
 
 
 //Add a button
-void GUI :: addButton(const sf::Texture& t,
-                      int width, int height,
-                      int xPos,  int yPos,
-                      std::function<void(void)>callback)
+void GUI :: addButton( const sf::Vector2f& size,
+                       const sf::Vector2f& position,
+                       const sf::Texture&  texture,
+                       std::function<void(void)> callback )
 {
     m_features.push_back( std::make_unique<Button>
-                          ( t,
-                            width, height,
-                            xPos, yPos,
-                            callback,
-                            getGUIOffset() ) );
+                        ( size, position, getGUIOffset(), texture, callback ) );
 }
 
 //Add an update label
-void GUI :: addSymbolUpdateLabel(const sf::Texture& t,
-                                 int width, int height,
-                                 int xPos, int yPos,
+void GUI :: addSymbolUpdateLabel(const sf::Vector2f& size,
+                                 const sf::Vector2f& position,
+                                 const sf::Texture& symbol,
                                  const int& value,
-                                 const std::string& toolTip)
+                                 const std::string& toolTip )
 {
     m_features.push_back( std::make_unique<Symbolled_Update_Label>
-                          ( width, height,
-                            xPos, yPos,
-                            getGUIOffset(),
-                            t,
-                            value,
-                            toolTip ) );
+                        ( size, position, getGUIOffset(), symbol, value, toolTip ));
 }
 
 void GUI :: setResizeable ( bool canResize )

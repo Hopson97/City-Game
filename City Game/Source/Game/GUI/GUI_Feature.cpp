@@ -2,12 +2,19 @@
 
 #include "Mouse.h"
 
-GUI_Feature::GUI_Feature(int xSize, int ySize, int xPos, int yPos, const sf::Vector2f& guiOffset, const sf::Texture& texture )
+GUI_Feature :: GUI_Feature (    const sf::Vector2f& size,
+                                const sf::Vector2f& position,
+                                const sf::Vector2f& guiPos,
+                                const sf::Texture&  texture )
 {
-    m_thing.setSize     ( { (float)xSize, (float)ySize } );
-    m_thing.setPosition ( xPos + guiOffset.x, yPos + guiOffset.y );
+    m_thing.setSize     ( size );
+    m_thing.setPosition ( position.x + guiPos.x, position.y + guiPos.y );
     m_thing.setTexture  ( &texture );
 }
+
+
+
+
 
 void GUI_Feature :: addRollOverFunction ( std::function<void(void)> f )
 {

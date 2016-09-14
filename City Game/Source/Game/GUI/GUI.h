@@ -19,20 +19,17 @@ class GUI
         void setTexture     ( const sf::Texture& texture );
         void setBgColour    ( const sf::Color& colour );
 
-        void addButton  (   const sf::Texture& t,
-                            int width,
-                            int height,
-                            int xPos,
-                            int yPos,
-                            std::function<void(void)> callback  );
+        void addButton  (   const sf::Vector2f& size,
+                            const sf::Vector2f& position,
+                            const sf::Texture&  texture,
+                            std::function<void(void)> callback );
 
-        void addSymbolUpdateLabel ( const sf::Texture& t,
-                                    int width,
-                                    int height,
-                                    int xPos,
-                                    int yPos,
+        void addSymbolUpdateLabel ( const sf::Vector2f& size,
+                                    const sf::Vector2f& position,
+                                    const sf::Texture& symbol,
                                     const int& value,
                                     const std::string& toolTip );
+
 
         void setResizeable ( bool canResize );
 

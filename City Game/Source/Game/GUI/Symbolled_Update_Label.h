@@ -8,11 +8,9 @@
 class Symbolled_Update_Label : public GUI_Feature
 {
     public:
-        Symbolled_Update_Label( int xSize,
-                                int ySize,
-                                int xPos,
-                                int yPos,
-                                const sf::Vector2f& guiOffset,
+        Symbolled_Update_Label( const sf::Vector2f& size,
+                                const sf::Vector2f& position,
+                                const sf::Vector2f& guiPos,
                                 const sf::Texture& m_symbol,
                                 const int& value,
                                 const std::string& toolTip );

@@ -10,14 +10,12 @@
 class Button : public GUI_Feature
 {
     public:
-        Button ( const sf::Texture& t,
-                int width,
-                int height,
-                int xPos,
-                int yPos,
-                std::function<void(void)> callback,
-                const sf::Vector2f& guiPos
-            );
+        Button (    const sf::Vector2f& size,
+                    const sf::Vector2f& position,
+                    const sf::Vector2f& guiPos,
+                    const sf::Texture&  texture,
+                    std::function<void(void)> callback
+                );
 
         void draw       () override;
         void onUpdate   () override;
