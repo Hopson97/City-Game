@@ -9,12 +9,21 @@
 
 #include "../GUI/GUI.h"
 
-#include "../../Level.h"
+#include "../Main/Level.h"
 
 namespace State
 {
 	class Playing : public State_Base
 	{
+	    struct Resources
+	    {
+	        int coins   = 100;
+	        int wood    = 10;
+	        int stone   = 10;
+	        int metal   = 10;
+	        int food    = 10;
+	    };
+
 	    enum class Playing_State
 	    {
 	        None,
@@ -38,9 +47,9 @@ namespace State
 
             Playing_State m_state = Playing_State::None;
 
-            GUI m_buildMenu;
-
-            Level m_level;
+            GUI         m_buildMenu;
+            Level       m_level;
+            Resources   m_resources;
 
 	};
 }

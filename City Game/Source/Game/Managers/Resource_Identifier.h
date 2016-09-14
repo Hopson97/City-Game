@@ -43,6 +43,7 @@ enum class Texture_Name
     Active_Map,
 
     GUI_Brick,
+
     TEMP2
 };
 

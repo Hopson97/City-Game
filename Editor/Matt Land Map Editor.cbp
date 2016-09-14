@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Matt Land Map Editor" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Matt Land Map Editor" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++14" />
+					<Add option="-g" />
+					<Add directory="Source" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-graphics-d" />
+					<Add library="sfml-window-d" />
+					<Add library="sfml-audio-d" />
+					<Add library="sfml-network-d" />
+					<Add library="sfml-system-d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Matt Land Map Editor" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++14" />
+					<Add directory="Source" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-network" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="D:/_Programming Libraries/C++/SFML Libraries/SFML-2.3.2 ... MinGW/include" />
+		</Compiler>
+		<Linker>
+			<Add directory="D:/_Programming Libraries/C++/SFML Libraries/SFML-2.3.2 ... MinGW/lib" />
+		</Linker>
+		<Unit filename="Project/SFML Full.exe" />
+		<Unit filename="Project/libstdc++-6.dll" />
+		<Unit filename="Project/openal32.dll" />
+		<Unit filename="Project/sfml-audio-2.dll" />
+		<Unit filename="Project/sfml-audio-d-2.dll" />
+		<Unit filename="Project/sfml-graphics-2.dll" />
+		<Unit filename="Project/sfml-graphics-d-2.dll" />
+		<Unit filename="Project/sfml-network-2.dll" />
+		<Unit filename="Project/sfml-network-d-2.dll" />
+		<Unit filename="Project/sfml-system-2.dll" />
+		<Unit filename="Project/sfml-system-d-2.dll" />
+		<Unit filename="Project/sfml-window-2.dll" />
+		<Unit filename="Project/sfml-window-d-2.dll" />
+		<Unit filename="SFML Full.depend" />
+		<Unit filename="Source/App.cpp" />
+		<Unit filename="Source/App.h" />
+		<Unit filename="Source/App_Save.cpp" />
+		<Unit filename="Source/Main.cpp" />
+		<Unit filename="Source/Mouse.cpp" />
+		<Unit filename="Source/Mouse.h" />
+		<Unit filename="Source/Set_Up.cpp" />
+		<Unit filename="Source/Set_Up.h" />
+		<Unit filename="openal32.dll" />
+		<Unit filename="sfml-audio-2.dll" />
+		<Unit filename="sfml-audio-d-2.dll" />
+		<Unit filename="sfml-graphics-2.dll" />
+		<Unit filename="sfml-graphics-d-2.dll" />
+		<Unit filename="sfml-network-2.dll" />
+		<Unit filename="sfml-network-d-2.dll" />
+		<Unit filename="sfml-system-2.dll" />
+		<Unit filename="sfml-system-d-2.dll" />
+		<Unit filename="sfml-window-2.dll" />
+		<Unit filename="sfml-window-d-2.dll" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

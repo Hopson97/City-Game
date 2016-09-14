@@ -12,7 +12,8 @@ Playing::Playing( Game & game )
 {
     Game::loadTexture( Res::getTexture( "GUI/Bricks" ),   Texture_Name::GUI_Brick,  false );
 
-    m_buildMenu.setTexture  ( Game::getTexture( Texture_Name::GUI_Brick ) );
+    m_buildMenu.setBgColour( { 100, 100, 100, 255 } );
+
     //m_buildMenu.addButton   ( Game::getTexture( Texture_Name::TEMP2 ), 20, 20, 10, 10, std::bind( &Playing::testButton, this ) );
 
     m_game.changeSong( "euk" );

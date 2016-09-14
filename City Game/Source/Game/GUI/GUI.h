@@ -14,7 +14,8 @@ class GUI
     public:
         GUI             ( int width, int height, int xPos, int yPos );
 
-        void setTexture ( const sf::Texture& texture );
+        void setTexture     ( const sf::Texture& texture );
+        void setBgColour    ( const sf::Color& colour );
 
         void addButton  ( const sf::Texture t,
                         int width,

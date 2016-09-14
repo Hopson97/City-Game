@@ -16,6 +16,8 @@ struct Button
              const sf::Vector2f& guiPos
            );
 
+
+
     void checkForClick();
 
     sf::RectangleShape          m_button;

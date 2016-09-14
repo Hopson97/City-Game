@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="City Game" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/City Game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++14" />
+					<Add option="-g" />
+					<Add directory="Source/Game/Util" />
+					<Add directory="Source/Game/Main" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-graphics-d" />
+					<Add library="sfml-window-d" />
+					<Add library="sfml-audio-d" />
+					<Add library="sfml-network-d" />
+					<Add library="sfml-system-d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/City Game" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-std=c++14" />
+					<Add directory="Source/Game/Util" />
+					<Add directory="Source/Game/Main" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-network" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="D:/_Programming Libraries/C++/SFML Libraries/SFML-2.3.2 ... MinGW/include" />
+		</Compiler>
+		<Linker>
+			<Add directory="D:/_Programming Libraries/C++/SFML Libraries/SFML-2.3.2 ... MinGW/lib" />
+		</Linker>
+		<Unit filename="Data/Fonts/arial.ttf" />
+		<Unit filename="Data/Music/euk.ogg" />
+		<Unit filename="Data/Sounds/example.ogg" />
+		<Unit filename="Data/Textures/sfml.png" />
+		<Unit filename="Logs/Info.txt" />
+		<Unit filename="Project/Data/Fonts/arial.ttf" />
+		<Unit filename="Project/Data/Music/euk.ogg" />
+		<Unit filename="Project/Data/Sounds/example.ogg" />
+		<Unit filename="Project/Data/Textures/sfml.png" />
+		<Unit filename="Project/Logs/Info.txt" />
+		<Unit filename="Project/libgcc_s_sjlj-1.dll" />
+		<Unit filename="Project/libstdc++-6.dll" />
+		<Unit filename="Project/openal32.dll" />
+		<Unit filename="Project/sfml-audio-2.dll" />
+		<Unit filename="Project/sfml-audio-d-2.dll" />
+		<Unit filename="Project/sfml-graphics-2.dll" />
+		<Unit filename="Project/sfml-graphics-d-2.dll" />
+		<Unit filename="Project/sfml-network-2.dll" />
+		<Unit filename="Project/sfml-network-d-2.dll" />
+		<Unit filename="Project/sfml-system-2.dll" />
+		<Unit filename="Project/sfml-system-d-2.dll" />
+		<Unit filename="Project/sfml-window-2.dll" />
+		<Unit filename="Project/sfml-window-d-2.dll" />
+		<Unit filename="Source/Game/GUI/Button.cpp" />
+		<Unit filename="Source/Game/GUI/Button.h" />
+		<Unit filename="Source/Game/GUI/GUI.cpp" />
+		<Unit filename="Source/Game/GUI/GUI.h" />
+		<Unit filename="Source/Game/Game.cpp" />
+		<Unit filename="Source/Game/Game.h" />
+		<Unit filename="Source/Game/Main/Building_Type.cpp" />
+		<Unit filename="Source/Game/Main/Building_Type.h" />
+		<Unit filename="Source/Game/Main/Level.cpp" />
+		<Unit filename="Source/Game/Main/Level.h" />
+		<Unit filename="Source/Game/Main/Level_Loader.cpp" />
+		<Unit filename="Source/Game/Managers/Music_Manager.cpp" />
+		<Unit filename="Source/Game/Managers/Music_Manager.h" />
+		<Unit filename="Source/Game/Managers/Resource_Identifier.h" />
+		<Unit filename="Source/Game/Managers/Resource_Manager.h" />
+		<Unit filename="Source/Game/States/Menu.cpp" />
+		<Unit filename="Source/Game/States/Menu.h" />
+		<Unit filename="Source/Game/States/Playing.cpp" />
+		<Unit filename="Source/Game/States/Playing.h" />
+		<Unit filename="Source/Game/States/Splash_Screen.cpp" />
+		<Unit filename="Source/Game/States/Splash_Screen.h" />
+		<Unit filename="Source/Game/States/State_Base.cpp" />
+		<Unit filename="Source/Game/States/State_Base.h" />
+		<Unit filename="Source/Game/States/State_Handler.cpp" />
+		<Unit filename="Source/Game/States/State_Handler.h" />
+		<Unit filename="Source/Game/Util/Debug_Log.cpp" />
+		<Unit filename="Source/Game/Util/Debug_Log.h" />
+		<Unit filename="Source/Game/Util/FPS_Counter.cpp" />
+		<Unit filename="Source/Game/Util/FPS_Counter.h" />
+		<Unit filename="Source/Game/Util/Mouse.cpp" />
+		<Unit filename="Source/Game/Util/Mouse.h" />
+		<Unit filename="Source/Game/Util/Random.cpp" />
+		<Unit filename="Source/Game/Util/Random.h" />
+		<Unit filename="Source/Game/Util/Window.cpp" />
+		<Unit filename="Source/Game/Util/Window.h" />
+		<Unit filename="Source/Main.cpp" />
+		<Unit filename="libgcc_s_sjlj-1.dll" />
+		<Unit filename="libstdc++-6.dll" />
+		<Unit filename="openal32.dll" />
+		<Unit filename="sfml-audio-2.dll" />
+		<Unit filename="sfml-audio-d-2.dll" />
+		<Unit filename="sfml-graphics-2.dll" />
+		<Unit filename="sfml-graphics-d-2.dll" />
+		<Unit filename="sfml-network-2.dll" />
+		<Unit filename="sfml-network-d-2.dll" />
+		<Unit filename="sfml-system-2.dll" />
+		<Unit filename="sfml-system-d-2.dll" />
+		<Unit filename="sfml-window-2.dll" />
+		<Unit filename="sfml-window-d-2.dll" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

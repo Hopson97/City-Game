@@ -17,6 +17,12 @@ void GUI :: setTexture(const sf::Texture& texture)
 }
 
 
+void GUI :: setBgColour ( const sf::Color& colour )
+{
+    m_background.setFillColor( colour );
+}
+
+
 void GUI :: addButton(const sf::Texture t, int width, int height, int xPos, int yPos, std::function<void(void)>callback)
 {
     m_buttons.emplace_back( t, width, height, xPos, yPos, callback, m_background.getPosition() );
