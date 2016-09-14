@@ -12,7 +12,7 @@ Button:: Button (    const sf::Vector2f& size,
 :   GUI_Feature ( size, position, guiPos, texture )
 ,   m_function ( callback )
 {
-
+    addRollOverFunction ( std::bind ( Button::checkForClick, this ) );
 }
 
 void Button :: checkForClick()
