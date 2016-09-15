@@ -10,7 +10,7 @@
 #include "Symbolled_Update_Label.h"
 
 //dont judge me, this is my first time doing gui really
-//it's ok
+//it's ok, same here
 
 class GUI
 {
