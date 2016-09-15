@@ -9,6 +9,7 @@ void Music_Manager::playSong( const std::string& name )
     }
     m_currentSong = std::make_unique<sf::Music>();
     m_currentSong->openFromFile ( "Data/Music/" + name + ".ogg" );
+    m_currentSong->setVolume ( 10 );
     m_currentSong->play();
     m_currentSong->setLoop( true );
 }

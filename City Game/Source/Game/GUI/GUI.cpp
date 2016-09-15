@@ -5,13 +5,15 @@
 #include "../Game.h"
 
 GUI :: GUI( const sf::Vector2f& size, const sf::Vector2f& position)
-    :   m_background   ( size )
+    :   m_background   (  { size.x, size.y + m_topBarHeight + 2 } )
     ,   m_resizeButton ( { 20, m_topBarHeight },
                          { 2, 2 },
                           position,
                           Game::getTexture( Texture_Name::GUI_Resize_Button),
                           std::bind( GUI::reSize, this ) )
-{ }
+{
+    m_background.setPosition( position );
+}
 
 
 void GUI :: setTexture(const sf::Texture& texture)
