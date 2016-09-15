@@ -1,8 +1,9 @@
 #ifndef STATE_PLAYING_H
 #define STATE_PLAYING_H
 
-#include "../game.h"
-#include "state_base.h"
+#include "State_Base.h"
+
+#include "../Game.h"
 
 #include "../Util/Window.h"
 #include "../Util/Mouse.h"

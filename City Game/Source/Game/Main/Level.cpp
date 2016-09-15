@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#include "Window.h"
+#include "../Util/Window.h"
 
 Level::Level( const std::string& name )
 :   m_name ( name )

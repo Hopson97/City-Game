@@ -1,7 +1,8 @@
 #include "GUI.h"
 
-#include "Mouse.h"
-#include "Window.h"
+#include "../Util/Mouse.h"
+#include "../Util/Window.h"
+
 #include "../Game.h"
 
 GUI :: GUI( const sf::Vector2f& size, const sf::Vector2f& position)

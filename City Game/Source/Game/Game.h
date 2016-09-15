@@ -4,10 +4,10 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "States\state_handler.h"
+#include "States/State_Handler.h"
 
-#include "Managers/music_manager.h"
-#include "Managers/resource_identifier.h"
+#include "Managers/Music_Manager.h"
+#include "Managers/Resource_Identifier.h"
 
 class Game
 {

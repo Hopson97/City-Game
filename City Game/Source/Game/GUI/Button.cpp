@@ -1,7 +1,7 @@
 #include "Button.h"
 
-#include "Mouse.h"
-#include "Window.h"
+#include "../Util/Mouse.h"
+#include "../Util/Window.h"
 
 Button:: Button (    const sf::Vector2f& size,
                      const sf::Vector2f& position,

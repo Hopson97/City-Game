@@ -1,8 +1,8 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-#include "../game.h"
-#include "state_base.h"
+#include "../Game.h"
+#include "State_Base.h"
 
 namespace State
 {

@@ -1,6 +1,6 @@
 #include "GUI_Feature.h"
 
-#include "Mouse.h"
+#include "../Util/Mouse.h"
 
 GUI_Feature :: GUI_Feature (    const sf::Vector2f& size,
                                 const sf::Vector2f& position,

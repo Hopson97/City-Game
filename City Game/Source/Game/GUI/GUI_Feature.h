@@ -2,6 +2,7 @@
 #define GUI_FEATURE_H
 
 #include <SFML/Graphics.hpp>
+
 #include <functional>
 
 class GUI_Feature

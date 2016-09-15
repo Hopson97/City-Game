@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "resource_manager.h"
+#include "Resource_Manager.h"
 
 namespace Res
 {

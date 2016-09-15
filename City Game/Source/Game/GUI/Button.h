@@ -1,9 +1,9 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <SFML/Graphics.hpp>
-
 #include <functional>
+
+#include <SFML/Graphics.hpp>
 
 #include "GUI_Feature.h"
 

@@ -2,7 +2,7 @@
 
 #include "../Game.h"
 
-#include "Window.h"
+#include "../Util/Window.h"
 
 #include <iostream>
 

@@ -3,8 +3,9 @@
 
 #include <vector>
 
-#include "../Game.h"
 #include "State_Base.h"
+
+#include "../Game.h"
 
 #include "../Util/Window.h"
 
