@@ -52,6 +52,8 @@ enum class Texture_Name
     Resource_Metal,
     Resource_Food,
 
+    Stat_Population,
+
     TEMP2
 };
 

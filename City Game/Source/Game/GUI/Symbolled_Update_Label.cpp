@@ -22,7 +22,7 @@ Symbolled_Update_Label :: Symbolled_Update_Label(   const sf::Vector2f& size,
 
     m_tooltip.setFont( Game::getFont( Font_Name::Rs ) );
     m_tooltip.setString( toolTip );
-    m_tooltip.setPosition( 25, 25 );
+    m_tooltip.setPosition( Window::WIDTH / 2 - m_tooltip.getLocalBounds().width / 2, 25 );
 
     m_label     .setCharacterSize( 15 );
     m_tooltip   .setCharacterSize( 15 );

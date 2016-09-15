@@ -24,6 +24,12 @@ namespace State
 	        int food    = 10;
 	    };
 
+	    struct Statistics
+	    {
+	        int population              = 0;
+	        int unemployedPopulation    = 0;
+	    };
+
 	    enum class Playing_State
 	    {
 	        None,
@@ -40,7 +46,8 @@ namespace State
         private:
             void setBuildingMode ( /* */ );
 
-            void setUpResourceGUI();
+            void setUpResourceGUI   ();
+            void setUpStatisticGUI  ();
 
         private:
             constexpr static float  BUILD_MENU_SEC_Y  = 600, //Where the build menu starts
@@ -50,9 +57,11 @@ namespace State
             Playing_State m_state = Playing_State::None;
 
             GUI         m_buildMenu;
-            GUI         m_statsMenu;
+            GUI         m_resourceGUI;
+            GUI         m_statsGUI;
             Level       m_level;
             Resources   m_resources;
+            Statistics  m_statistics;
 
 	};
 }

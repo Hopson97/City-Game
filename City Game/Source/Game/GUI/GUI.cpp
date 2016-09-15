@@ -13,6 +13,8 @@ GUI :: GUI( const sf::Vector2f& size, const sf::Vector2f& position)
                           std::bind( GUI::reSize, this ) )
 {
     m_background.setPosition( position );
+    m_background.setOutlineThickness( 3 );
+    m_background.setOutlineColor( sf::Color::Black );
 }
 
 

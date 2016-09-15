@@ -61,12 +61,12 @@ void Game::run()
 		m_stateHandler.peekState()->draw	(dt);
 
 		Mouse::draw();
-		counter.update();
-		counter.drawFPS();
 
 		if ( m_musicManager->finished() ) {
             resetMusic();
 		}
+        counter.update();
+		counter.drawFPS();
 
 		Window::update();
 	}
@@ -157,13 +157,17 @@ void Game :: resetMusic()
     static std::vector<std::string> songNames =
     {
         "euk",
-        "uouat"
+        "uouat",
+        "tbatw"
     };
 
-    int song = Random::integer( 0, songNames.size() - 1 );
-
+    static int lastSong = songNames.size();
+    int song = lastSong;
+    while ( song == lastSong ) { //This is so that the same song does not play twice in a row
+        song = Random::integer( 0, songNames.size() - 1 );
+    }
+    lastSong = song;
     m_musicManager->playSong ( songNames.at( song ) );
-
 }
 
 
