@@ -10,8 +10,13 @@ class Music_Manager
     public:
         void playSong	( const std::string& name );
 
+        bool finished   () const;
+
     private:
-        std::unique_ptr<sf::Music> m_currentSong;
+        sf::Music m_currentSong;
+        sf::Clock m_songTimer;
+
+        float m_songTime;
 };
 
 #endif

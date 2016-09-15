@@ -6,8 +6,11 @@
 #include "Util/FPS_Counter.h"
 #include "Util/Window.h"
 #include "Util/Mouse.h"
+#include "Util/Random.h"
+
 #include "States/Splash_Screen.h"
 #include "States/Playing.h"
+
 
 //They are unique pointers so that the life time of these objects can
 //be controlled.
@@ -34,6 +37,8 @@ Game::Game()
     loadFont( Res::getFont("rs"), Font_Name::Rs);
     loadTexture( Res::getTexture( "GUI/Resize_Button" ), Texture_Name::GUI_Resize_Button);
 
+    resetMusic();
+
 	pushState( std::make_unique<State::Playing>( *this ) );
 }
 
@@ -58,6 +63,10 @@ void Game::run()
 		Mouse::draw();
 		counter.update();
 		counter.drawFPS();
+
+		if ( m_musicManager->finished() ) {
+            resetMusic();
+		}
 
 		Window::update();
 	}
@@ -137,8 +146,24 @@ void Game :: changeState ( StatePtr state )
     Log::logMessage( "Finished changing game state.", Log_Type::State_Switch );
 }
 
-Game::~Game()
+Game :: ~Game()
 {
 	Window::destroy();
 }
+
+void Game :: resetMusic()
+{
+    static std::string songPath = "Data/Music/";
+    static std::vector<std::string> songNames =
+    {
+        "euk",
+        "uouat"
+    };
+
+    int song = Random::integer( 0, songNames.size() - 1 );
+
+    m_musicManager->playSong ( songNames.at( song ) );
+
+}
+
 

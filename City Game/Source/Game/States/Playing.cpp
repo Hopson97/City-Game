@@ -24,7 +24,7 @@ Playing::Playing( Game & game )
 
     setUpResourceGUI();
 
-    m_game.changeSong( "euk" );
+    //m_game.changeSong( "euk" );
 
     Log::logMessage( "Switched to Playing state", Log_Type::State_Switch );
 }

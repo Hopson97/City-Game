@@ -38,6 +38,7 @@ void GUI :: addButton( const sf::Vector2f& size,
                           ( size, position, getGUIOffset(), texture, callback ) );
 }
 
+
 //Add an update label
 void GUI :: addSymbolUpdateLabel(const sf::Vector2f& size,
                                  const sf::Vector2f& position,
@@ -69,6 +70,7 @@ void GUI :: update()
 
 void GUI :: draw()
 {
+    //This is basically for if the GUI has been "resized", meaning it is hidden.
     if ( !m_isHidden ) {
         Window::draw( m_background );
 
@@ -76,6 +78,7 @@ void GUI :: draw()
             feature->draw();
         }
     }
+
     if ( m_isResizable ) {
         m_resizeButton.draw();
     }

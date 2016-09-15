@@ -37,6 +37,8 @@ class Game
 		State_Handler m_stateHandler;
 
 		static void pushManagerStates();
+
+		void resetMusic();
 };
 
 #endif // GAME_H_INCLUDED
