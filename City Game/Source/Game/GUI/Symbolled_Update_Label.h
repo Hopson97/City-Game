@@ -1,7 +1,7 @@
 #ifndef SYMBOLLED_UPDATE_LABEL_H
 #define SYMBOLLED_UPDATE_LABEL_H
 
-#include <SFMl/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "GUI_Feature.h"
 

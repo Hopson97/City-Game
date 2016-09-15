@@ -89,4 +89,11 @@ void Level_Values::setUpStatisticGUI()
                                         m_statistics.population,
                                         "Population." );
     position.y += increase;
+
+    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
+                                        position,
+                                        Game::getTexture( Texture_Name::Stat_Vacancy ),
+                                        m_statistics.vacancy,
+                                        "Jobless population looking for work." );
+    position.y += increase;
 }

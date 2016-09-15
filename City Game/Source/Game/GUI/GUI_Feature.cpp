@@ -16,7 +16,7 @@ GUI_Feature :: GUI_Feature (    const sf::Vector2f& size,
 
 
 
-void GUI_Feature :: addRollOverFunction ( std::function<void(void)> f )
+void GUI_Feature :: addRollOverFunction ( std::function<void()> f )
 {
     m_rollOverfunction = f;
     m_hasRollOverFunction = true;

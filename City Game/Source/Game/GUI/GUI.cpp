@@ -11,7 +11,7 @@ GUI :: GUI( const sf::Vector2f& size, const sf::Vector2f& position)
                          { 2, 2 },
                           position,
                           Game::getTexture( Texture_Name::GUI_Resize_Button),
-                          std::bind( GUI::reSize, this ) )
+                          std::bind( &GUI::reSize, this ) )
 {
     m_background.setPosition( position );
     m_background.setOutlineThickness( 3 );

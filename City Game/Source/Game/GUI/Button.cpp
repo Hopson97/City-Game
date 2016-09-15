@@ -12,7 +12,9 @@ Button:: Button (    const sf::Vector2f& size,
 :   GUI_Feature ( size, position, guiPos, texture )
 ,   m_function ( callback )
 {
-    addRollOverFunction ( std::bind ( Button::checkForClick, this ) );
+    auto fp = std::bind(&Button::checkForClick, this);
+    addRollOverFunction ( fp );
+    //addRollOverFunction ( std::bind ( Button::checkForClick, this ) );
 }
 
 void Button :: checkForClick()
@@ -23,6 +25,8 @@ void Button :: checkForClick()
             m_activeTimer.restart();
         }
     }
+
+    return;
 }
 
 void Button :: draw ()

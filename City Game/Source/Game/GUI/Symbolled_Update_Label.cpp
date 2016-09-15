@@ -27,7 +27,7 @@ Symbolled_Update_Label :: Symbolled_Update_Label(   const sf::Vector2f& size,
     m_label     .setCharacterSize( 15 );
     m_tooltip   .setCharacterSize( 15 );
 
-    addRollOverFunction( std::bind ( Symbolled_Update_Label::drawToolTip, this ) );
+    addRollOverFunction( std::bind ( &Symbolled_Update_Label::drawToolTip, this ) );
 }
 
 void Symbolled_Update_Label :: onUpdate()

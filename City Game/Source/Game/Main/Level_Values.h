@@ -17,6 +17,7 @@ class Level_Values
     struct Statistics
     {
         int population              = 0;
+        int vacancy                 = 0;
         int unemployedPopulation    = 0;
     };
 

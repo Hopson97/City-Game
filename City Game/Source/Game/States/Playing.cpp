@@ -16,6 +16,7 @@ Playing::Playing( Game & game )
     Game::loadTexture( Res::getTexture( "Resource_Types/Food" ), Texture_Name::Resource_Food );
 
     Game::loadTexture( Res::getTexture( "Statistics/Population"), Texture_Name::Stat_Population );
+    Game::loadTexture( Res::getTexture( "Statistics/Vacancy" ), Texture_Name::Stat_Vacancy );
 
     m_buildMenu     .setBgColour    ( { 100, 100, 100 } );
 
