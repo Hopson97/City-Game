@@ -1,6 +1,8 @@
 #ifndef STATE_PLAYING_H
 #define STATE_PLAYING_H
 
+#include <memory>
+
 #include "State_Base.h"
 
 #include "../Game.h"
@@ -16,21 +18,6 @@ namespace State
 {
 	class Playing : public State_Base
 	{
-	    struct Resources
-	    {
-	        int coins   = 100;
-	        int wood    = 10;
-	        int stone   = 10;
-	        int metal   = 10;
-	        int food    = 10;
-	    };
-
-	    struct Statistics
-	    {
-	        int population              = 0;
-	        int unemployedPopulation    = 0;
-	    };
-
 	    enum class Playing_State
 	    {
 	        None,
@@ -58,12 +45,8 @@ namespace State
             Playing_State m_state = Playing_State::None;
 
             GUI         m_buildMenu;
-            GUI         m_resourceGUI;
-            GUI         m_statsGUI;
-            Level       m_level;
-            Resources   m_resources;
-            Statistics  m_statistics;
 
+            std::unique_ptr<Level> m_level;
 	};
 }
 

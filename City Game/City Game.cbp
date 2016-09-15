@@ -14,9 +14,7 @@
 				<Compiler>
 					<Add option="-std=c++14" />
 					<Add option="-g" />
-					<Add directory="Source/Game/Util" />
 					<Add directory="Source/Game/Main" />
-					<Add directory="Source/Game/GUI" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
@@ -34,9 +32,7 @@
 				<Compiler>
 					<Add option="-O3" />
 					<Add option="-std=c++14" />
-					<Add directory="Source/Game/Util" />
 					<Add directory="Source/Game/Main" />
-					<Add directory="Source/Game/GUI" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -94,6 +90,8 @@
 		<Unit filename="Source/Game/Main/Level.cpp" />
 		<Unit filename="Source/Game/Main/Level.h" />
 		<Unit filename="Source/Game/Main/Level_Loader.cpp" />
+		<Unit filename="Source/Game/Main/Level_Values.cpp" />
+		<Unit filename="Source/Game/Main/Level_Values.h" />
 		<Unit filename="Source/Game/Managers/Music_Manager.cpp" />
 		<Unit filename="Source/Game/Managers/Music_Manager.h" />
 		<Unit filename="Source/Game/Managers/Resource_Identifier.h" />

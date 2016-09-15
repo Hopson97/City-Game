@@ -11,10 +11,12 @@ Level::Level( const std::string& name )
 
 void Level :: update( float dt)
 {
-
+    m_values.update();
 }
 
 void Level :: draw()
 {
     Window::draw( m_background );
+
+    m_values.draw();
 }

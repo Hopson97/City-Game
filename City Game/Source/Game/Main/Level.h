@@ -5,6 +5,8 @@
 
 #include <vector>
 
+#include "Level_Values.h"
+
 class Level
 {
     public:
@@ -20,6 +22,8 @@ class Level
         sf::RectangleShape m_background;
 
         sf::String m_name;
+
+        Level_Values m_values;
 
         std::vector<sf::FloatRect> m_waterSections;
         std::vector<sf::FloatRect> m_groundSections;
