@@ -29,10 +29,10 @@ namespace House_Data
     struct Hut : public Base_House_Data
     {
         Hut()
-        :   Base_House_Data ( 2,
-                            { 20, 2, 0, 0, 1 },
-                            { 1, 0, 0, 0, 0 },
-                            { 16, 16 },
+        :   Base_House_Data ( 2,                //Maximum Occupants
+                            { 20, 2, 0, 0, 1 }, //The cost
+                            { 1, 0, 0, 0, 0 },  //The rates
+                            { 16, 16 },         //The size (pixel size on the window)
                             Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
         { }
 
