@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 
 #include <vector>
+#include <memory>
+
+#include "Building_Type.h"
 
 #include "Level_Values.h"
 
@@ -14,6 +17,8 @@ class Level
 
         void update ( float dt );
         void draw   ();
+
+        void addBuilding ( std::unique_ptr<Building> b );
 
     private:
         void init ();
@@ -29,11 +34,11 @@ class Level
         std::vector<sf::FloatRect> m_groundSections;
         std::vector<sf::FloatRect> m_noBuildSections;
 
+        std::vector<std::unique_ptr<Building>> m_buildings;
+
         static
         constexpr int   WIDTH  = 1280,
                         HEIGHT = 600;
-
-
 };
 
 #endif // LEVEL_H

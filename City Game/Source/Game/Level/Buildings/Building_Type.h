@@ -1,14 +1,9 @@
 #ifndef BUILDING_TYPE_H
 #define BUILDING_TYPE_H
 
-enum Building_Use
-{
-    Housing,
-    Wood,
-    Stone,
-    Metal,
-    Food
-};
+#include "../Level_Values.h"
+
+#include "E_Building_Use.h"
 
 class Building
 {
