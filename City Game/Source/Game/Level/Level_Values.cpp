@@ -37,43 +37,45 @@ void Level_Values :: setUpResourceGUI()
     int increase = symbolSize.y + gap;
     sf::Vector2f position ( gap, 1 );
 
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Resource_Coins),
-                                        m_resources.coins,
-                                        "The amount of coins you have."  );
+    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
+                                                                  position,
+                                                                  m_resourceGUI.getGUIOffset(),
+                                                                  Game::getTexture( Texture_Name::Resource_Coins),
+                                                                  m_resources.coins,
+                                                                  "The amount of coins you have."  ) );
     position.y += increase;
 
-
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Resource_Logs),
-                                        m_resources.wood,
-                                        "The amount of logs you have." );
+    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
+                                                                  position,
+                                                                  m_resourceGUI.getGUIOffset(),
+                                                                  Game::getTexture( Texture_Name::Resource_Logs),
+                                                                  m_resources.wood,
+                                                                  "The amount of logs you have." ) );
     position.y += increase;
 
-
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Resource_Stones),
-                                        m_resources.stone,
-                                        "The amount of stone you have." );
+    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
+                                                                  position,
+                                                                  m_resourceGUI.getGUIOffset(),
+                                                                  Game::getTexture( Texture_Name::Resource_Stones),
+                                                                  m_resources.stone,
+                                                                  "The amount of stone you have." ) );
     position.y += increase;
 
+    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
+                                                                  position,
+                                                                  m_resourceGUI.getGUIOffset(),
+                                                                  Game::getTexture( Texture_Name::Resource_Metal),
+                                                                  m_resources.metal,
+                                                                  "The amount of metal you have." ) );
 
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Resource_Metal),
-                                        m_resources.metal,
-                                        "The amount of metal you have." );
     position.y += increase;
 
-
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Resource_Food),
-                                        m_resources.food,
-                                        "The amount of food you have." );
+    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
+                                                                  position,
+                                                                  m_resourceGUI.getGUIOffset(),
+                                                                  Game::getTexture( Texture_Name::Resource_Food),
+                                                                  m_resources.food,
+                                                                  "The amount of food you have." ) );
 }
 
 
