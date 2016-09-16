@@ -14,7 +14,6 @@
 				<Compiler>
 					<Add option="-std=c++14" />
 					<Add option="-g" />
-					<Add directory="Source/Game/Main" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
@@ -32,7 +31,6 @@
 				<Compiler>
 					<Add option="-O3" />
 					<Add option="-std=c++14" />
-					<Add directory="Source/Game/Main" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -85,13 +83,16 @@
 		<Unit filename="Source/Game/GUI/Symbolled_Update_Label.h" />
 		<Unit filename="Source/Game/Game.cpp" />
 		<Unit filename="Source/Game/Game.h" />
-		<Unit filename="Source/Game/Main/Building_Type.cpp" />
-		<Unit filename="Source/Game/Main/Building_Type.h" />
-		<Unit filename="Source/Game/Main/Level.cpp" />
-		<Unit filename="Source/Game/Main/Level.h" />
-		<Unit filename="Source/Game/Main/Level_Loader.cpp" />
-		<Unit filename="Source/Game/Main/Level_Values.cpp" />
-		<Unit filename="Source/Game/Main/Level_Values.h" />
+		<Unit filename="Source/Game/Level/Buildings/Building.cpp" />
+		<Unit filename="Source/Game/Level/Buildings/Building.h" />
+		<Unit filename="Source/Game/Level/Buildings/Building_Data.cpp" />
+		<Unit filename="Source/Game/Level/Buildings/Building_Data.h" />
+		<Unit filename="Source/Game/Level/Buildings/E_Building_Use.h" />
+		<Unit filename="Source/Game/Level/Level.cpp" />
+		<Unit filename="Source/Game/Level/Level.h" />
+		<Unit filename="Source/Game/Level/Level_Loader.cpp" />
+		<Unit filename="Source/Game/Level/Level_Values.cpp" />
+		<Unit filename="Source/Game/Level/Level_Values.h" />
 		<Unit filename="Source/Game/Managers/Music_Manager.cpp" />
 		<Unit filename="Source/Game/Managers/Music_Manager.h" />
 		<Unit filename="Source/Game/Managers/Resource_Identifier.h" />
