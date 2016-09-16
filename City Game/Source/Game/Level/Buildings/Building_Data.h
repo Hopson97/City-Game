@@ -4,7 +4,10 @@
 #include "E_Building_Use.h"
 #include "../Level_Values.h"
 
-
+enum Building_Name
+{
+    House_Hut
+};
 
 struct Building_Data
 {
@@ -23,5 +26,7 @@ struct Building_Data
     private:
         sf::RectangleShape m_sprite;
 };
+
+
 
 #endif // BUILDING_DATA_H

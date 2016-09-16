@@ -56,6 +56,8 @@ enum class Texture_Name
     Stat_Vacancy,
     Stat_Happiness,
 
+    Building_Dwelling_Hut,
+
     TEMP2
 };
 

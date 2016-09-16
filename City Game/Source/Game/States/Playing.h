@@ -12,7 +12,7 @@
 
 #include "../GUI/GUI.h"
 
-#include "../Main/Level.h"
+#include "../Level/Level.h"
 
 namespace State
 {

@@ -6,7 +6,7 @@
 #include <vector>
 #include <memory>
 
-#include "Building_Type.h"
+#include "Buildings/Building.h"
 
 #include "Level_Values.h"
 

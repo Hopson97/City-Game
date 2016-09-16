@@ -5,6 +5,20 @@
 
 struct Resources
 {
+    Resources() = default;
+    Resources( int coins,
+               int wood,
+               int stone,
+               int metal,
+               int food )
+               : coins ( coins )
+               , wood  ( wood  )
+               , stone ( stone )
+               , metal ( metal )
+               , food  ( food  ) {}
+
+
+
     int coins   = 100;
     int wood    = 10;
     int stone   = 10;

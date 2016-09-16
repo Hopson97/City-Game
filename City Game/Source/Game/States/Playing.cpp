@@ -19,6 +19,8 @@ Playing::Playing( Game & game )
     Game::loadTexture( Res::getTexture( "Statistics/Vacancy"    ),  Texture_Name::Stat_Vacancy      );
     Game::loadTexture( Res::getTexture( "Statistics/Happiness"  ),  Texture_Name::Stat_Happiness    );
 
+    Game::loadTexture( Res::getTexture( "Buildings/Dwellings/Hut"), Texture_Name::Building_Dwelling_Hut );
+
     m_buildMenu     .setBgColour    ( { 100, 100, 100 } );
 
     m_level = std::make_unique<Level>( "River City" );
