@@ -21,12 +21,17 @@ struct Building_Data
     const Resources     cost;   //How much this building costs to build
     const Resources     rates;  //How much this building influences the player's rate daily
 
+    const sf::Texture&  getTexture  () const;
+    const sf::Vector2f& getSize     () const;
+
     void draw ( const sf::Vector2f& position );
 
     private:
         sf::RectangleShape m_sprite;
 };
 
+
+Building_Data& getBuildingData(Building_Name name);
 
 
 #endif // BUILDING_DATA_H

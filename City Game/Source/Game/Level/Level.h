@@ -10,6 +10,10 @@
 
 #include "Level_Values.h"
 
+#include "Builder.h"
+
+typedef std::vector<sf::FloatRect> FloatRect_Vector;
+
 class Level
 {
     public:
@@ -18,7 +22,11 @@ class Level
         void update ( float dt );
         void draw   ();
 
-        void addBuilding ( std::unique_ptr<Building> b );
+        void addBuilding ( std::shared_ptr<Building> b );
+
+        const FloatRect_Vector& getWaterSections    () const;
+        const FloatRect_Vector& getGroundSections   () const;
+        const FloatRect_Vector& getNoBuildSections  () const;
 
     private:
         void init ();
@@ -26,15 +34,20 @@ class Level
 
         sf::RectangleShape m_background;
 
-        sf::String m_name;
+        sf::String      m_name;
 
-        Level_Values m_values;
+        Level_Values    m_values;
+        Builder         m_builder;
 
-        std::vector<sf::FloatRect> m_waterSections;
-        std::vector<sf::FloatRect> m_groundSections;
-        std::vector<sf::FloatRect> m_noBuildSections;
+        FloatRect_Vector m_waterSections;
+        FloatRect_Vector m_groundSections;
+        FloatRect_Vector m_noBuildSections;
 
-        std::vector<std::unique_ptr<Building>> m_buildings;
+        std::vector<std::shared_ptr<Building>> m_buildings;
+
+        std::vector<std::shared_ptr<Building>> m_houses;
+
+
 
         static
         constexpr int   WIDTH  = 1280,

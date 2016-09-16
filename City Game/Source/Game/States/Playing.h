@@ -18,12 +18,6 @@ namespace State
 {
 	class Playing : public State_Base
 	{
-	    enum class Playing_State
-	    {
-	        None,
-	        Building
-	    };
-
 		public:
 			Playing		( Game& game );
 
@@ -38,14 +32,6 @@ namespace State
             void setUpStatisticGUI  ();
 
         private:
-            constexpr static float  BUILD_MENU_SEC_Y  = 600, //Where the build menu starts
-                                    BUILD_MENU_WIDTH  = Window::WIDTH,
-                                    BUILD_MENU_HEIGHT = 120;
-
-            Playing_State m_state = Playing_State::None;
-
-            GUI         m_buildMenu;
-
             std::unique_ptr<Level> m_level;
 	};
 }

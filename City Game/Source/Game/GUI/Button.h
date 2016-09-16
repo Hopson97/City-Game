@@ -23,9 +23,6 @@ class Button : public GUI_Feature
     private:
         void checkForClick();
 
-        bool m_isActive = false;
-        sf::Clock m_activeTimer;
-
         std::function<void(void)>   m_function;
 };
 

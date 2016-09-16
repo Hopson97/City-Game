@@ -14,19 +14,13 @@ Button:: Button (    const sf::Vector2f& size,
 {
     auto fp = std::bind(&Button::checkForClick, this);
     addRollOverFunction ( fp );
-    //addRollOverFunction ( std::bind ( Button::checkForClick, this ) );
 }
 
 void Button :: checkForClick()
 {
-    if ( m_isActive ) {
-        if ( Mouse::isLeftDown() ) {
-            m_function();
-            m_activeTimer.restart();
-        }
+    if ( Mouse::isLeftDown() ) {
+        m_function();
     }
-
-    return;
 }
 
 void Button :: draw ()
@@ -35,11 +29,4 @@ void Button :: draw ()
 }
 
 void Button :: onUpdate ()
-{
-    if ( m_activeTimer.getElapsedTime().asSeconds() >= 0.2 ) {
-        m_isActive = true;
-    }
-    else  {
-        m_isActive = false;
-    }
-}
+{}

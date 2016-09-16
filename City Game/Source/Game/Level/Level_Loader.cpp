@@ -1,6 +1,7 @@
 #include "Level.h"
 
 #include <fstream>
+#include <iostream>
 
 #include "../Managers/Resource_Identifier.h"
 
@@ -25,15 +26,15 @@ void Level :: init()
     if ( !inFile.is_open() ) {
         throw std::runtime_error ( "Unable to open the map file for " + m_name );
     } else {
-        std::string line;
-        while ( std::getline( inFile, line, ' ' ) ) {
-            if ( line == "c" ) {
+        char identifier;
+        while ( inFile >> identifier ) {
+            if ( identifier == 'c' ) {
                 loadFloatRectToVector( m_noBuildSections,   inFile );
             }
-            else if ( line == "g" ) {
+            else if ( identifier == 'g' ) {
                 loadFloatRectToVector( m_groundSections,    inFile );
             }
-            else if ( line == "w") {
+            else if ( identifier == 'w' ) {
                 loadFloatRectToVector( m_waterSections,     inFile );
             }
         }

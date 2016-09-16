@@ -1,5 +1,7 @@
 #include "Building_Data.h"
 
+#include <iostream>
+
 #include "../../Util/Window.h"
 
 #include "../../Game.h"
@@ -39,14 +41,6 @@ namespace House_Data
     };
 }
 
-
-
-
-
-
-
-
-
 Building_Data :: Building_Data ( Building_Use use,
                                  Resources cost,
                                  Resources rates,
@@ -57,17 +51,28 @@ Building_Data :: Building_Data ( Building_Use use,
 ,   rates   ( rates )
 ,   m_sprite    ( size )
 {
+    m_sprite.setSize( size );
     m_sprite.setTexture( &texture );
 }
 
 
 void Building_Data :: draw ( const sf::Vector2f& position )
 {
+    m_sprite.setPosition( position );
     Window::draw( m_sprite );
 }
 
-//Begin the database
+const sf::Texture& Building_Data :: getTexture() const
+{
+    return *m_sprite.getTexture();
+}
 
+const sf::Vector2f& Building_Data :: getSize () const
+{
+    return m_sprite.getSize();
+}
+
+//Begin the database
 class Building_Database
 {
     public:
@@ -85,6 +90,7 @@ Building_Data& getBuildingData(Building_Name name)
 
     return *b.m_database.at( name );
 }
+
 
 
 

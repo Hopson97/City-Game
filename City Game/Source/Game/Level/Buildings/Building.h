@@ -3,12 +3,14 @@
 
 #include "Building_Data.h"
 
-class Building
+struct Building
 {
-    public:
-        Building( Building_Data& data );
+    Building( Building_Data& data, const sf::Vector2f& position );
+    Building_Data& m_data; //This is basically a read only class (just constants) so it is fine to be public really
 
-        Building_Data& m_data; //This is basically a read only class (just constants) so it is fine to be public really
+    const sf::Vector2f m_position;
+
+    void draw();
 };
 
 #endif // BUILDING_TYPE_H

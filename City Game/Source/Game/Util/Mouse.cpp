@@ -2,10 +2,26 @@
 
 #include "Window.h"
 
+#include <iostream>
+
 namespace
 {
     sf::Sprite  m_sprite;
     sf::Texture m_icon;
+
+    bool m_isActive = false;
+    sf::Clock m_activeTimer;
+
+    bool isButtonDown ( bool b )
+    {
+        if ( m_isActive ) {
+            if ( b ) {
+                m_activeTimer.restart();
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 namespace Mouse
@@ -21,19 +37,27 @@ void init()
 
 void update( )
 {
-    m_sprite.setPosition( sf::Mouse::getPosition( Window::get() ).x, sf::Mouse::getPosition( Window::get() ).y );
+    m_sprite.setPosition( sf::Mouse::getPosition( Window::get() ).x,
+                          sf::Mouse::getPosition( Window::get() ).y );
+
+    if ( m_activeTimer.getElapsedTime().asSeconds() >= 0.2 ) {
+        m_isActive = true;
+    }
+    else  {
+        m_isActive = false;
+    }
 }
 
 
 bool isLeftDown()
 {
-    return sf::Mouse::isButtonPressed ( sf::Mouse::Left );
+    return isButtonDown( sf::Mouse::isButtonPressed ( sf::Mouse::Left ) );
 }
 
 
 bool isRightDown()
 {
-    return sf::Mouse::isButtonPressed ( sf::Mouse::Right );
+    return isButtonDown( sf::Mouse::isButtonPressed ( sf::Mouse::Right ) );
 }
 
 

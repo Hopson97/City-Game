@@ -7,7 +7,6 @@ namespace State
 
 Playing::Playing( Game & game )
 :	State_Base      ( game )
-,   m_buildMenu     ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
 {
     Game::loadTexture( Res::getTexture( "Resource_Types/Gold"   ),  Texture_Name::Resource_Coins    );
     Game::loadTexture( Res::getTexture( "Resource_Types/Logs"   ),  Texture_Name::Resource_Logs     );
@@ -21,8 +20,6 @@ Playing::Playing( Game & game )
 
     Game::loadTexture( Res::getTexture( "Buildings/Dwellings/Hut"), Texture_Name::Building_Dwelling_Hut );
 
-    m_buildMenu     .setBgColour    ( { 100, 100, 100 } );
-
     m_level = std::make_unique<Level>( "River City" );
 
     Log::logMessage( "Switched to Playing state", Log_Type::State_Switch );
@@ -35,14 +32,12 @@ void Playing :: input( float dt )
 
 void Playing :: update( float dt )
 {
-    m_buildMenu     .update();
     m_level        ->update( dt );
 }
 
 void Playing :: draw( float dt )
 {
     m_level    ->draw();
-    m_buildMenu .draw();
 }
 
 

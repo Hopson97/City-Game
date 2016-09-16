@@ -20,6 +20,8 @@ class GUI
         void setTexture     ( const sf::Texture& texture );
         void setBgColour    ( const sf::Color& colour );
 
+        void add( std::unique_ptr<GUI_Feature> feature );
+
         void addButton  (   const sf::Vector2f& size,
                             const sf::Vector2f& position,
                             const sf::Texture&  texture,
@@ -37,12 +39,10 @@ class GUI
         void update     ();
         void draw       ();
 
-
+        sf::Vector2f getGUIOffset () const;
 
     private:
         sf::RectangleShape  m_background;
-
-        sf::Vector2f getGUIOffset () const;
 
         void reSize();
 

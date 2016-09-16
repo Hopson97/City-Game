@@ -30,6 +30,10 @@ void GUI :: setBgColour ( const sf::Color& colour )
     m_background    .setFillColor( colour );
 }
 
+void GUI :: add( std::unique_ptr<GUI_Feature> feature )
+{
+    m_features.push_back ( std::move ( feature ) );
+}
 
 //Add a button
 void GUI :: addButton( const sf::Vector2f& size,
