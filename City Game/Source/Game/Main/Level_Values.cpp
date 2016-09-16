@@ -76,6 +76,9 @@ void Level_Values :: setUpResourceGUI()
                                         "The amount of food you have." );
 }
 
+
+
+
 void Level_Values::setUpStatisticGUI()
 {
     const sf::Vector2f symbolSize ( 32, 32 );
@@ -87,7 +90,7 @@ void Level_Values::setUpStatisticGUI()
                                         position,
                                         Game::getTexture( Texture_Name::Stat_Population),
                                         m_statistics.population,
-                                        "Population." );
+                                        "Population living in your city." );
     position.y += increase;
 
     m_statsGUI.addSymbolUpdateLabel(    symbolSize,
@@ -95,5 +98,12 @@ void Level_Values::setUpStatisticGUI()
                                         Game::getTexture( Texture_Name::Stat_Vacancy ),
                                         m_statistics.vacancy,
                                         "Jobless population looking for work." );
+    position.y += increase;
+
+    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
+                                        position,
+                                        Game::getTexture( Texture_Name::Stat_Happiness ),
+                                        m_statistics.vacancy,
+                                        "The overall happiness of your people." );
     position.y += increase;
 }

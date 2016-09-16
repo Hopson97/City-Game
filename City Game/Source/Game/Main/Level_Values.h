@@ -19,6 +19,7 @@ class Level_Values
         int population              = 0;
         int vacancy                 = 0;
         int unemployedPopulation    = 0;
+        int happiness               = 0;
     };
 
     public:
