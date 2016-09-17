@@ -1,4 +1,4 @@
-#include "Level.h"
+#include "City.h"
 
 #include <fstream>
 #include <iostream>
@@ -12,9 +12,9 @@
     This function loads up the map files created from the map editor. This includes stuff like where you
     are able to build certain things, water sections and non-build zones.
 
-    It also loads up the image for the background of the level, too.
+    It also loads up the image for the background of the City, too.
 */
-void Level :: init()
+void City :: init()
 {
     std::string m_backgroundTexture = Res::getTexture( "Maps/" + m_name );
     std::string mapFilePath         = "Data/Maps/" + m_name + ".cgm";
@@ -41,7 +41,7 @@ void Level :: init()
     }
 }
 
-void Level :: loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile )
+void City :: loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile )
 {
     float left, top, width, height;
     inFile >> left >> top >> width >> height;

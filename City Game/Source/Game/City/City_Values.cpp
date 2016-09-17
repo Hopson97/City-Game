@@ -1,11 +1,15 @@
-#include "Level_Values.h"
+#include "City_Values.h"
 
 #include "../Util/Window.h"
 #include "../Game.h"
 #include "../Managers/Resource_Identifier.h"
 
-Level_Values::Level_Values()
-:   m_resourceGUI   ( {100, 185}, {Window::WIDTH - 100, 0} )
+constexpr static int EXPLOIT_MODE = 9'999'999;
+
+City_Values::City_Values()
+:   m_resources     ( 200, 25, 25, 25, 25 )
+//:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
+,   m_resourceGUI   ( {100, 185}, {Window::WIDTH - 100, 0} )
 ,   m_statsGUI      ( {100, 185}, {0,0 } )
 {
     m_resourceGUI   .setBgColour    ( { 100, 100, 100 } );
@@ -18,19 +22,24 @@ Level_Values::Level_Values()
     setUpStatisticGUI();
 }
 
-void Level_Values :: update()
+void City_Values :: update()
 {
     m_resourceGUI   .update();
     m_statsGUI      .update();
 }
 
-void Level_Values :: draw()
+void City_Values :: draw()
 {
     m_resourceGUI   .draw();
     m_statsGUI      .draw();
 }
 
-void Level_Values :: setUpResourceGUI()
+void City_Values :: newDay()
+{
+    m_resources += m_dailyResourceChange;
+}
+
+void City_Values :: setUpResourceGUI()
 {
     const sf::Vector2f symbolSize ( 32, 32 );
     const int gap = 4;//Padding between the symbols
@@ -81,7 +90,7 @@ void Level_Values :: setUpResourceGUI()
 
 
 
-void Level_Values::setUpStatisticGUI()
+void City_Values::setUpStatisticGUI()
 {
     const sf::Vector2f symbolSize ( 32, 32 );
     const int gap = 4;//Padding between the symbols
@@ -97,15 +106,22 @@ void Level_Values::setUpStatisticGUI()
 
     m_statsGUI.addSymbolUpdateLabel(    symbolSize,
                                         position,
+                                        Game::getTexture( Texture_Name::Stat_Unemployed),
+                                        m_statistics.population,
+                                        "Unemployed people looking for work." );
+    position.y += increase;
+
+    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
+                                        position,
                                         Game::getTexture( Texture_Name::Stat_Vacancy ),
                                         m_statistics.vacancy,
-                                        "Jobless population looking for work." );
+                                        "Vacant housing  spaces in your city." );
     position.y += increase;
 
     m_statsGUI.addSymbolUpdateLabel(    symbolSize,
                                         position,
                                         Game::getTexture( Texture_Name::Stat_Happiness ),
-                                        m_statistics.vacancy,
+                                        m_statistics.happiness,
                                         "The overall happiness of your people." );
     position.y += increase;
 }

@@ -12,7 +12,7 @@
 
 #include "../GUI/GUI.h"
 
-#include "../Level/Level.h"
+#include "../City/City.h"
 
 namespace State
 {
@@ -32,7 +32,7 @@ namespace State
             void setUpStatisticGUI  ();
 
         private:
-            std::unique_ptr<Level> m_level;
+            std::unique_ptr<City> m_city;
 	};
 }
 

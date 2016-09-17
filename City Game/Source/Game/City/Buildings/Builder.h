@@ -7,7 +7,7 @@
 
 #include "Building_Data.h"
 
-class Level;
+class City;
 
 class Builder
 {
@@ -19,7 +19,7 @@ class Builder
 
 
     public:
-        Builder( Level& level );
+        Builder( City& City );
 
         void input  ();
         void update ();
@@ -32,7 +32,7 @@ class Builder
 
         sf::RectangleShape m_preview;
 
-        Level&  m_level;
+        City&  m_City;
         GUI     m_buildMenu;
 
         Playing_State m_state = Playing_State::None;

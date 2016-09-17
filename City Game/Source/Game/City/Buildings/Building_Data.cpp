@@ -10,45 +10,41 @@
 
 namespace House_Data
 {
-    struct Base_House_Data : public Building_Data
-    {
-        Base_House_Data(  int maxOccupants,
-                          Resources cost,
-                          Resources rates,
-                          const sf::Vector2f& size,
-                          const sf::Texture& texture )
-        : Building_Data ( Building_Use::Housing,
-                          cost,
-                          rates,
-                          size,
-                          texture )
-        , maxOccupants  ( maxOccupants )
-        {}
-
-        const int maxOccupants;
-    };
-
-    struct Hut : public Base_House_Data
+    struct Hut : public Building_Data
     {
         Hut()
-        :   Base_House_Data ( 2,                //Maximum Occupants
+        :   Building_Data   ( Building_Use::Housing,
                             { 20, 2, 0, 0, 1 }, //The cost
-                            { 1, 0, 0, 0, 0 },  //The rates
-                            { 16, 16 },         //The size (pixel size on the window)
+                            { 1, 0, 0, 0, -1  }, //The rates aka how much resources does this structure increase
+                            { 2, 0, 2, -1    }, //Statistic change
+                            { 16, 16         }, //The size (pixel size on the window)
                             Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
         { }
+    };
 
+    struct House : public Building_Data
+    {
+        House()
+        :   Building_Data   ( Building_Use::Housing,
+                            { 50, 5, 5, 2, 5 }, //The cost
+                            { 5, 0, 0, 0, -6 }, //The rates aka how much resources does this structure increase
+                            { 5, 0, 5, 1     }, //Statistic change
+                            { 25, 25         }, //The size (pixel size on the window)
+                            Game::getTexture( Texture_Name::Building_Dwelling_House ) )
+        { }
     };
 }
 
 Building_Data :: Building_Data ( Building_Use use,
-                                 Resources cost,
-                                 Resources rates,
+                                 Resources    cost,
+                                 Resources    rates,
+                                 Statistics   change,
                                  const sf::Vector2f& size,
                                  const sf::Texture& texture )
-:   use     ( use  )
-,   cost    ( cost )
-,   rates   ( rates )
+:   use         ( use  )
+,   cost        ( cost )
+,   rates       ( rates )
+,   change      ( change )
 ,   m_sprite    ( size )
 {
     m_sprite.setSize( size );
@@ -79,6 +75,7 @@ class Building_Database
         Building_Database ()
         {
             m_database[ Building_Name::House_Hut ] = std::make_unique<House_Data::Hut>();
+            m_database[ Building_Name::House     ] = std::make_unique<House_Data::House>();
         }
 
         std::map<Building_Name, std::unique_ptr<Building_Data>> m_database;

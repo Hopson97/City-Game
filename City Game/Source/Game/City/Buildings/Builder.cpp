@@ -6,12 +6,12 @@
 #include "../../Util/Mouse.h"
 #include "../../Game.h"
 #include "../../Managers/Resource_Identifier.h"
-#include "../Level.h"
+#include "../City.h"
 
 #include "Special_Button.h"
 
-Builder :: Builder ( Level& level )
-:   m_level     ( level )
+Builder :: Builder ( City& City )
+:   m_City     ( City )
 ,   m_buildMenu ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
 {
     using namespace std::placeholders;
@@ -26,6 +26,13 @@ Builder :: Builder ( Level& level )
                                                                         Game::getTexture( Texture_Name::Building_Dwelling_Hut ),
                                                                         std::bind ( &Builder::switchBuildType, this, &getBuildingData( Building_Name::House_Hut ) ),
                                                                         getBuildingData( Building_Name::House_Hut ) ));
+
+     m_buildMenu.add ( std::make_unique<Special_Button<Building_Data>>( buttonSize,
+                                                                        sf::Vector2f{ 10 + buttonSize.x + 5, 0  },
+                                                                        m_buildMenu.getGUIOffset(),
+                                                                        Game::getTexture( Texture_Name::Building_Dwelling_House ),
+                                                                        std::bind ( &Builder::switchBuildType, this, &getBuildingData( Building_Name::House ) ),
+                                                                        getBuildingData( Building_Name::House ) ));
 }
 
 void Builder :: input ()
@@ -61,27 +68,27 @@ void Builder :: draw   ()
 void Builder :: switchBuildType( Building_Data* data )
 {
     m_state = Playing_State::Building;
-    m_preview.setTexture( &data->getTexture ()  );
     m_preview.setSize   (  data->getSize    ()  );
+    m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;
 }
 
 void Builder :: tryBuild  ()
 {
     if ( m_canBuild ) {
-        m_level.addBuilding( std::make_shared<Building>( *m_currentData, m_preview.getPosition() ) );
+        m_City.tryAddBuilding( std::make_shared<Building>( *m_currentData, m_preview.getPosition() ) );
     }
 }
 
 void Builder :: checkIfCanBuild()
 {
-    for ( auto& rect : m_level.getGroundSections() ) {
+    for ( auto& rect : m_City.getGroundSections() ) {
         if ( m_preview.getGlobalBounds().intersects( rect ) ) {
             m_canBuild = true;
         }
     }
 
-    for ( auto& rect : m_level.getWaterSections() ) {
+    for ( auto& rect : m_City.getWaterSections() ) {
         if ( m_preview.getGlobalBounds().intersects( rect ) ) {
             m_canBuild = false;
         }

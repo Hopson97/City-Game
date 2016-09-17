@@ -1,5 +1,5 @@
-#ifndef LEVEL_H
-#define LEVEL_H
+#ifndef CITY_H
+#define CITY_H
 
 #include <SFML/Graphics.hpp>
 
@@ -8,27 +8,29 @@
 
 #include "Buildings/Building.h"
 
-#include "Level_Values.h"
+#include "City_Values.h"
 
-#include "Builder.h"
+#include "Buildings/Builder.h"
 
 typedef std::vector<sf::FloatRect> FloatRect_Vector;
 
-class Level
+class City
 {
     public:
-        Level( const std::string& name );
+        City( const std::string& name );
 
         void update ( float dt );
         void draw   ();
 
-        void addBuilding ( std::shared_ptr<Building> b );
+        void tryAddBuilding ( std::shared_ptr<Building> b );
 
         const FloatRect_Vector& getWaterSections    () const;
         const FloatRect_Vector& getGroundSections   () const;
         const FloatRect_Vector& getNoBuildSections  () const;
 
     private:
+        void addBuilding ( std::shared_ptr<Building> b );
+
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
 
@@ -36,7 +38,7 @@ class Level
 
         sf::String      m_name;
 
-        Level_Values    m_values;
+        City_Values     m_values;
         Builder         m_builder;
 
         FloatRect_Vector m_waterSections;
@@ -47,6 +49,9 @@ class Level
 
         std::vector<std::shared_ptr<Building>> m_houses;
 
+        sf::Time    m_dayLength = sf::seconds( 8 );
+        sf::Clock   m_dayTimer;
+
 
 
         static
@@ -54,4 +59,4 @@ class Level
                         HEIGHT = 600;
 };
 
-#endif // LEVEL_H
+#endif // CITY_H

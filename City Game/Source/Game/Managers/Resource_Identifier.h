@@ -53,10 +53,12 @@ enum class Texture_Name
     Resource_Food,
 
     Stat_Population,
+    Stat_Unemployed,
     Stat_Vacancy,
     Stat_Happiness,
 
     Building_Dwelling_Hut,
+    Building_Dwelling_House,
 
     TEMP2
 };
