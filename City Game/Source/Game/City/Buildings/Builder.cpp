@@ -56,6 +56,12 @@ void Builder :: update ()
     m_buildPreview.update();
     m_buildMenu.update();
     m_preview.setPosition( Mouse::getPosition() );
+
+    if ( !m_canBuild ) {
+        m_preview.setFillColor( { 200, 100, 100, 200 } );
+    } else {
+        m_preview.setFillColor( sf::Color::White );
+    }
 }
 
 void Builder :: draw   ()
@@ -91,15 +97,28 @@ void Builder :: tryBuild  ()
 
 void Builder :: checkIfCanBuild()
 {
+    sf::FloatRect bottom = m_preview.getGlobalBounds();
+    bottom.top += bottom.height - 7;
+    bottom.height = 7;
+
+
     for ( auto& rect : m_City.getGroundSections() ) {
-        if ( m_preview.getGlobalBounds().intersects( rect ) ) {
+        if ( bottom.intersects( rect ) ) {
             m_canBuild = true;
         }
     }
 
     for ( auto& rect : m_City.getWaterSections() ) {
-        if ( m_preview.getGlobalBounds().intersects( rect ) ) {
+        if ( bottom.intersects( rect ) ) {
             m_canBuild = false;
+        }
+    }
+
+    //Check for intersection with the other buildings, seeing as we don't want
+    //buildings ontop of buildings as that wouldn't make sense tbh
+    for ( auto& building : m_City.getBuildings() ) {
+        if ( bottom.intersects( building->bounds ) ) {
+           m_canBuild = false;
         }
     }
 }

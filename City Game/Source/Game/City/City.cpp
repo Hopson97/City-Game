@@ -52,13 +52,7 @@ void City :: tryAddBuilding ( std::shared_ptr<Building> b )
         return;
     }
 
-    //Check for intersection with the other buildings, seeing as we don't want
-    //buildings ontop of buildings as that wouldn't make sense tbh
-    for ( auto& building : m_buildings ) {
-        if ( b->bounds.intersects( building->bounds ) ) {
-            return;
-        }
-    }
+
 
     //If all the checks have passed, it will add the buildings
     addBuilding( b );
@@ -100,4 +94,9 @@ const FloatRect_Vector& City :: getGroundSections() const
 const FloatRect_Vector& City::getNoBuildSections() const
 {
     return m_noBuildSections;
+}
+
+const Building_Ptr_Vector& City :: getBuildings () const
+{
+    return m_buildings;
 }

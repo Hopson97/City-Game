@@ -13,6 +13,7 @@
 #include "Buildings/Builder.h"
 
 typedef std::vector<sf::FloatRect> FloatRect_Vector;
+typedef std::vector<std::shared_ptr<Building>> Building_Ptr_Vector;
 
 class City
 {
@@ -27,6 +28,8 @@ class City
         const FloatRect_Vector& getWaterSections    () const;
         const FloatRect_Vector& getGroundSections   () const;
         const FloatRect_Vector& getNoBuildSections  () const;
+
+        const Building_Ptr_Vector& getBuildings     () const;
 
     private:
         void addBuilding ( std::shared_ptr<Building> b );
@@ -45,9 +48,9 @@ class City
         FloatRect_Vector m_groundSections;
         FloatRect_Vector m_noBuildSections;
 
-        std::vector<std::shared_ptr<Building>> m_buildings;
+        Building_Ptr_Vector m_buildings;
 
-        std::vector<std::shared_ptr<Building>> m_houses;
+        Building_Ptr_Vector m_houses;
 
         sf::Time    m_dayLength = sf::seconds( 8 );
         sf::Clock   m_dayTimer;
