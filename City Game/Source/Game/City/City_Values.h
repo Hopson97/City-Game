@@ -97,6 +97,8 @@ class City_Values
         Resources   m_dailyResourceChange;
         Statistics  m_statistics;
 
+        // BAG GUI
+
         void newDay();
 
     private:

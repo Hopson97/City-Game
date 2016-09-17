@@ -13,6 +13,8 @@
 Builder :: Builder ( City& City )
 :   m_City     ( City )
 ,   m_buildMenu ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
+,   m_buildPreview ()
+
 {
     using namespace std::placeholders;
 
@@ -52,13 +54,15 @@ void Builder :: input ()
 void Builder :: update ()
 {
     checkIfCanBuild();
+    m_buildPreview.update();
     m_buildMenu.update();
     m_preview.setPosition( Mouse::getPosition() );
 }
 
 void Builder :: draw   ()
 {
-    m_buildMenu .draw();
+    m_buildPreview.draw();
+    m_buildMenu.draw();
 
     if ( m_state == Playing_State::Building ) {
         Window::draw( m_preview );

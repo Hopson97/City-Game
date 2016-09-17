@@ -6,6 +6,7 @@
 #include "../../Util/Window.h"
 
 #include "Building_Data.h"
+#include "Building_Preview.h"
 
 class City;
 
@@ -34,6 +35,7 @@ class Builder
 
         City&  m_City;
         GUI     m_buildMenu;
+        Building_Preview m_buildPreview;
 
         Playing_State m_state = Playing_State::None;
 
