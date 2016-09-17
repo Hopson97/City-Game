@@ -21,7 +21,8 @@ class Building_Preview
         void update(); // Update all the GUIs :D
         void draw();
 
-        void changeState(PR_STATE state); // Change
+        void changeState(PR_STATE state); // Change state
+        void setImagePreview(const sf::Texture& texture);
 
     private:
         GUI     m_mainFrame;        // All the GUIs in the preview

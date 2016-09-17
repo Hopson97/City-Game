@@ -10,6 +10,11 @@ Building_Preview::Building_Preview()
     this->state = PR_STATE::HIDE;
 }
 
+void Building_Preview::setImagePreview(const sf::Texture& texture)
+{
+    m_imagePreview.setTexture(texture);
+}
+
 void Building_Preview::changeState(PR_STATE state)
 {
     this->state = state;

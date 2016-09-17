@@ -72,7 +72,10 @@ void Builder :: draw   ()
 void Builder :: switchBuildType( Building_Data* data )
 {
     m_state = Playing_State::Building;
+
     m_buildPreview.changeState(PR_STATE::SHOW);
+    m_buildPreview.setImagePreview( data->getTexture() );
+
     m_preview.setSize   (  data->getSize    ()  );
     m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;
