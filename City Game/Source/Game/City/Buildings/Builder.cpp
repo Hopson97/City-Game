@@ -10,37 +10,41 @@
 
 #include "Special_Button.h"
 
-Builder :: Builder ( City& City )
-:   m_City     ( City )
-,   m_buildMenu ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
+Builder :: Builder ( City& City, const City_Values& values )
+:   m_City          ( City )
+,   m_cityValues    ( values )
+,   m_buildMenu     ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
 
 {
     using namespace std::placeholders;
 
-     m_buildMenu.setBgColour    ( { 100, 100, 100 } );
+    m_cannotBuildText.setFont( Game::getFont( Font_Name::Rs ) );
+    m_cannotBuildText.setCharacterSize( 15 );
 
-     const sf::Vector2f buttonSize ( 20, 20 );
-     m_buildMenu.beginRow( { 10, 0 }, 5 );
+    m_buildMenu.setBgColour    ( { 100, 100, 100 } );
 
-     m_buildMenu.addSpecialButton<Building_Data>
+    const sf::Vector2f buttonSize ( 20, 20 );
+    m_buildMenu.beginRow( { 10, 0 }, 5 );
+
+    m_buildMenu.addSpecialButton<Building_Data>
                                 ( buttonSize,
                                 Game::getTexture( Texture_Name::Building_Dwelling_Hut ),
                                 getFunction( getBuildingData( Building_Name::House_Hut ) ),
                                 getBuildingData( Building_Name::House_Hut ) );
 
-         m_buildMenu.addSpecialButton<Building_Data>
+    m_buildMenu.addSpecialButton<Building_Data>
                                 ( buttonSize,
                                 Game::getTexture( Texture_Name::Building_Dwelling_House ),
                                 getFunction( getBuildingData( Building_Name::House ) ),
                                 getBuildingData( Building_Name::House ) );
 
-        m_buildMenu.addSpecialButton<Building_Data>
+    m_buildMenu.addSpecialButton<Building_Data>
                                 ( buttonSize,
                                 Game::getTexture( Texture_Name::Building_Wood_Woodcut_Hut ),
                                 getFunction( getBuildingData( Building_Name::Wood_Woodcut_Hut ) ),
                                 getBuildingData( Building_Name::Wood_Woodcut_Hut     ) );
 
-        m_buildMenu.addSpecialButton<Building_Data>
+    m_buildMenu.addSpecialButton<Building_Data>
                                 ( buttonSize,
                                 Game::getTexture( Texture_Name::Building_Stone_Small_Mine ),
                                 getFunction( getBuildingData( Building_Name::Stone_Small_Mine ) ),
@@ -52,6 +56,10 @@ void Builder :: input ()
     if ( m_state == Playing_State::Building ) {
         if ( Mouse::isLeftDown() ) {
             tryBuild();
+
+            if ( !m_canBuild ) {
+                m_tooltipTimer.restart();
+            }
         }
     }
 
@@ -69,6 +77,9 @@ void Builder :: update ()
     m_buildMenu.update();
     m_preview.setPosition( Mouse::getPosition() );
 
+    m_cannotBuildText.setPosition( Mouse::getPosition().x,
+                                   Mouse::getPosition().y - m_cannotBuildText.getGlobalBounds().height );
+
     if ( !m_canBuild ) {
         m_preview.setFillColor( { 200, 100, 100, 200 } );
     } else {
@@ -83,6 +94,9 @@ void Builder :: draw   ()
 
     if ( m_state == Playing_State::Building ) {
         Window::draw( m_preview );
+        if ( m_tooltipTimer.getElapsedTime().asSeconds() < 1.5 ) {
+            Window::draw( m_cannotBuildText );
+        }
     }
 }
 
@@ -109,6 +123,14 @@ void Builder :: tryBuild  ()
 
 void Builder :: checkIfCanBuild()
 {
+    static const std::string waterError     = "Cannot build on water.";
+    //static const std::string nonBuildError  = "Cannot build here.";
+    //static const std::string groundError    = "Cannot build on ground.";
+
+    static const std::string collisionEorr  = "Cannot build a building on a building.";
+
+    static const std::string resourceError  = "Not enough resources to build.";
+
     sf::FloatRect bottom = m_preview.getGlobalBounds();
     bottom.top += bottom.height - 7;
     bottom.height = 7;
@@ -117,12 +139,14 @@ void Builder :: checkIfCanBuild()
     for ( auto& rect : m_City.getGroundSections() ) {
         if ( bottom.intersects( rect ) ) {
             m_canBuild = true;
+            //m_cannotBuildText.setString( waterError );
         }
     }
 
     for ( auto& rect : m_City.getWaterSections() ) {
         if ( bottom.intersects( rect ) ) {
             m_canBuild = false;
+            m_cannotBuildText.setString( waterError );
         }
     }
 
@@ -131,6 +155,14 @@ void Builder :: checkIfCanBuild()
     for ( auto& building : m_City.getBuildings() ) {
         if ( bottom.intersects( building->bounds ) ) {
            m_canBuild = false;
+           m_cannotBuildText.setString( collisionEorr );
+        }
+    }
+
+    if ( m_currentData ) {
+        if ( m_currentData->cost > m_cityValues.m_resources ) {
+            m_canBuild = false;
+            m_cannotBuildText.setString( resourceError );
         }
     }
 }
