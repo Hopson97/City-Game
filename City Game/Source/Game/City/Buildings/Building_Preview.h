@@ -6,8 +6,6 @@
 #include "../../GUI/GUI.h"
 #include "../../Util/Window.h"
 
-#include "Builder.h"
-
 // Tells the GUI how to act depending on its state
 enum class PR_STATE
     {
@@ -17,17 +15,21 @@ enum class PR_STATE
 
 class Building_Preview
 {
-private:
-    GUI     m_mainFrame;        // All the GUIs in the preview
-    GUI     m_imagePreview;
+    public:
+        Building_Preview(); // ctor
 
-public:
-    Building_Preview(); // ctor
+        void update(); // Update all the GUIs :D
+        void draw();
 
-    void update(); // Update all the GUIs :D
-    void draw();
+        void changeState(PR_STATE state); // Change
 
-    void changeState(PR_STATE state); // Change
+    private:
+        GUI     m_mainFrame;        // All the GUIs in the preview
+        GUI     m_imagePreview;
+
+        PR_STATE state;
+
+        float   relative_xpos;
 };
 
 #endif // BUILDING_PREVIEW_H

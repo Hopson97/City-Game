@@ -13,7 +13,6 @@
 Builder :: Builder ( City& City )
 :   m_City     ( City )
 ,   m_buildMenu ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
-,   m_buildPreview ()
 
 {
     using namespace std::placeholders;
@@ -47,6 +46,7 @@ void Builder :: input ()
 
     if ( Mouse::isRightDown() ) {
         m_state = Playing_State::None;
+        m_buildPreview.changeState(PR_STATE::HIDE);
         m_currentData = nullptr;
     }
 }
@@ -72,6 +72,7 @@ void Builder :: draw   ()
 void Builder :: switchBuildType( Building_Data* data )
 {
     m_state = Playing_State::Building;
+    m_buildPreview.changeState(PR_STATE::SHOW);
     m_preview.setSize   (  data->getSize    ()  );
     m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;

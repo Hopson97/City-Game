@@ -2,18 +2,33 @@
 
 // Set up the GUIs
 Building_Preview::Building_Preview()
-:   m_mainFrame ( {200,100}, {Window::WIDTH-210,  200 - 130} )
+:   m_mainFrame ( {200.f,100}, {Window::WIDTH-210, Window::HEIGHT-245} )
+,   m_imagePreview( {55,40}, {Window::WIDTH-190, Window::HEIGHT-215} )
 {
-    m_mainFrame  .setBgColour    ( { 100, 100, 100 } );
+    m_mainFrame  .setBgColour    ( { 180, 180, 180 } );
+
+    this->state = PR_STATE::HIDE;
+}
+
+void Building_Preview::changeState(PR_STATE state)
+{
+    this->state = state;
 }
 
 // Basic Functions to update everything
 void Building_Preview::update()
 {
+    // Update mainFrame
+
     m_mainFrame.update();
+    m_imagePreview.update();
 }
 
 void Building_Preview::draw()
 {
-    m_mainFrame.draw();
+    if (this->state == PR_STATE::SHOW)
+    {
+        m_mainFrame.draw();
+        m_imagePreview.draw();
+    }
 }
