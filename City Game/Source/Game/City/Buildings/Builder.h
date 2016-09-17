@@ -1,6 +1,8 @@
 #ifndef BUILDER_H
 #define BUILDER_H
 
+#include <functional>
+
 #include "../../GUI/GUI.h"
 
 #include "../../Util/Window.h"
@@ -30,6 +32,8 @@ class Builder
         void switchBuildType( Building_Data* data );
         void tryBuild       ();
         void checkIfCanBuild();
+
+        std::function<void(Building_Data*)> getFunction(  Building_Data& data );
 
         sf::RectangleShape m_preview;
 

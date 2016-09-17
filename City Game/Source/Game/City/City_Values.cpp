@@ -41,87 +41,63 @@ void City_Values :: newDay()
 
 void City_Values :: setUpResourceGUI()
 {
+    const int padding = 4;
     const sf::Vector2f symbolSize ( 32, 32 );
-    const int gap = 4;//Padding between the symbols
-    int increase = symbolSize.y + gap;
-    sf::Vector2f position ( gap, 1 );
+    m_resourceGUI.beginColumn( { padding, 1 }, padding );
 
-    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
-                                                                  position,
-                                                                  m_resourceGUI.getGUIOffset(),
-                                                                  Game::getTexture( Texture_Name::Resource_Coins),
-                                                                  m_resources.coins,
-                                                                  "The amount of coins you have."  ) );
-    position.y += increase;
 
-    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
-                                                                  position,
-                                                                  m_resourceGUI.getGUIOffset(),
-                                                                  Game::getTexture( Texture_Name::Resource_Logs),
-                                                                  m_resources.wood,
-                                                                  "The amount of logs you have." ) );
-    position.y += increase;
+    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
+                                        Game::getTexture( Texture_Name::Resource_Coins),
+                                        m_resources.coins,
+                                        "The amount of coins you have." );
 
-    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
-                                                                  position,
-                                                                  m_resourceGUI.getGUIOffset(),
-                                                                  Game::getTexture( Texture_Name::Resource_Stones),
-                                                                  m_resources.stone,
-                                                                  "The amount of stone you have." ) );
-    position.y += increase;
+    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
+                                        Game::getTexture( Texture_Name::Resource_Logs),
+                                        m_resources.wood,
+                                        "The amount of logs you have." );
 
-    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
-                                                                  position,
-                                                                  m_resourceGUI.getGUIOffset(),
-                                                                  Game::getTexture( Texture_Name::Resource_Metal),
-                                                                  m_resources.metal,
-                                                                  "The amount of metal you have." ) );
+    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
+                                        Game::getTexture( Texture_Name::Resource_Stones),
+                                        m_resources.stone,
+                                        "The amount of stone you have." );
 
-    position.y += increase;
+    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
+                                        Game::getTexture( Texture_Name::Resource_Metal),
+                                        m_resources.metal,
+                                        "The amount of metal you have." );
 
-    m_resourceGUI.add( std::make_unique<Symbolled_Update_Label> ( symbolSize,
-                                                                  position,
-                                                                  m_resourceGUI.getGUIOffset(),
-                                                                  Game::getTexture( Texture_Name::Resource_Food),
-                                                                  m_resources.food,
-                                                                  "The amount of food you have." ) );
+    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
+                                        Game::getTexture( Texture_Name::Resource_Food),
+                                        m_resources.food,
+                                        "The amount of food you have." );
 }
-
-
 
 
 void City_Values::setUpStatisticGUI()
 {
+    const int padding = 4;
     const sf::Vector2f symbolSize ( 32, 32 );
-    const int gap = 4;//Padding between the symbols
-    int increase = symbolSize.y + gap;
-    sf::Vector2f position ( gap, 1 );
+    m_statsGUI.beginColumn( { padding, 1 }, padding );
 
-    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Stat_Population),
-                                        m_statistics.population,
-                                        "Population living in your city." );
-    position.y += increase;
 
-    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Stat_Unemployed),
-                                        m_statistics.population,
-                                        "Unemployed people looking for work." );
-    position.y += increase;
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Population),
+                                     m_statistics.population,
+                                     "Population living in your city." );
 
-    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Stat_Vacancy ),
-                                        m_statistics.vacancy,
-                                        "Vacant housing  spaces in your city." );
-    position.y += increase;
 
-    m_statsGUI.addSymbolUpdateLabel(    symbolSize,
-                                        position,
-                                        Game::getTexture( Texture_Name::Stat_Happiness ),
-                                        m_statistics.happiness,
-                                        "The overall happiness of your people." );
-    position.y += increase;
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Unemployed),
+                                     m_statistics.unemployedPopulation,
+                                     "Unemployed people looking for work." );
+
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Vacancy),
+                                     m_statistics.vacancy,
+                                     "Vacant housing  spaces in your city." );
+
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Happiness),
+                                     m_statistics.happiness,
+                                     "The overall happiness of your people." );
 }

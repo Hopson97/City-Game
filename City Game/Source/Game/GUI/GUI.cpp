@@ -37,24 +37,40 @@ void GUI :: add( std::unique_ptr<GUI_Feature> feature )
 
 //Add a button
 void GUI :: addButton( const sf::Vector2f& size,
-                       const sf::Vector2f& position,
                        const sf::Texture&  texture,
                        std::function<void(void)> callback )
 {
-    m_features.push_back( std::make_unique<Button>
-                          ( size, position, getGUIOffset(), texture, callback ) );
+    if ( !stylersActive() ) {
+        return;
+    }
+    auto position = m_activePositioner->getPosition( size.y );
+
+    m_features.push_back( std::make_unique<Button>(size,
+                                                   position,
+                                                   getGUIOffset(),
+                                                   texture,
+                                                   callback  ) );
 }
 
 
 //Add an update label
-void GUI :: addSymbolUpdateLabel(const sf::Vector2f& size,
-                                 const sf::Vector2f& position,
-                                 const sf::Texture& symbol,
-                                 const int& value,
-                                 const std::string& toolTip )
+void GUI :: addSymbolUpdateLabel( const sf::Vector2f& size,
+                                  const sf::Texture& symbol,
+                                  const int& value,
+                                  const std::string& toolTip )
 {
+    if ( !stylersActive() ) {
+        return;
+    }
+    auto position = m_activePositioner->getPosition( size.y );
+
     m_features.push_back( std::make_unique<Symbolled_Update_Label>
-                          ( size, position, getGUIOffset(), symbol, value, toolTip ));
+                        ( size,
+                          position,
+                          getGUIOffset(),
+                          symbol,
+                          value,
+                          toolTip  ) );
 }
 
 void GUI :: setResizeable ( bool canResize )
@@ -91,6 +107,28 @@ void GUI :: draw()
     }
 }
 
+void GUI::beginColumn ( const sf::Vector2f& beginPosition, int padding )
+{
+    m_column = Column ( beginPosition, padding );
+    m_column.active = true;
+    m_row.active    = false;
+
+    m_activePositioner = &m_column;
+}
+
+void GUI :: beginRow ( const sf::Vector2f& beginPosition, int padding )
+{
+    m_row = Row ( beginPosition, padding );
+    m_row.active    = true;
+    m_column.active = false;
+
+    m_activePositioner = &m_row;
+}
+
+bool GUI :: stylersActive  () const
+{
+    return m_row.active || m_column.active;
+}
 
 sf::Vector2f GUI::getGUIOffset() const
 {
@@ -99,7 +137,7 @@ sf::Vector2f GUI::getGUIOffset() const
 }
 
 
-void GUI::reSize()
+void GUI :: reSize()
 {
     m_isHidden = !m_isHidden;
 }

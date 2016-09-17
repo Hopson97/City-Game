@@ -25,6 +25,8 @@ class Building_Preview
         void setImagePreview(const sf::Texture& texture);
 
     private:
+        void resetImagePreview();
+
         GUI     m_mainFrame;        // All the GUIs in the preview
         GUI     m_imagePreview;
 

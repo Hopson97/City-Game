@@ -2,9 +2,6 @@
 #define SPECIAL_BUTTON_H
 
 #include <functional>
-#include <iostream>
-
-#include <SFML/Graphics.hpp>
 
 #include "GUI_Feature.h"
 #include "../Util/Mouse.h"
