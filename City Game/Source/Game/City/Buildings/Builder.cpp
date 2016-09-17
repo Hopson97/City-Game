@@ -33,6 +33,18 @@ Builder :: Builder ( City& City )
                                 Game::getTexture( Texture_Name::Building_Dwelling_House ),
                                 getFunction( getBuildingData( Building_Name::House ) ),
                                 getBuildingData( Building_Name::House ) );
+
+        m_buildMenu.addSpecialButton<Building_Data>
+                                ( buttonSize,
+                                Game::getTexture( Texture_Name::Building_Wood_Woodcut_Hut ),
+                                getFunction( getBuildingData( Building_Name::Wood_Woodcut_Hut ) ),
+                                getBuildingData( Building_Name::Wood_Woodcut_Hut     ) );
+
+        m_buildMenu.addSpecialButton<Building_Data>
+                                ( buttonSize,
+                                Game::getTexture( Texture_Name::Building_Stone_Small_Mine ),
+                                getFunction( getBuildingData( Building_Name::Stone_Small_Mine ) ),
+                                getBuildingData( Building_Name::Stone_Small_Mine     ) );
 }
 
 void Builder :: input ()

@@ -60,6 +60,10 @@ enum class Texture_Name
     Building_Dwelling_Hut,
     Building_Dwelling_House,
 
+    Building_Wood_Woodcut_Hut,
+
+    Building_Stone_Small_Mine,
+
     TEMP2
 };
 

@@ -8,32 +8,63 @@
 
 #include "../../Managers/Resource_Identifier.h"
 
-namespace House_Data
+namespace Builds
 {
-    struct Hut : public Building_Data
-    {
-        Hut()
-        :   Building_Data   ( Building_Use::Housing,
-                            { 20, 2, 0, 0, 1 }, //The cost
-                            { 1, 0, 0, 0, -1  }, //The rates aka how much resources does this structure increase
-                            { 2, 0, 2, -1    }, //Statistic change
-                            { 16, 16         }, //The size (pixel size on the window)
-                            Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
-        { }
-    };
+//Houses
+struct Hut : public Building_Data
+{
+    Hut()
+    :   Building_Data   ( Building_Use::Housing,
+                        { 20, 2, 0, 0, 1 }, //The cost
+                        { 1, 0, 0, 0, -1  }, //The rates aka how much resources does this structure increase
+                        { 2, 0, 2, -1    }, //Statistic change
+                        { 16, 16         }, //The size (pixel size on the window)
+                        Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
+    { }
+};
 
-    struct House : public Building_Data
-    {
-        House()
-        :   Building_Data   ( Building_Use::Housing,
-                            { 50, 5, 5, 2, 5 }, //The cost
-                            { 5, 0, 0, 0, -6 }, //The rates aka how much resources does this structure increase
-                            { 5, 0, 5, 1     }, //Statistic change
-                            { 25, 25         }, //The size (pixel size on the window)
-                            Game::getTexture( Texture_Name::Building_Dwelling_House ) )
-        { }
-    };
+struct House : public Building_Data
+{
+    House()
+    :   Building_Data   ( Building_Use::Housing,
+                        { 50, 5, 5, 2, 5 }, //The cost
+                        { 5, 0, 0, 0, -6 }, //The rates aka how much resources does this structure increase
+                        { 5, 0, 5, 1     }, //Statistic change
+                        { 25, 25         }, //The size (pixel size on the window)
+                        Game::getTexture( Texture_Name::Building_Dwelling_House ) )
+    { }
+};
+
+//Wood
+struct Woodcut_Hut : public Building_Data
+{
+    Woodcut_Hut()
+    :   Building_Data   ( Building_Use::Housing,
+                        { 20, 1, 0, 0, 1    }, //The cost
+                        { -2, 2, 0, 0, -1   }, //The rates aka how much resources does this structure increase
+                        { 0, -2, 0, 0        }, //Statistic change
+                        { 25, 25            }, //The size (pixel size on the window)
+                        Game::getTexture( Texture_Name::Building_Wood_Woodcut_Hut ) )
+    { }
+};
+
+//Stone
+struct Small_Mine : public Building_Data
+{
+    Small_Mine()
+    :   Building_Data   ( Building_Use::Housing,
+                        { 20, 1, 0, 0, 1    }, //The cost
+                        { -2, 0, 2, 0, -1   }, //The rates aka how much resources does this structure increase
+                        { 0, -2, 0, -1       }, //Statistic change
+                        { 25, 25            }, //The size (pixel size on the window)
+                        Game::getTexture( Texture_Name::Building_Stone_Small_Mine ) )
+    { }
+};
+
 }
+
+
+
 
 Building_Data :: Building_Data ( Building_Use use,
                                  Resources    cost,
@@ -74,8 +105,13 @@ class Building_Database
     public:
         Building_Database ()
         {
-            m_database[ Building_Name::House_Hut ] = std::make_unique<House_Data::Hut>();
-            m_database[ Building_Name::House     ] = std::make_unique<House_Data::House>();
+            m_database[ Building_Name::House_Hut ] = std::make_unique<Builds::Hut>();
+            m_database[ Building_Name::House     ] = std::make_unique<Builds::House>();
+
+            m_database[ Building_Name::Wood_Woodcut_Hut ] = std::make_unique<Builds::Woodcut_Hut>();
+
+            m_database[ Building_Name::Stone_Small_Mine ] = std::make_unique<Builds::Small_Mine>();
+
         }
 
         std::map<Building_Name, std::unique_ptr<Building_Data>> m_database;

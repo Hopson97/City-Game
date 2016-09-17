@@ -19,8 +19,12 @@ Playing::Playing( Game & game )
     Game::loadTexture( Res::getTexture( "Statistics/Vacancy"    ),  Texture_Name::Stat_Vacancy      );
     Game::loadTexture( Res::getTexture( "Statistics/Happiness"  ),  Texture_Name::Stat_Happiness    );
 
-    Game::loadTexture( Res::getTexture( "Buildings/Dwellings/Hut"), Texture_Name::Building_Dwelling_Hut );
-    Game::loadTexture( Res::getTexture( "Buildings/Dwellings/House"), Texture_Name::Building_Dwelling_House );
+    Game::loadTexture( Res::getTexture( "Buildings/Dwellings/Hut"       ),  Texture_Name::Building_Dwelling_Hut     );
+    Game::loadTexture( Res::getTexture( "Buildings/Dwellings/House"     ),  Texture_Name::Building_Dwelling_House   );
+
+    Game::loadTexture( Res::getTexture( "Buildings/Wood/Woodcut_Hut"    ),  Texture_Name::Building_Wood_Woodcut_Hut );
+
+    Game::loadTexture( Res::getTexture( "Buildings/Stone/Small_Mine"    ),  Texture_Name::Building_Stone_Small_Mine );
 
     m_city = std::make_unique<City>( "River City" );
 

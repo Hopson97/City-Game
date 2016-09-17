@@ -7,7 +7,11 @@
 enum Building_Name
 {
     House_Hut,
-    House
+    House,
+
+    Wood_Woodcut_Hut,
+
+    Stone_Small_Mine
 };
 
 struct Building_Data
