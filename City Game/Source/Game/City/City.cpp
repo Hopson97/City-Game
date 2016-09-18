@@ -56,10 +56,28 @@ void City::tryDestory(sf::FloatRect area)
         if ( b.bounds.intersects ( area ) ) {
             b.destroy();
             removeBuilding( b );
-            m_buildings.erase( m_buildings.begin() + i );
+            cleanUpBuildRemoval( i );
         }
     }
 }
+
+//This just removes the buildings from the specialised index eg the houses and the work places
+//aka cleaning up for the reference counter
+void City :: cleanUpBuildRemoval ( size_t index )
+{
+    m_buildings.erase( m_buildings.begin() + index );
+
+    Indexer currentBuildingIndex = m_buildingIndex.at( index );
+    if ( currentBuildingIndex.w != -1 ) {
+        m_workPlaces.erase  ( m_workPlaces.begin()  + currentBuildingIndex.w);
+    }
+    if ( currentBuildingIndex.h != -1 ) {
+        m_houses.erase      ( m_houses.begin()      + currentBuildingIndex.h );
+    }
+
+    m_buildingIndex.erase( m_buildingIndex.begin() + index );
+}
+
 
 
 
@@ -109,18 +127,24 @@ void City :: addBuilding( std::shared_ptr<Building>b )
     m_values.m_resources  -= b->data.getCost();
     m_values.m_statistics += b->data.getStats();
 
+    Indexer i;  //This is so that the removal of building makes it easier to remove from the house and workplace vector too (damn reference counter!)
+
     switch ( b->data.getUse() )
     {
         case Building_Use::Housing:
             m_houses.push_back( b );
+            i.h = m_houses.size();
             break;
 
         case Building_Use::Work:
             m_workPlaces.push_back( b );
+            i.w = m_workPlaces.size();
             break;
     }
 
     m_buildings.push_back( b );
+
+    m_buildingIndex.push_back( i );
 }
 
 void City :: nextDay ()

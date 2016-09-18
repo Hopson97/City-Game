@@ -20,6 +20,12 @@ typedef std::vector<std::shared_ptr<Building>> Building_Ptr_Vector;
 
 class City
 {
+    struct Indexer
+    {
+        int w = -1;
+        int h = -1;
+    };
+
     public:
         City( const std::string& name );
 
@@ -40,7 +46,8 @@ class City
         void addBuilding    ( std::shared_ptr<Building> b );
         void addPerson      ();
 
-        void removeBuilding ( Building& b );
+        void removeBuilding     ( Building& b );
+        void cleanUpBuildRemoval( size_t index );
 
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
@@ -72,6 +79,8 @@ class City
 
         int m_day = 0;
         std::vector<PersonPtr> m_people;
+
+        std::vector<Indexer> m_buildingIndex;
 
         static
         constexpr int   WIDTH  = 1280,
