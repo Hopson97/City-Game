@@ -13,8 +13,8 @@
 constexpr static int EXPLOIT_MODE = 100000;
 
 City_Values::City_Values()
-//:   m_resources     ( 200, 25, 25, 25, 25 )
-:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
+:   m_resources     ( 200, 25, 25, 25, 25 )
+//:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
 ,   m_resourceGUI   ( { 100, 34 * 6 }, {Window::WIDTH - 100, 0} )
 ,   m_statsGUI      ( { 100, 34 * 7 }, {0,0 } )
 {
@@ -52,24 +52,35 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
         }
 
         for ( int i = 0 ; i < occupants ; i++ ) {
-            tryDoRates  ( m_resources.coins,   building->data.getRates().coins );
-            tryDoRates  ( m_resources.food,    building->data.getRates().food );
+            tryDoRates  ( m_resources.coins,   building->data.getRates().coins, "coin"  );
+            tryDoRates  ( m_resources.food,    building->data.getRates().food,  "food"  );
         }
-        tryDoRates  ( m_resources.metal,   building->data.getRates().metal );
-        tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
-        tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
+        tryDoRates  ( m_resources.metal,   building->data.getRates().metal,     "metal" );
+        tryDoRates  ( m_resources.stone,   building->data.getRates().stone,     "stone" );
+        tryDoRates  ( m_resources.wood,    building->data.getRates().wood,      "wood"  );
     }
+
+    std::cout <<    m_resources.coins  << "\n" <<
+                    m_resources.stone   << "\n" <<
+
+                  m_resources.wood    << "\n" <<
+                  m_resources.metal    << "\n" <<
+                  m_resources.food     << "\n" << std::endl;
+
+
+
+
 
     m_statistics.happiness -= m_statistics.homeless / 2;
 }
 
-void City_Values :: tryDoRates (int& rate, int amount)
+void City_Values :: tryDoRates (int& rate, int amount, std::string temp )
 {
-
     if ( rate + amount >= 0 ) {
         rate += amount;
     } else {
         m_statistics.happiness--;
+        std::cout << "Uh oh, a rate with " << rate << " and the name is " << temp <<  " is too small to be taken away from " << amount << "! " <<  rate + amount  << std::endl;
     }
 }
 

@@ -39,7 +39,8 @@ Game::Game()
 
     resetMusic();
 
-	pushState( std::make_unique<State::Playing>( *this ) );
+    pushState( std::make_unique<State::Splash_Screen> (*this ) );
+	//pushState( std::make_unique<State::Playing>( *this ) );
 }
 
 void Game::run()
@@ -66,7 +67,7 @@ void Game::run()
             resetMusic();
 		}
         counter.update();
-		counter.drawFPS();
+		//counter.drawFPS();
 
 		Window::update();
 	}

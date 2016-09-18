@@ -115,7 +115,9 @@ void City :: nextDay ()
 {
     m_day++;
     m_dayTimer.restart();
-    m_values.newDay( m_buildings );
+    m_values.newDay( getWorkPlaces() );
+    m_values.newDay( getHouses() );
+
 
     tryGetHomelessHouses();
     tryGetMoveIns();
@@ -275,9 +277,6 @@ Person_Ptr_Vector City::getUnemployedPeople()
     }
     return list;
 }
-
-
-
 
 
 const FloatRect_Vector& City :: getWaterSections() const

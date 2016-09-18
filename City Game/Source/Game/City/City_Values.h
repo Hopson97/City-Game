@@ -129,7 +129,7 @@ class City_Values
         void newDay(  const std::vector<std::shared_ptr<Building>>& buildings  );
 
     private:
-        void tryDoRates         ( int& rate, int amount );
+        void tryDoRates         ( int& rate, int amount, std::string temp );
 
         void setUpResourceGUI   ();
         void setUpStatisticGUI  ();

@@ -3,25 +3,25 @@ Coins	20
 Wood  	1
 Stone 	0
 Metal 	0
-Food 	0
+Food 	1
 END
 
 RATES
 Coins	-1
-Wood  	0
-Stone 	2
+Wood  	2 
+Stone 	0
 Metal 	0
 Food 	-1
 END
 
 STATS
 Vacancy		0
-Happiness	-1
+Happiness	0
 Jobs		2
 END
 
 MISC
-Size 25 25
+Size 30 30
 Use  1
-Description A mine for a couple miners to work in.
+Description A hut for a couple lumberjacks to work in.
 END
