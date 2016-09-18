@@ -11,10 +11,10 @@
 constexpr static int EXPLOIT_MODE = 9'999'999;
 
 City_Values::City_Values()
-:   m_resources     ( 200, 25, 25, 25, 25, 0 )
-//:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
-,   m_resourceGUI   ( {100, 220}, {Window::WIDTH - 100, 0} )
-,   m_statsGUI      ( {100, 115}, {0,0 } )
+:   m_resources     ( 200, 25, 25, 25, 25 )
+//:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
+,   m_resourceGUI   ( { 100, 200 }, {Window::WIDTH - 100, 0} )
+,   m_statsGUI      ( { 100, 200 }, {0,0 } )
 {
     m_resourceGUI   .setBgColour    ( { 100, 100, 100 } );
     m_statsGUI      .setBgColour    ( { 100, 100, 100 } );
@@ -45,8 +45,13 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
     //We have to take the rates away individually, just in case there are not enough resources to take away.
     for ( const auto& building : buildings )
     {
-        tryDoRates  ( m_resources.coins,   building->data.getRates().coins );
-        tryDoRates  ( m_resources.food,    building->data.getRates().food );
+        int occupants = building->getOccupantCount();
+        if ( occupants == 0 ) continue;
+
+        for ( int i = 0 ; i < occupants ; i++ ) {
+            tryDoRates  ( m_resources.coins,   building->data.getRates().coins );
+            tryDoRates  ( m_resources.food,    building->data.getRates().food );
+        }
         tryDoRates  ( m_resources.metal,   building->data.getRates().metal );
         tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
         tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
@@ -96,11 +101,6 @@ void City_Values :: setUpResourceGUI()
                                         Game::getTexture( Texture_Name::Resource_Food),
                                         m_resources.food,
                                         "The amount of food you have." );
-
-    m_resourceGUI.addSymbolUpdateLabel( symbolSize,
-                                        Game::getTexture( Texture_Name::Stat_Unemployed),
-                                        m_resources.unemployedPopulation,
-                                        "Unemployed people looking for work." );
 }
 
 
@@ -128,4 +128,14 @@ void City_Values::setUpStatisticGUI()
                                      Game::getTexture( Texture_Name::Stat_Happiness),
                                      m_statistics.happiness,
                                      "The overall happiness of your people." );
+
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Unemployed),
+                                     m_statistics.unemployedPopulation,
+                                     "Unemployed people looking for work." );
+
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Jobs),
+                                     m_statistics.jobs,
+                                     "Jobs that are open for workers." );
 }

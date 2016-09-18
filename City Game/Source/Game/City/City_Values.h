@@ -15,14 +15,12 @@ struct Resources
                int wood,
                int stone,
                int metal,
-               int food,
-               int unemployedPopulation )
+               int food)
                : coins ( coins )
                , wood  ( wood  )
                , stone ( stone )
                , metal ( metal )
-               , food  ( food  )
-               , unemployedPopulation   ( unemployedPopulation ){}
+               , food  ( food  ){}
 
 
 
@@ -31,7 +29,6 @@ struct Resources
     int stone   = 0;
     int metal   = 0;
     int food    = 0;
-    int unemployedPopulation    = 0;
 
     void operator -=( const Resources& other )
     {
@@ -40,7 +37,6 @@ struct Resources
         stone   -= other.stone;
         metal   -= other.metal;
         food    -= other.food;
-        unemployedPopulation    -= other.unemployedPopulation;
     }
 
     void operator +=( const Resources& other )
@@ -50,7 +46,6 @@ struct Resources
         stone   += other.stone;
         metal   += other.metal;
         food    += other.food;
-        unemployedPopulation    += other.unemployedPopulation;
     }
 
     bool operator > ( const Resources& other ) const
@@ -59,8 +54,7 @@ struct Resources
                 ( wood  > other.wood   ) ||
                 ( stone > other.stone  ) ||
                 ( metal > other.metal  ) ||
-                ( food  > other.food   ) ||
-                ( unemployedPopulation > other.unemployedPopulation );
+                ( food  > other.food   );
     }
 };
 
@@ -70,16 +64,22 @@ struct Statistics
 
     Statistics ( int population,
                  int vacancy,
-                 int happiness )
+                 int happiness ,
+                 int unemployedPopulation,
+                 int jobs )
     :   population              ( population           )
     ,   vacancy                 ( vacancy              )
     ,   happiness               ( happiness            )
+    ,   unemployedPopulation    ( unemployedPopulation )
+    ,   jobs                    ( jobs )
     {}
 
 
     int population              = 0;
     int vacancy                 = 0;
     int happiness               = 0;
+    int unemployedPopulation    = 0;
+    int jobs                    = 0;
 
     void operator +=( const Statistics& other )
     {
@@ -99,7 +99,6 @@ class City_Values
         void draw   ();
 
         Resources   m_resources;
-        Resources   m_dailyResourceChange;
         Statistics  m_statistics;
 
         // BAG GUI

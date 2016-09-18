@@ -1,8 +1,10 @@
 #include "City.h"
 
 #include "../Util/Window.h"
+#include "../Util/Random.h"
 
 #include "../Game.h"
+
 
 City::City( const std::string& name )
 :   m_name      ( name )
@@ -61,7 +63,7 @@ void City :: draw()
     m_values.draw(); //aka the gui
 
     m_actionGUI.draw();
-    m_newDayGUI.draw();
+    //m_newDayGUI.draw();
 }
 
 void City :: tryAddBuilding ( std::shared_ptr<Building> b )
@@ -78,8 +80,6 @@ void City :: addBuilding(std::shared_ptr<Building>b)
     //Deduct/ Increase the player's resource values
     m_values.m_resources  -= b->data.getCost();
     m_values.m_statistics += b->data.getStats();
-
-    m_values.m_dailyResourceChange += b->data.getRates();
 
     switch ( b->data.getUse() )
     {
@@ -101,6 +101,10 @@ void City :: nextDay ()
     m_values.newDay( m_buildings );
 
     int people = Random::integer( 0, m_values.m_statistics.vacancy );
+    for ( int i = 0 ; i < people ; i++ )
+    {
+        m_people.push_back( Person() );
+    }
 }
 
 

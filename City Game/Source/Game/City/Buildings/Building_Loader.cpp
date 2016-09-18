@@ -25,9 +25,9 @@ namespace
             else if ( identifier == "Food" ) {
                 inFile >> resources.food;
             }
-            else if ( identifier == "Unemp" ) {
-                inFile >> resources.unemployedPopulation;
-            }
+            //else if ( identifier == "Unemp" ) {
+            //    inFile >> resources.unemployedPopulation;
+            //}
             else if ( identifier == "END" ) {
                 return;
             }
@@ -41,12 +41,12 @@ namespace
         while ( inFile >> identifier )
         {
             if ( identifier == "Population" ) {
-                int val;
-                inFile >> val;
-                statistics.population = val;
-                if ( resources.unemployedPopulation == 0 ) {
-                    resources.unemployedPopulation = -val;
-                }
+                //int val;
+                //inFile >> val;
+                //statistics.population = val;
+                //if ( resources.unemployedPopulation == 0 ) {
+                //    resources.unemployedPopulation = -val;
+                //}
             }
             else if ( identifier == "Vacancy" ) {
                 inFile >> statistics.vacancy;

@@ -21,6 +21,7 @@ Playing::Playing( Game & game )
     Game::loadTexture( Res::getTexture( "Statistics/Unemployed" ),  Texture_Name::Stat_Unemployed   );
     Game::loadTexture( Res::getTexture( "Statistics/Vacancy"    ),  Texture_Name::Stat_Vacancy      );
     Game::loadTexture( Res::getTexture( "Statistics/Happiness"  ),  Texture_Name::Stat_Happiness    );
+    Game::loadTexture( Res::getTexture( "Statistics/Jobs"       ),  Texture_Name::Stat_Jobs    );
 
     Game::loadTexture( Res::getTexture( "Buildings/Dwellings/Hut"       ),  Texture_Name::Building_Dwelling_Hut         );
     Game::loadTexture( Res::getTexture( "Buildings/Dwellings/House"     ),  Texture_Name::Building_Dwelling_House       );

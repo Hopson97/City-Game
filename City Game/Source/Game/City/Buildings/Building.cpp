@@ -12,3 +12,8 @@ void Building :: draw ()
 {
     data.draw ( position );
 }
+
+int Building :: getOccupantCount() const
+{
+    return m_occupants.size();
+}

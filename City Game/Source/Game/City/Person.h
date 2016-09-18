@@ -10,8 +10,8 @@ class Person
 
 
     private:
-        Building* m_workPlace;
-        Building* m_house;
+        Building* m_workPlace   = nullptr;
+        Building* m_house       = nullptr;
 };
 
 #endif // PERSON_H

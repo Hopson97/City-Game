@@ -3,7 +3,7 @@ Coins	50
 Wood  	5
 Stone 	5
 Metal 	2
-Food 	-5
+Food 	5
 END
 
 RATES
@@ -11,12 +11,12 @@ Coins	5
 Wood  	0
 Stone 	0
 Metal 	0
-Food 	-6
+Food 	-2
 END
 
 STATS
-Population	5
-Vacancy		0
+Population	0
+Vacancy		5
 Happiness	1
 END
 

@@ -4,11 +4,10 @@ Wood  	1
 Stone 	0
 Metal 	0
 Food 	1
-Unemp	2
 END
 
 RATES
-Coins	-2
+Coins	-1
 Wood  	0
 Stone 	2
 Metal 	0

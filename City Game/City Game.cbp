@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add directory="Source/Game/Level/Buildings" />
 					<Add directory="Source/Game/GUI" />
+					<Add directory="Source/Game/City" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
@@ -35,6 +36,7 @@
 					<Add option="-std=c++14" />
 					<Add directory="Source/Game/Level/Buildings" />
 					<Add directory="Source/Game/GUI" />
+					<Add directory="Source/Game/City" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -92,6 +94,8 @@
 		<Unit filename="Source/Game/City/City_Loader.cpp" />
 		<Unit filename="Source/Game/City/City_Values.cpp" />
 		<Unit filename="Source/Game/City/City_Values.h" />
+		<Unit filename="Source/Game/City/Person.cpp" />
+		<Unit filename="Source/Game/City/Person.h" />
 		<Unit filename="Source/Game/GUI/Button.cpp" />
 		<Unit filename="Source/Game/GUI/Button.h" />
 		<Unit filename="Source/Game/GUI/GUI.cpp" />

@@ -4,15 +4,14 @@ Wood  	1
 Stone 	0
 Metal 	0
 Food 	1
-Unemp	2
 END
 
 RATES
-Coins	-2
+Coins	-1
 Wood  	2 
 Stone 	0
 Metal 	0
-Food 	-2
+Food 	-1
 END
 
 STATS
