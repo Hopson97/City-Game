@@ -70,6 +70,7 @@ void City_Values :: setUpResourceGUI()
     const sf::Vector2f symbolSize ( 32, 32 );
     m_resourceGUI.beginColumn( { padding, 1 }, padding );
 
+    m_resourceGUI.setTitle( "Resources" );
 
     m_resourceGUI.addSymbolUpdateLabel( symbolSize,
                                         Game::getTexture( Texture_Name::Resource_Coins),
@@ -108,6 +109,8 @@ void City_Values::setUpStatisticGUI()
     const int padding = 4;
     const sf::Vector2f symbolSize ( 32, 32 );
     m_statsGUI.beginColumn( { padding, 1 }, padding );
+
+    m_statsGUI.setTitle( "Statistics" );
 
 
     m_statsGUI.addSymbolUpdateLabel( symbolSize,

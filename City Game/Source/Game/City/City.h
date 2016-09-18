@@ -37,6 +37,8 @@ class City
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
 
+        void nextDay    ();
+
         sf::RectangleShape m_background;
 
         sf::String      m_name;
@@ -52,10 +54,13 @@ class City
 
         Building_Ptr_Vector m_houses;
 
-        sf::Time    m_dayLength = sf::seconds( 8 );
+        sf::Time    m_dayLength = sf::seconds( 30 );
         sf::Clock   m_dayTimer;
 
+        GUI m_actionGUI;
+        GUI m_newDayGUI;
 
+        int m_day = 0;
 
         static
         constexpr int   WIDTH  = 1280,

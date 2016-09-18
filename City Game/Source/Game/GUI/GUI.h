@@ -88,7 +88,8 @@ class GUI
                                     const std::string& toolTip );
 
 
-        void setResizeable ( bool canResize );
+        void setResizeable  ( bool canResize );
+        void setTitle       ( const std::string& title );
 
         void update         ();
         void draw           ();
@@ -105,10 +106,12 @@ class GUI
 
 
         sf::RectangleShape  m_background;
+        sf::Text            m_title;
 
         Button m_resizeButton;
         bool m_isResizable   = false;
         bool m_isHidden      = false;
+        bool m_titleSet      = false;
 
         Positioner* m_activePositioner;
         Column  m_column;

@@ -46,6 +46,10 @@ enum class Texture_Name
     GUI_Brick,
     GUI_Resize_Button,
 
+    GUI_Next_Day_Button,
+
+    Days,
+
     Resource_Coins,
     Resource_Logs,
     Resource_Stones,

@@ -28,6 +28,10 @@ class Builder
         void update ();
         void draw   ();
 
+        constexpr static float  BUILD_MENU_SEC_Y  = 600, //Where the build menu starts
+                                BUILD_MENU_WIDTH  = Window::WIDTH,
+                                BUILD_MENU_HEIGHT = 120;
+
     private:
         void switchBuildType( Building_Data* data );
         void tryBuild       ();
@@ -51,10 +55,6 @@ class Builder
         Building_Data* m_currentData = nullptr;
 
         bool m_canBuild = false;
-
-        constexpr static float  BUILD_MENU_SEC_Y  = 600, //Where the build menu starts
-                                BUILD_MENU_WIDTH  = Window::WIDTH,
-                                BUILD_MENU_HEIGHT = 120;
 };
 
 #endif // BUILDER_H
