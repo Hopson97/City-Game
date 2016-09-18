@@ -45,8 +45,7 @@ void City_Values :: draw()
 void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildings )
 {
     //We have to take the rates away individually, just in case there are not enough resources to take away.
-    for ( const auto& building : buildings )
-    {
+    for ( const auto& building : buildings )  {
         int occupants = building->getOccupantCount();
         if ( occupants == 0 ) {
             continue;
@@ -60,6 +59,7 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
         tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
         tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
     }
+
     m_statistics.happiness -= m_statistics.homeless / 2;
 }
 

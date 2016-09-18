@@ -23,6 +23,7 @@ class Building
         void draw();
 
         bool isSpacesAvalibleToLive () const;
+        bool isSpaceForWork         () const;
 
         void addPerson  ( PersonPtr person );
         void addWorker  ( PersonPtr person );

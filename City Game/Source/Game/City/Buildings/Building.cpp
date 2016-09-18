@@ -15,13 +15,19 @@ void Building :: draw ()
 
 int Building :: getOccupantCount() const
 {
-    return m_people.occupants.size();
+    return m_people.occupants.size() | m_people.workers.size();
 }
 
 bool Building :: isSpacesAvalibleToLive() const
 {
     return ( m_people.occupants.size() < (size_t)data.getStats().vacancy );
 }
+
+bool Building::isSpaceForWork() const
+{
+    return ( m_people.workers.size() < (size_t)data.getStats().jobs );
+}
+
 
 void Building :: addPerson ( PersonPtr person)
 {

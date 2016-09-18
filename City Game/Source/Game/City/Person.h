@@ -8,7 +8,8 @@ class Building;
 class Person
 {
     public:
-        Person() = default;
+        bool isHomeless   ();
+        bool isUnemployed ();
 
         void setHouse   ( Building& building );
         void setWork    ( Building& building );

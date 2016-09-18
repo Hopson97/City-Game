@@ -1,6 +1,7 @@
 #include "City.h"
 
 #include <iostream>
+#include <cassert>
 
 #include "../Util/Window.h"
 #include "../Util/Random.h"
@@ -39,9 +40,9 @@ void City::removeBuilding( Building& b )
     m_values.m_resources += b.data.getCost() / 4;
 
     Person_Group group = b.destroy();
-    m_values.m_statistics.jobs                  += group.workers.size();
-    m_values.m_statistics.unemployedPopulation  += group.workers.size();
-    m_values.m_statistics.homeless              += group.occupants.size();
+    m_values.m_statistics.homeless += group.occupants.size();
+
+    m_values.m_statistics.vacancy += group.occupants.size();
 
     m_values.m_statistics -= b.data.getStats();
     group.clear();
@@ -64,22 +65,18 @@ void City::tryDestory(sf::FloatRect area)
 
 void City :: update( float dt)
 {
-    if ( m_dayTimer.getElapsedTime() >= m_dayLength )
-    {
-        nextDay();
-    }
-
     m_builder.input();
 
     m_values.update();
 
-    for ( auto& building : m_buildings ) {
-
-    }
     m_builder.update();
 
     m_newDayGUI.update();
     m_actionGUI.update();
+
+    if ( m_dayTimer.getElapsedTime() >= m_dayLength ) {
+        nextDay();
+    }
 }
 
 void City :: draw()
@@ -132,17 +129,45 @@ void City :: nextDay ()
     m_dayTimer.restart();
     m_values.newDay( m_buildings );
 
+    tryGetMoveIns();
+    tryAddWorkers();
+    m_values.m_statistics.population = m_people.size();
+}
+
+void City::tryGetMoveIns()
+{
     //Add new people into the city if there are vacancies
     int people = Random::integer( 0, m_day + 5 );
     if ( people > m_values.m_statistics.vacancy ) people = m_values.m_statistics.vacancy;
     m_values.m_statistics.vacancy -= people;
-    for ( int i = 0 ; i < people ; i++ )
-    {
+
+    for ( int i = 0 ; i < people ; i++ ) {
         addPerson ();
     }
 
     m_values.m_statistics.population = m_people.size();
 }
+
+void City::tryAddWorkers()
+{
+    for ( auto& person : m_people )
+    {
+        if ( person->isUnemployed() ) {
+            int workPlace = Random::integer( 0, m_workPlaces.size() - 1 ) ;
+            Building& b = *m_workPlaces.at( workPlace );
+
+            if ( b.isSpaceForWork() ) {
+                b.addWorker( person );
+
+                m_values.m_statistics.unemployedPopulation--;
+                m_values.m_statistics.jobs--;
+
+                person->setWork ( b );
+            }
+        }
+    }
+}
+
 
 void City :: addPerson ()
 {

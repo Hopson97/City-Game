@@ -45,7 +45,9 @@ class City
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
 
-        void nextDay    ();
+        void nextDay        ();
+        void tryGetMoveIns  ();
+        void tryAddWorkers  ();
 
         sf::RectangleShape m_background;
 
