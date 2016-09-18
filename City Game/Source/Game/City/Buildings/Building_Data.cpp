@@ -15,10 +15,10 @@ struct Hut : public Building_Data
 {
     Hut()
     :   Building_Data   ( Building_Use::Housing,
-                        { 20, 2, 0, 0, 1 }, //The cost
-                        { 1, 0, 0, 0, -1  }, //The rates aka how much resources does this structure increase
-                        { 2, 0, 2, -1    }, //Statistic change
-                        { 16, 16         }, //The size (pixel size on the window)
+                        { 20, 2, 0, 0, 1, -2    }, //The cost
+                        { 1, 0, 0, 0, -1, 0    }, //The rates aka how much resources does this structure increase
+                        { 2, 0, -1          }, //Statistic change
+                        { 16, 16            }, //The size (pixel size on the window)
                         Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
     { }
 };
@@ -27,10 +27,10 @@ struct House : public Building_Data
 {
     House()
     :   Building_Data   ( Building_Use::Housing,
-                        { 50, 5, 5, 2, 5 }, //The cost
-                        { 5, 0, 0, 0, -6 }, //The rates aka how much resources does this structure increase
-                        { 5, 0, 5, 1     }, //Statistic change
-                        { 25, 25         }, //The size (pixel size on the window)
+                        { 50, 5, 5, 2, 5, -5 }, //The cost
+                        { 5, 0, 0, 0, -6, 0 }, //The rates aka how much resources does this structure increase
+                        { 5, 0, 1           }, //Statistic change
+                        { 25, 25            }, //The size (pixel size on the window)
                         Game::getTexture( Texture_Name::Building_Dwelling_House ) )
     { }
 };
@@ -40,10 +40,10 @@ struct Woodcut_Hut : public Building_Data
 {
     Woodcut_Hut()
     :   Building_Data   ( Building_Use::Housing,
-                        { 20, 1, 0, 0, 1    }, //The cost
-                        { -2, 2, 0, 0, -1   }, //The rates aka how much resources does this structure increase
-                        { 0, -2, 0, 0        }, //Statistic change
-                        { 25, 25            }, //The size (pixel size on the window)
+                        { 20, 1, 0, 0, 1, 2    }, //The cost
+                        { -2, 2, 0, 0, -1, 0    }, //The rates aka how much resources does this structure increase
+                        { 0, 0, 0              }, //Statistic change
+                        { 25, 25                }, //The size (pixel size on the window)
                         Game::getTexture( Texture_Name::Building_Wood_Woodcut_Hut ) )
     { }
 };
@@ -53,10 +53,10 @@ struct Small_Mine : public Building_Data
 {
     Small_Mine()
     :   Building_Data   ( Building_Use::Housing,
-                        { 20, 1, 0, 0, 1    }, //The cost
-                        { -2, 0, 2, 0, -1   }, //The rates aka how much resources does this structure increase
-                        { 0, -2, 0, -1       }, //Statistic change
-                        { 25, 25            }, //The size (pixel size on the window)
+                        { 20, 1, 0, 0, 1, 2     }, //The cost
+                        { -2, 0, 2, 0, -1, 0    }, //The rates aka how much resources does this structure increase
+                        { 0, 0, -1              }, //Statistic change
+                        { 25, 25                }, //The size (pixel size on the window)
                         Game::getTexture( Texture_Name::Building_Stone_Small_Mine ) )
     { }
 };

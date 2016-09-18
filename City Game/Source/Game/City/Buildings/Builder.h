@@ -22,7 +22,7 @@ class Builder
 
 
     public:
-        Builder( City& City );
+        Builder( City& City, const City_Values& values );
 
         void input  ();
         void update ();
@@ -35,11 +35,16 @@ class Builder
 
         std::function<void(Building_Data*)> getFunction(  Building_Data& data );
 
-        sf::RectangleShape m_preview;
+        sf::RectangleShape  m_preview;
+        sf::Text            m_cannotBuildText;
+        sf::Clock           m_tooltipTimer;
 
         City&  m_City;
-        GUI     m_buildMenu;
+        const City_Values& m_cityValues;
+
+        GUI m_buildMenu;
         Building_Preview m_buildPreview;
+
 
         Playing_State m_state = Playing_State::None;
 

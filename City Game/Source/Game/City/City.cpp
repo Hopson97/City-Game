@@ -6,7 +6,7 @@
 
 City::City( const std::string& name )
 :   m_name      ( name )
-,   m_builder   ( *this )
+,   m_builder   ( *this, m_values )
 {
     m_background.setSize( { WIDTH, HEIGHT } );
     this->init();
@@ -46,13 +46,6 @@ void City :: tryAddBuilding ( std::shared_ptr<Building> b )
 {
     //Make sure it is actually being added within the bounds of the map
     if ( !b->bounds.intersects( m_background.getGlobalBounds() ) ) return;
-
-    //If the player cannot afford to build, it will not build.
-    if ( !(m_values.m_resources >= b->data.cost ) ) {
-        return;
-    }
-
-
 
     //If all the checks have passed, it will add the buildings
     addBuilding( b );
