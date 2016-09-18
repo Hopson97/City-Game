@@ -83,6 +83,7 @@
 		<Unit filename="Source/Game/City/Buildings/Building.h" />
 		<Unit filename="Source/Game/City/Buildings/Building_Data.cpp" />
 		<Unit filename="Source/Game/City/Buildings/Building_Data.h" />
+		<Unit filename="Source/Game/City/Buildings/Building_Loader.cpp" />
 		<Unit filename="Source/Game/City/Buildings/Building_Preview.cpp" />
 		<Unit filename="Source/Game/City/Buildings/Building_Preview.h" />
 		<Unit filename="Source/Game/City/Buildings/E_Building_Use.h" />

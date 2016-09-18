@@ -1,6 +1,8 @@
 #ifndef BUILDING_DATA_H
 #define BUILDING_DATA_H
 
+#include <fstream>
+
 #include "E_Building_Use.h"
 #include "../City_Values.h"
 
@@ -14,30 +16,49 @@ enum Building_Name
     Stone_Small_Mine
 };
 
-struct Building_Data
+
+class Building_Data
 {
-    Building_Data( Building_Use use,
-                   Resources    cost,
-                   Resources    rates,
-                   Statistics   change,
-                   const sf::Vector2f& size,
-                   const sf::Texture& texture );
+    public:
+        Building_Data( Building_Use use,
+                    Resources    cost,
+                    Resources    rates,
+                    Statistics   change,
+                    const sf::Vector2f& size,
+                    const sf::Texture& texture );
 
-    const Building_Use  use;
-    const Resources     cost;   //How much this building costs to build
-    const Resources     rates;  //How much this building influences the player's rate daily
-    const Statistics    change;
+        Building_Data ( const std::string& strName,
+                        const sf::Texture& texture );
 
-    const sf::Texture&  getTexture  () const;
-    const sf::Vector2f& getSize     () const;
+        Building_Use getUse () const;
 
-    void draw ( const sf::Vector2f& position );
+        const Resources&     getCost   ()  const;   //How much this building costs to build
+        const Resources&     getRates  ()  const;   //How much this building influences the player's rate daily
+        const Statistics&    getStats  ()  const;
+
+        const sf::Texture&  getTexture  () const;
+        const sf::Vector2f& getSize     () const;
+
+        void draw ( const sf::Vector2f& position );
 
     private:
+        void load ();
+        void loadMisc ( std::ifstream& inFile );
+
+        Building_Use  m_use;
+
+        Resources     m_cost;   //How much this building costs to build
+        Resources     m_rates;  //How much this building influences the player's rate daily
+        Statistics    m_stats;
+
         sf::RectangleShape m_sprite;
+
+        const std::string m_name;
 };
 
+
 Building_Data& getBuildingData(Building_Name name);
+
 
 
 #endif // BUILDING_DATA_H

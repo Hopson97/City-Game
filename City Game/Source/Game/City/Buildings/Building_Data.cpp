@@ -13,52 +13,36 @@ namespace Builds
 //Houses
 struct Hut : public Building_Data
 {
-    Hut()
-    :   Building_Data   ( Building_Use::Housing,
-                        { 20, 2, 0, 0, 1, -2    }, //The cost
-                        { 1, 0, 0, 0, -1, 0    }, //The rates aka how much resources does this structure increase
-                        { 2, 0, -1          }, //Statistic change
-                        { 16, 16            }, //The size (pixel size on the window)
+    Hut ()
+    :   Building_Data ( "Hut",
                         Game::getTexture( Texture_Name::Building_Dwelling_Hut ) )
-    { }
+    {}
 };
 
 struct House : public Building_Data
 {
-    House()
-    :   Building_Data   ( Building_Use::Housing,
-                        { 50, 5, 5, 2, 5, -5 }, //The cost
-                        { 5, 0, 0, 0, -6, 0 }, //The rates aka how much resources does this structure increase
-                        { 5, 0, 1           }, //Statistic change
-                        { 25, 25            }, //The size (pixel size on the window)
+    House ()
+    :   Building_Data ( "House",
                         Game::getTexture( Texture_Name::Building_Dwelling_House ) )
-    { }
+    {}
 };
 
 //Wood
 struct Woodcut_Hut : public Building_Data
 {
-    Woodcut_Hut()
-    :   Building_Data   ( Building_Use::Housing,
-                        { 20, 1, 0, 0, 1, 2    }, //The cost
-                        { -2, 2, 0, 0, -1, 0    }, //The rates aka how much resources does this structure increase
-                        { 0, 0, 0              }, //Statistic change
-                        { 25, 25                }, //The size (pixel size on the window)
+    Woodcut_Hut ()
+    :   Building_Data ( "Woodcutting Hut",
                         Game::getTexture( Texture_Name::Building_Wood_Woodcut_Hut ) )
-    { }
+    {}
 };
 
 //Stone
-struct Small_Mine : public Building_Data
+struct Small_Stone_Mine : public Building_Data
 {
-    Small_Mine()
-    :   Building_Data   ( Building_Use::Housing,
-                        { 20, 1, 0, 0, 1, 2     }, //The cost
-                        { -2, 0, 2, 0, -1, 0    }, //The rates aka how much resources does this structure increase
-                        { 0, 0, -1              }, //Statistic change
-                        { 25, 25                }, //The size (pixel size on the window)
+    Small_Stone_Mine ()
+    :   Building_Data ( "Small Stone Mine",
                         Game::getTexture( Texture_Name::Building_Stone_Small_Mine ) )
-    { }
+    {}
 };
 
 }
@@ -72,22 +56,45 @@ Building_Data :: Building_Data ( Building_Use use,
                                  Statistics   change,
                                  const sf::Vector2f& size,
                                  const sf::Texture& texture )
-:   use         ( use  )
-,   cost        ( cost )
-,   rates       ( rates )
-,   change      ( change )
+:   m_use       ( use  )
+,   m_cost      ( cost )
+,   m_rates     ( rates )
+,   m_stats     ( change )
 ,   m_sprite    ( size )
+,   m_name      ( " " )
 {
     m_sprite.setSize( size );
     m_sprite.setTexture( &texture );
 }
 
-
-void Building_Data :: draw ( const sf::Vector2f& position )
+Building_Data :: Building_Data( const std::string& strName,
+                                const sf::Texture& texture )
+:   m_name      ( strName )
 {
-    m_sprite.setPosition( position );
-    Window::draw( m_sprite );
+    load ();
+    m_sprite.setTexture( &texture );
 }
+
+Building_Use Building_Data :: getUse() const
+{
+    return m_use;
+}
+
+const Resources& Building_Data :: getCost() const
+{
+    return m_cost;
+}
+
+const Resources& Building_Data :: getRates() const
+{
+    return m_rates;
+}
+
+const Statistics& Building_Data :: getStats() const
+{
+    return m_stats;
+}
+
 
 const sf::Texture& Building_Data :: getTexture() const
 {
@@ -98,6 +105,14 @@ const sf::Vector2f& Building_Data :: getSize () const
 {
     return m_sprite.getSize();
 }
+
+void Building_Data :: draw ( const sf::Vector2f& position )
+{
+    m_sprite.setPosition( position );
+    Window::draw( m_sprite );
+}
+
+
 
 //Begin the database
 class Building_Database
@@ -110,7 +125,7 @@ class Building_Database
 
             m_database[ Building_Name::Wood_Woodcut_Hut ] = std::make_unique<Builds::Woodcut_Hut>();
 
-            m_database[ Building_Name::Stone_Small_Mine ] = std::make_unique<Builds::Small_Mine>();
+            m_database[ Building_Name::Stone_Small_Mine ] = std::make_unique<Builds::Small_Stone_Mine>();
 
         }
 

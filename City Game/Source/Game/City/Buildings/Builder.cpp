@@ -110,6 +110,8 @@ void Builder :: switchBuildType( Building_Data* data )
     m_buildPreview.changeState(PR_STATE::SHOW);
     m_buildPreview.setImagePreview( data->getTexture() );
 
+    m_cannotBuildText.setString( "" );
+
     m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;
 }
@@ -160,7 +162,7 @@ void Builder :: checkIfCanBuild()
     }
 
     if ( m_currentData ) {
-        if ( m_currentData->cost > m_cityValues.m_resources ) {
+        if ( m_currentData->getCost() > m_cityValues.m_resources ) {
             m_canBuild = false;
             m_cannotBuildText.setString( resourceError );
         }

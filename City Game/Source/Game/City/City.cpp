@@ -54,12 +54,12 @@ void City :: tryAddBuilding ( std::shared_ptr<Building> b )
 void City :: addBuilding(std::shared_ptr<Building>b)
 {
     //Deduct/ Increase the player's resource values
-    m_values.m_resources  -= b->data.cost;
-    m_values.m_statistics += b->data.change;
+    m_values.m_resources  -= b->data.getCost();
+    m_values.m_statistics += b->data.getStats();
 
-    m_values.m_dailyResourceChange += b->data.rates;
+    m_values.m_dailyResourceChange += b->data.getRates();
 
-    switch ( b->data.use )
+    switch ( b->data.getUse() )
     {
         case Building_Use::Housing:
             m_houses.push_back( b );

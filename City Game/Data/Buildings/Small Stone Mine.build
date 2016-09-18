@@ -1,0 +1,27 @@
+COST
+Coins	20
+Wood  	1
+Stone 	0
+Metal 	0
+Food 	1
+Unemp	2
+END
+
+RATES
+Coins	-2
+Wood  	0
+Stone 	2
+Metal 	0
+Food 	-1
+END
+
+STATS
+Population	0
+Vacancy		0
+Happiness	-1
+END
+
+MISC
+Size 25 25
+Use  2
+END
