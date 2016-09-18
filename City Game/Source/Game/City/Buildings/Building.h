@@ -14,6 +14,8 @@ struct Building
     const sf::Vector2f  position;
     const sf::FloatRect bounds;
 
+    std::vector<Person*> m_occupants; //Is a vector of pointers, but not to dynamic memory so dw about memory leaks tbh
+
     void draw();
 };
 

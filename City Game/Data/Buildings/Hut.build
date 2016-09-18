@@ -15,8 +15,8 @@ Food 	-1
 END
 
 STATS
-Population	2
-Vacancy		0
+Population	0
+Vacancy		2
 Happiness	-1
 END
 

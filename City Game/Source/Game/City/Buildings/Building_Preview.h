@@ -6,6 +6,8 @@
 #include "../../GUI/GUI.h"
 #include "../../Util/Window.h"
 
+class Builder;
+
 // Tells the GUI how to act depending on its state
 enum class PR_STATE
     {

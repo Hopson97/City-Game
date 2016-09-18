@@ -99,6 +99,8 @@ void City :: nextDay ()
     m_day++;
     m_dayTimer.restart();
     m_values.newDay( m_buildings );
+
+    int people = Random::integer( 0, m_values.m_statistics.vacancy );
 }
 
 

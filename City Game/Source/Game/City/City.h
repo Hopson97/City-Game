@@ -12,6 +12,8 @@
 
 #include "Buildings/Builder.h"
 
+#include "Person.h"
+
 typedef std::vector<sf::FloatRect> FloatRect_Vector;
 typedef std::vector<std::shared_ptr<Building>> Building_Ptr_Vector;
 
@@ -61,6 +63,7 @@ class City
         GUI m_newDayGUI;
 
         int m_day = 0;
+        std::vector<Person> m_people;
 
         static
         constexpr int   WIDTH  = 1280,
