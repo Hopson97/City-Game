@@ -56,30 +56,10 @@ void City::tryDestory(sf::FloatRect area)
         if ( b.bounds.intersects ( area ) ) {
             b.destroy();
             removeBuilding( b );
-            cleanUpBuildRemoval( i );
+            m_buildings.erase( m_buildings.begin() + i );
         }
     }
 }
-
-//This just removes the buildings from the specialised index eg the houses and the work places
-//aka cleaning up for the reference counter
-void City :: cleanUpBuildRemoval ( size_t index )
-{
-    m_buildings.erase( m_buildings.begin() + index );
-
-    Indexer currentBuildingIndex = m_buildingIndex.at( index );
-    if ( currentBuildingIndex.w != -1 ) {
-        m_workPlaces.erase  ( m_workPlaces.begin()  + currentBuildingIndex.w);
-    }
-    if ( currentBuildingIndex.h != -1 ) {
-        m_houses.erase      ( m_houses.begin()      + currentBuildingIndex.h );
-    }
-
-    m_buildingIndex.erase( m_buildingIndex.begin() + index );
-}
-
-
-
 
 void City :: update( float dt)
 {
@@ -127,24 +107,8 @@ void City :: addBuilding( std::shared_ptr<Building>b )
     m_values.m_resources  -= b->data.getCost();
     m_values.m_statistics += b->data.getStats();
 
-    Indexer i;  //This is so that the removal of building makes it easier to remove from the house and workplace vector too (damn reference counter!)
-
-    switch ( b->data.getUse() )
-    {
-        case Building_Use::Housing:
-            m_houses.push_back( b );
-            i.h = m_houses.size();
-            break;
-
-        case Building_Use::Work:
-            m_workPlaces.push_back( b );
-            i.w = m_workPlaces.size();
-            break;
-    }
-
     m_buildings.push_back( b );
 
-    m_buildingIndex.push_back( i );
 }
 
 void City :: nextDay ()
@@ -160,17 +124,28 @@ void City :: nextDay ()
     m_values.m_statistics.population = m_people.size();
 }
 
-void City::tryGetMoveIns()
+int City :: getMoveInCount ( int& stat, int chance )
 {
-    int& vacant = m_values.m_statistics.vacancy;
-    //Add new people into the city if there are vacancies
     int people = Random::integer( 0, m_day + 5 );
-    if ( people > vacant ) {
-        people = vacant;
-    }
+
     if ( people > 5 ) {
         people = 5;
     }
+    if ( people > stat ) {
+        people = stat;
+    }
+    return people;
+}
+
+
+void City::tryGetMoveIns()
+{
+    int& vacant = m_values.m_statistics.vacancy;
+    if ( vacant == 0 ) {
+        return;
+    }
+    //Add new people into the city if there are vacancies
+    int people = getMoveInCount( vacant, 10 );
 
     for ( int i = 0 ; i < people ; i++ ) {
         addPerson ();
@@ -183,33 +158,21 @@ void City::tryGetMoveIns()
 void City::tryGetHomelessHouses()
 {
     int& homeless = m_values.m_statistics.homeless;
-    if ( homeless == 0 ) return;
-    int people = Random::integer( 0, m_day + 2 );
+    if ( homeless == 0 ) {
+        return;
+    }
+    int people = getMoveInCount( homeless, 5 );
 
-    if ( people > homeless ) {
-        people = homeless;
-    }
-    if ( people > 5 ) {
-        people = 5;
-    }
+    std::vector<PersonPtr> homelessList = getHomelessPeople();
 
-    std::vector<PersonPtr> homelessList;
-    for ( auto& person : m_people )
-    {
-        if ( person->isHomeless() ) {
-            homelessList.push_back( person );
-        }
-    }
     if ( homelessList.empty() ) {
         return;
     }
 
     for ( int i = 0 ; i < people ; i++ ) {
-        for ( auto& house : m_houses ) {
-            if ( house->isSpacesAvalibleToLive() ) {
-                addPersonToHouse( homelessList.at( i ), house );
-                homeless --;
-            }
+        for ( auto& house : getVacantHouses() ) {
+            addPersonToHouse( homelessList.at( i ), house );
+            homeless--;
         }
     }
 }
@@ -217,22 +180,21 @@ void City::tryGetHomelessHouses()
 
 void City::tryAddWorkers()
 {
-    if ( m_workPlaces.size() == 0 ) return;
+    auto workPlaces = getWorkPlaces();
+    if ( workPlaces.size() == 0 ) return;
 
-    for ( auto& person : m_people )
+    for ( auto& person : getUnemployedPeople() )
     {
-        if ( person->isUnemployed() ) {
-            int workPlace = Random::integer( 0, m_workPlaces.size() - 1 ) ;
-            Building& b = *m_workPlaces.at( workPlace );
+        int workPlace = Random::integer( 0, workPlaces.size() - 1 ) ;
+        Building& b = *workPlaces.at( workPlace );
 
-            if ( b.isSpaceForWork() ) {
-                b.addWorker( person );
+        if ( b.isSpaceForWork() ) {
+            b.addWorker( person );
 
-                m_values.m_statistics.unemployedPopulation--;
-                m_values.m_statistics.jobs--;
+            m_values.m_statistics.unemployedPopulation--;
+            m_values.m_statistics.jobs--;
 
-                person->setWork ( b );
-            }
+            person->setWork ( b );
         }
     }
 }
@@ -240,14 +202,12 @@ void City::tryAddWorkers()
 
 void City :: addPerson ()
 {
-    for ( auto& house : m_houses ) {
-        if ( house->isSpacesAvalibleToLive() ) {
-            PersonPtr p = std::make_shared<Person>();
-            m_people.push_back( p );
-            addPersonToHouse( p, house );
-            m_values.m_statistics.unemployedPopulation++;
-            break;
-        }
+    for ( auto& house : getVacantHouses() ) {
+        PersonPtr p = std::make_shared<Person>();
+        m_people.push_back( p );
+        addPersonToHouse( p, house );
+        m_values.m_statistics.unemployedPopulation++;
+        break;
     }
 }
 
@@ -256,6 +216,68 @@ void City :: addPersonToHouse( PersonPtr person, BuildingPtr house )
     house ->addPerson   ( person );
     person->setHouse    ( *house  );
 }
+
+Building_Ptr_Vector City :: getBuildingsOfType( Building_Use use )
+{
+    Building_Ptr_Vector buildings;
+    for ( auto& building : m_buildings ) {
+        if ( building->data.getUse() == use ) {
+            buildings.push_back( building );
+        }
+    }
+    return buildings;
+}
+
+Building_Ptr_Vector City :: getHouses()
+{
+    return getBuildingsOfType ( Building_Use::Housing );
+}
+
+Building_Ptr_Vector City :: getWorkPlaces()
+{
+    return getBuildingsOfType ( Building_Use::Work );
+}
+
+Building_Ptr_Vector City::getVacantHouses()
+{
+    Building_Ptr_Vector houses;
+    for ( auto& house : getHouses() ) {
+        if ( house->isSpacesAvalibleToLive() ) {
+            houses.push_back( house );
+        }
+    }
+    return houses;
+}
+
+
+
+
+Person_Ptr_Vector City::getHomelessPeople()
+{
+    Person_Ptr_Vector list;
+
+    for ( auto& person : m_people ) {
+        if ( person->isHomeless() ) {
+                list.push_back( person );
+        }
+    }
+    return list;
+}
+
+Person_Ptr_Vector City::getUnemployedPeople()
+{
+    Person_Ptr_Vector list;
+
+    for ( auto& person : m_people ) {
+        if ( person->isUnemployed() ) {
+                list.push_back( person );
+        }
+    }
+    return list;
+}
+
+
+
 
 
 const FloatRect_Vector& City :: getWaterSections() const

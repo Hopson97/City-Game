@@ -4,6 +4,7 @@
 class Building;
 
 #include <memory>
+#include <vector>
 
 class Person
 {
@@ -23,5 +24,6 @@ class Person
 };
 
 typedef std::shared_ptr<Person> PersonPtr;
+typedef std::vector<PersonPtr> Person_Ptr_Vector;
 
 #endif // PERSON_H
