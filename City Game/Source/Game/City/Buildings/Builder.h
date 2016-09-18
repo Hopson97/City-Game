@@ -17,7 +17,8 @@ class Builder
     enum class Playing_State
     {
         None,
-        Building
+        Building,
+        Destroying
     };
 
 
@@ -34,6 +35,7 @@ class Builder
 
     private:
         void switchBuildType( Building_Data* data );
+        void switchToDestroy();
         void tryBuild       ();
         void checkIfCanBuild();
 
@@ -43,7 +45,7 @@ class Builder
         sf::Text            m_cannotBuildText;
         sf::Clock           m_tooltipTimer;
 
-        City&  m_City;
+        City&  m_city;
         const City_Values& m_cityValues;
 
         GUI m_buildMenu;

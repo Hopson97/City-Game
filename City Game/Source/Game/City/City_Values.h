@@ -103,6 +103,14 @@ struct Statistics
         jobs                    += other.jobs;
     }
 
+    void operator -=( const Statistics& other )
+    {
+        population              -= other.population;
+        vacancy                 -= other.vacancy;
+        happiness               -= other.happiness;
+        jobs                    -= other.jobs;
+    }
+
 };
 
 class City_Values

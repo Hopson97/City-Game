@@ -53,6 +53,11 @@ void Building_Preview::draw()
     }
 }
 
+void Building_Preview::setBuildingName(const std::string& str)
+{
+
+}
+
 
 void Building_Preview::resetImagePreview()
 {

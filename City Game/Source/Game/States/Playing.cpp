@@ -8,8 +8,9 @@ namespace State
 Playing::Playing( Game & game )
 :	State_Base      ( game )
 {
-    Game::loadTexture( Res::getTexture( "Statistics/Days"       ),  Texture_Name::Days                  );
-    Game::loadTexture( Res::getTexture( "GUI/Next_Day_Button"   ),  Texture_Name::GUI_Next_Day_Button   );
+    Game::loadTexture( Res::getTexture( "Statistics/Days"           ),  Texture_Name::Days                      );
+    Game::loadTexture( Res::getTexture( "GUI/Next_Day_Button"       ),  Texture_Name::GUI_Next_Day_Button       );
+    Game::loadTexture( Res::getTexture( "GUI/Destroy_Mode_Button"   ),  Texture_Name::GUI_Destroy_Mode_Button   );
 
     Game::loadTexture( Res::getTexture( "Resource_Types/Gold"   ),  Texture_Name::Resource_Coins    );
     Game::loadTexture( Res::getTexture( "Resource_Types/Logs"   ),  Texture_Name::Resource_Logs     );

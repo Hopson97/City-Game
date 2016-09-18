@@ -49,7 +49,6 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
     {
         int occupants = building->getOccupantCount();
         if ( occupants == 0 ) {
-            std::cout << "Empty af" << std::endl;
             continue;
         }
 
@@ -61,7 +60,7 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
         tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
         tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
     }
-    m_statistics.happiness -= m_statistics.homeless;
+    m_statistics.happiness -= m_statistics.homeless / 2;
 }
 
 void City_Values :: tryDoRates (int& rate, int amount)

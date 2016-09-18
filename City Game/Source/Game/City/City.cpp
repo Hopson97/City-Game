@@ -33,17 +33,33 @@ City::City( const std::string& name )
     m_actionGUI.setTitle( "Actions" );
 }
 
-void City::removeBuilding( BuildingPtr b )
+void City::removeBuilding( Building& b )
 {
     //Re add the resources and then get the group of people of whom were evicted
-    m_values.m_resources += b->data.getCost() / 4;
+    m_values.m_resources += b.data.getCost() / 4;
 
-    Person_Group group = b->destroy();
+    Person_Group group = b.destroy();
     m_values.m_statistics.jobs                  += group.workers.size();
     m_values.m_statistics.unemployedPopulation  += group.workers.size();
     m_values.m_statistics.homeless              += group.occupants.size();
+
+    m_values.m_statistics -= b.data.getStats();
     group.clear();
 }
+
+void City::tryDestory(sf::FloatRect area)
+{
+    for ( size_t i = 0 ; i < m_buildings.size() ; i++ )
+    {
+        Building& b = *m_buildings.at( i );
+        if ( b.bounds.intersects ( area ) ) {
+            b.destroy();
+            removeBuilding( b );
+            m_buildings.erase( m_buildings.begin() + i );
+        }
+    }
+}
+
 
 
 void City :: update( float dt)

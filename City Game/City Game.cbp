@@ -96,6 +96,7 @@
 		<Unit filename="Source/Game/City/City_Values.h" />
 		<Unit filename="Source/Game/City/Person.cpp" />
 		<Unit filename="Source/Game/City/Person.h" />
+		<Unit filename="Source/Game/City/Person_Group.h" />
 		<Unit filename="Source/Game/GUI/Button.cpp" />
 		<Unit filename="Source/Game/GUI/Button.h" />
 		<Unit filename="Source/Game/GUI/GUI.cpp" />

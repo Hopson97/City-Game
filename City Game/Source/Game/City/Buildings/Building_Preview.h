@@ -21,12 +21,12 @@ class Building_Preview
     public:
         Building_Preview(); // ctor
 
-        void update(); // Update all the GUIs :D
-        void draw();
+        void update (); // Update all the GUIs :D
+        void draw   ();
 
-        void changeState(PR_STATE state); // Change state
-        void setImagePreview(const sf::Texture& texture);
-        void setBuildingName(std::string& str);
+        void changeState        ( PR_STATE state); // Change state
+        void setImagePreview    ( const sf::Texture& texture);
+        void setBuildingName    ( const std::string& str );
 
     private:
         void resetImagePreview();

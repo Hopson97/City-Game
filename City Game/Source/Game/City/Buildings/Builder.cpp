@@ -11,7 +11,7 @@
 #include "Special_Button.h"
 
 Builder :: Builder ( City& City, const City_Values& values )
-:   m_City          ( City )
+:   m_city          ( City )
 ,   m_cityValues    ( values )
 ,   m_buildMenu     ( {BUILD_MENU_WIDTH, BUILD_MENU_HEIGHT}, {0, BUILD_MENU_SEC_Y} )
 
@@ -61,6 +61,10 @@ Builder :: Builder ( City& City, const City_Values& values )
                                 Game::getTexture( Texture_Name::Building_Food_Farm ),
                                 getFunction( getBuildingData( Building_Name::Food_Farm ) ),
                                 getBuildingData( Building_Name::Food_Farm     ) );
+
+    m_buildMenu.addButton( {32, 32},
+                           Game::getTexture( Texture_Name::GUI_Destroy_Mode_Button ),
+                           std::bind( &Builder::switchToDestroy, this ) );
 }
 
 void Builder :: input ()
@@ -74,6 +78,11 @@ void Builder :: input ()
             }
         }
     }
+    else if ( m_state == Playing_State::Destroying ) {
+        if ( Mouse::isLeftDown() ) {
+            m_city.tryDestory( m_preview.getGlobalBounds() );
+        }
+    }
 
     if ( Mouse::isRightDown() ) {
         m_state = Playing_State::None;
@@ -84,7 +93,9 @@ void Builder :: input ()
 
 void Builder :: update ()
 {
-    checkIfCanBuild();
+    if ( m_state == Playing_State::Building ) {
+        checkIfCanBuild();
+    }
     m_buildPreview.update();
     m_buildMenu.update();
     m_preview.setPosition( Mouse::getPosition() );
@@ -104,7 +115,7 @@ void Builder :: draw   ()
     m_buildPreview.draw();
     m_buildMenu.draw();
 
-    if ( m_state == Playing_State::Building ) {
+    if ( m_state != Playing_State::None ) {
         Window::draw( m_preview );
         if ( m_tooltipTimer.getElapsedTime().asSeconds() < 1.5 ) {
             Window::draw( m_cannotBuildText );
@@ -125,16 +136,27 @@ void Builder :: switchBuildType( Building_Data* data )
     m_cannotBuildText.setString( "" );
 
     // TODO: Change Building Name via Building_Preview::setBuildingName();
-    // m_buildPreview.setBuildingName(data->)
+    m_buildPreview.setBuildingName(data->getName());
 
     m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;
 }
 
+void Builder :: switchToDestroy()
+{
+    m_preview = sf::RectangleShape();   //Reset the preview, or else the texture is messed up on it
+    m_state = Playing_State::Destroying;
+
+    m_preview.setTexture( &Game::getTexture( Texture_Name::GUI_Destroy_Mode_Button ) );
+
+    m_preview.setSize   ( {32, 32} );
+}
+
+
 void Builder :: tryBuild  ()
 {
     if ( m_canBuild ) {
-        m_City.tryAddBuilding( std::make_shared<Building>( *m_currentData, m_preview.getPosition() ) );
+        m_city.tryAddBuilding( std::make_shared<Building>( *m_currentData, m_preview.getPosition() ) );
     }
 }
 
@@ -153,14 +175,14 @@ void Builder :: checkIfCanBuild()
     bottom.height = 7;
 
 
-    for ( auto& rect : m_City.getGroundSections() ) {
+    for ( auto& rect : m_city.getGroundSections() ) {
         if ( bottom.intersects( rect ) ) {
             m_canBuild = true;
             //m_cannotBuildText.setString( waterError );
         }
     }
 
-    for ( auto& rect : m_City.getWaterSections() ) {
+    for ( auto& rect : m_city.getWaterSections() ) {
         if ( bottom.intersects( rect ) ) {
             m_canBuild = false;
             m_cannotBuildText.setString( waterError );
@@ -169,7 +191,7 @@ void Builder :: checkIfCanBuild()
 
     //Check for intersection with the other buildings, seeing as we don't want
     //buildings ontop of buildings as that wouldn't make sense tbh
-    for ( auto& building : m_City.getBuildings() ) {
+    for ( auto& building : m_city.getBuildings() ) {
         if ( bottom.intersects( building->bounds ) ) {
            m_canBuild = false;
            m_cannotBuildText.setString( collisionEorr );

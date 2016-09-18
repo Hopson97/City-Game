@@ -126,6 +126,10 @@ void Building_Data :: draw ( const sf::Vector2f& position )
     Window::draw( m_sprite );
 }
 
+const std::string& Building_Data :: getName() const
+{
+    return m_name;
+}
 
 
 //Begin the database

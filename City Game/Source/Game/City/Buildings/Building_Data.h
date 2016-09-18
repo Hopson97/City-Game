@@ -38,6 +38,8 @@ class Building_Data
 
         void draw ( const sf::Vector2f& position );
 
+        const std::string& getName () const;
+
     private:
         void load ();
         void loadResources  ( Resources& resources, std::ifstream& inFile );

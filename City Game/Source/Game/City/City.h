@@ -34,11 +34,13 @@ class City
 
         const Building_Ptr_Vector& getBuildings     () const;
 
-        void removeBuilding ( BuildingPtr b );
+        void tryDestory     ( sf::FloatRect area );
 
     private:
         void addBuilding    ( std::shared_ptr<Building> b );
         void addPerson      ();
+
+        void removeBuilding ( Building& b );
 
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
