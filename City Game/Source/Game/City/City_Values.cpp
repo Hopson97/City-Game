@@ -60,17 +60,6 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
         tryDoRates  ( m_resources.wood,    building->data.getRates().wood,      "wood"  );
     }
 
-    std::cout <<    m_resources.coins  << "\n" <<
-                    m_resources.stone   << "\n" <<
-
-                  m_resources.wood    << "\n" <<
-                  m_resources.metal    << "\n" <<
-                  m_resources.food     << "\n" << std::endl;
-
-
-
-
-
     m_statistics.happiness -= m_statistics.homeless / 2;
 }
 
@@ -80,7 +69,6 @@ void City_Values :: tryDoRates (int& rate, int amount, std::string temp )
         rate += amount;
     } else {
         m_statistics.happiness--;
-        std::cout << "Uh oh, a rate with " << rate << " and the name is " << temp <<  " is too small to be taken away from " << amount << "! " <<  rate + amount  << std::endl;
     }
 }
 
