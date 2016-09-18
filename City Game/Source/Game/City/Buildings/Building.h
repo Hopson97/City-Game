@@ -20,6 +20,10 @@ class Building
 
         void draw();
 
+        bool isSpacesAvalibleToLive () const;
+
+        void addPerson( Person& person );
+
     private:
         std::vector<Person*> m_occupants; //Is a vector of pointers, but not to dynamic memory so dw about memory leaks tbh
 };

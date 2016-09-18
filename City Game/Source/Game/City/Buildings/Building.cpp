@@ -17,3 +17,14 @@ int Building :: getOccupantCount() const
 {
     return m_occupants.size();
 }
+
+bool Building :: isSpacesAvalibleToLive() const
+{
+    return ( m_occupants.size() < (size_t)data.getStats().vacancy );
+}
+
+void Building::addPerson(Person& person)
+{
+    m_occupants.push_back( &person );
+}
+

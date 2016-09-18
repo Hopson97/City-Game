@@ -81,25 +81,6 @@ struct Farm : public Building_Data
 }
 
 
-
-
-Building_Data :: Building_Data ( Building_Use use,
-                                 Resources    cost,
-                                 Resources    rates,
-                                 Statistics   change,
-                                 const sf::Vector2f& size,
-                                 const sf::Texture& texture )
-:   m_use       ( use  )
-,   m_cost      ( cost )
-,   m_rates     ( rates )
-,   m_stats     ( change )
-,   m_sprite    ( size )
-,   m_name      ( " " )
-{
-    m_sprite.setSize( size );
-    m_sprite.setTexture( &texture );
-}
-
 Building_Data :: Building_Data( const std::string& strName,
                                 const sf::Texture& texture )
 :   m_name      ( strName )

@@ -24,13 +24,6 @@ enum Building_Name
 class Building_Data
 {
     public:
-        Building_Data( Building_Use use,
-                    Resources    cost,
-                    Resources    rates,
-                    Statistics   change,
-                    const sf::Vector2f& size,
-                    const sf::Texture& texture );
-
         Building_Data ( const std::string& strName,
                         const sf::Texture& texture );
 
@@ -47,7 +40,9 @@ class Building_Data
 
     private:
         void load ();
-        void loadMisc ( std::ifstream& inFile );
+        void loadResources  ( Resources& resources, std::ifstream& inFile );
+        void loadStats      ( std::ifstream& inFile );
+        void loadMisc       ( std::ifstream& inFile );
 
         Building_Use  m_use;
 
@@ -60,6 +55,8 @@ class Building_Data
         sf::RectangleShape m_sprite;
 
         const std::string m_name;
+
+        int m_maxOccupants;
 };
 
 

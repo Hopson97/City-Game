@@ -34,7 +34,8 @@ class City
         const Building_Ptr_Vector& getBuildings     () const;
 
     private:
-        void addBuilding ( std::shared_ptr<Building> b );
+        void addBuilding    ( std::shared_ptr<Building> b );
+        void addPerson      ();
 
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );

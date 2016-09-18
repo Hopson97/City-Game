@@ -1,5 +1,7 @@
 #include "City.h"
 
+#include <iostream>
+
 #include "../Util/Window.h"
 #include "../Util/Random.h"
 
@@ -100,10 +102,28 @@ void City :: nextDay ()
     m_dayTimer.restart();
     m_values.newDay( m_buildings );
 
-    int people = Random::integer( 0, m_values.m_statistics.vacancy );
+    //Add new people into the city if there are vacancies
+    int people = Random::integer( 0, m_day + 5 );
+    if ( people > m_values.m_statistics.vacancy ) people = m_values.m_statistics.vacancy;
+    m_values.m_statistics.vacancy -= people;
     for ( int i = 0 ; i < people ; i++ )
     {
-        m_people.push_back( Person() );
+        addPerson ();
+    }
+
+    m_values.m_statistics.population = m_people.size();
+}
+
+void City :: addPerson ()
+{
+    for ( auto& house : m_houses ) {
+        if ( house->isSpacesAvalibleToLive() ) {
+            Person p;
+            m_people.push_back( p );
+            house->addPerson ( p );
+            m_values.m_statistics.unemployedPopulation++;
+            break;
+        }
     }
 }
 

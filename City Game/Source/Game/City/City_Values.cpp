@@ -1,5 +1,7 @@
 #include "City_Values.h"
 
+#include <iostream>
+
 #include "../Util/Window.h"
 
 #include "../Game.h"
@@ -46,7 +48,10 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
     for ( const auto& building : buildings )
     {
         int occupants = building->getOccupantCount();
-        if ( occupants == 0 ) continue;
+        if ( occupants == 0 ) {
+            std::cout << "Empty af" << std::endl;
+            continue;
+        }
 
         for ( int i = 0 ; i < occupants ; i++ ) {
             tryDoRates  ( m_resources.coins,   building->data.getRates().coins );
