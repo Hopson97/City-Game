@@ -1,0 +1,28 @@
+COST
+Coins	50
+Wood  	5
+Stone 	5
+Metal 	1
+Food 	-2
+Unemp	3
+END
+
+RATES
+Coins	-3
+Wood  	0
+Stone 	-2
+Metal 	2
+Food 	-3
+END
+
+STATS
+Population	0
+Vacancy		0
+Happiness	0
+END
+
+MISC
+Size 25 20
+Use  3
+Description Turns stone into metal.
+END

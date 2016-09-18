@@ -158,7 +158,8 @@ void Game :: resetMusic()
     {
         "euk",
         "uouat",
-        "tbatw"
+        "tbatw",
+        "gm"
     };
 
     static int lastSong = songNames.size();

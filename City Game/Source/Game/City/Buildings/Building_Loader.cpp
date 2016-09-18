@@ -63,6 +63,7 @@ namespace
 
 } //Namespace anon
 
+
 void Building_Data :: loadMisc ( std::ifstream& inFile )
 {
         std::string identifier;
@@ -77,6 +78,9 @@ void Building_Data :: loadMisc ( std::ifstream& inFile )
                 int use;
                 inFile >> use;
                 m_use = static_cast<Building_Use>( use );
+            }
+            else if ( identifier == "Description" ) {
+                std::getline( inFile, m_description, '\n' );
             }
             else if ( identifier == "END" ) {
                 return;

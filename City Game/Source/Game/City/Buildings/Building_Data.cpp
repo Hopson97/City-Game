@@ -8,6 +8,21 @@
 
 #include "../../Managers/Resource_Identifier.h"
 
+/*
+    Adding a new building ->
+        You need to...
+            Create a texture
+            Add the texture to the enum in "Managers/Resource_Identifier.h"
+            Load up the texture in States/Playing.cpp
+
+            Create a class inheriting from the "Building_Data" class here
+            Create .build file for the data
+            Add the name to the enum in "Building_Data.h"
+            Add the building to the database at the bottom of this page
+
+    This might look like a lot but it takes like 2 to 4 minutes, not including creating the texture.
+*/
+
 namespace Builds
 {
 //Houses
@@ -42,6 +57,24 @@ struct Small_Stone_Mine : public Building_Data
     Small_Stone_Mine ()
     :   Building_Data ( "Small Stone Mine",
                         Game::getTexture( Texture_Name::Building_Stone_Small_Mine ) )
+    {}
+};
+
+//Metal
+struct Ore_Refinery : public Building_Data
+{
+    Ore_Refinery ()
+    :   Building_Data ( "Ore Refinery",
+                        Game::getTexture( Texture_Name::Building_Metal_Ore_Refinery ) )
+    {}
+};
+
+//Metal
+struct Farm : public Building_Data
+{
+    Farm ()
+    :   Building_Data ( "Farm",
+                        Game::getTexture( Texture_Name::Building_Food_Farm ) )
     {}
 };
 
@@ -123,10 +156,13 @@ class Building_Database
             m_database[ Building_Name::House_Hut ] = std::make_unique<Builds::Hut>();
             m_database[ Building_Name::House     ] = std::make_unique<Builds::House>();
 
-            m_database[ Building_Name::Wood_Woodcut_Hut ] = std::make_unique<Builds::Woodcut_Hut>();
+            m_database[ Building_Name::Wood_Woodcut_Hut     ]   = std::make_unique<Builds::Woodcut_Hut>();
 
-            m_database[ Building_Name::Stone_Small_Mine ] = std::make_unique<Builds::Small_Stone_Mine>();
+            m_database[ Building_Name::Stone_Small_Mine     ]   = std::make_unique<Builds::Small_Stone_Mine>();
 
+            m_database[ Building_Name::Metal_Ore_Refinery   ]   = std::make_unique<Builds::Ore_Refinery>();
+
+            m_database[ Building_Name::Food_Farm            ]   = std::make_unique<Builds::Farm>();
         }
 
         std::map<Building_Name, std::unique_ptr<Building_Data>> m_database;

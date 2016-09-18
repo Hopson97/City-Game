@@ -64,6 +64,10 @@ enum class Texture_Name
 
     Building_Stone_Small_Mine,
 
+    Building_Metal_Ore_Refinery,
+
+    Building_Food_Farm,
+
     TEMP2
 };
 

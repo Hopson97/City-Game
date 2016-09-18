@@ -13,7 +13,11 @@ enum Building_Name
 
     Wood_Woodcut_Hut,
 
-    Stone_Small_Mine
+    Stone_Small_Mine,
+
+    Metal_Ore_Refinery,
+
+    Food_Farm
 };
 
 
@@ -50,6 +54,8 @@ class Building_Data
         Resources     m_cost;   //How much this building costs to build
         Resources     m_rates;  //How much this building influences the player's rate daily
         Statistics    m_stats;
+
+        std::string m_description;
 
         sf::RectangleShape m_sprite;
 

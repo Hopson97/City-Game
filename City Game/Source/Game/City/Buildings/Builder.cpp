@@ -49,6 +49,18 @@ Builder :: Builder ( City& City, const City_Values& values )
                                 Game::getTexture( Texture_Name::Building_Stone_Small_Mine ),
                                 getFunction( getBuildingData( Building_Name::Stone_Small_Mine ) ),
                                 getBuildingData( Building_Name::Stone_Small_Mine     ) );
+
+    m_buildMenu.addSpecialButton<Building_Data>
+                                ( buttonSize,
+                                Game::getTexture( Texture_Name::Building_Metal_Ore_Refinery ),
+                                getFunction( getBuildingData( Building_Name::Metal_Ore_Refinery ) ),
+                                getBuildingData( Building_Name::Metal_Ore_Refinery     ) );
+
+    m_buildMenu.addSpecialButton<Building_Data>
+                                ( buttonSize,
+                                Game::getTexture( Texture_Name::Building_Food_Farm ),
+                                getFunction( getBuildingData( Building_Name::Food_Farm ) ),
+                                getBuildingData( Building_Name::Food_Farm     ) );
 }
 
 void Builder :: input ()
