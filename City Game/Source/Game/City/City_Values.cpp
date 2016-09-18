@@ -1,8 +1,12 @@
 #include "City_Values.h"
 
 #include "../Util/Window.h"
+
 #include "../Game.h"
+
 #include "../Managers/Resource_Identifier.h"
+
+#include "Buildings/Building_Data.h"
 
 constexpr static int EXPLOIT_MODE = 9'999'999;
 
@@ -14,6 +18,8 @@ City_Values::City_Values()
 {
     m_resourceGUI   .setBgColour    ( { 100, 100, 100 } );
     m_statsGUI      .setBgColour    ( { 100, 100, 100 } );
+
+    m_statistics.happiness = 50;
 
     m_resourceGUI   .setResizeable( true );
     m_statsGUI      .setResizeable( true );
@@ -34,10 +40,29 @@ void City_Values :: draw()
     m_statsGUI      .draw();
 }
 
-void City_Values :: newDay()
+void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildings )
 {
-    m_resources += m_dailyResourceChange;
+    //We have to take the rates away individually, just in case there are not enough resources to take away.
+    for ( const auto& building : buildings )
+    {
+        tryDoRates  ( m_resources.coins,   building->data.getRates().coins );
+        tryDoRates  ( m_resources.food,    building->data.getRates().food );
+        tryDoRates  ( m_resources.metal,   building->data.getRates().metal );
+        tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
+        tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
+    }
 }
+
+void City_Values :: tryDoRates (int& rate, int amount)
+{
+
+    if ( rate + amount >= 0 ) {
+        rate += amount;
+    } else {
+        m_statistics.happiness--;
+    }
+}
+
 
 void City_Values :: setUpResourceGUI()
 {

@@ -3,6 +3,9 @@
 
 #include "../GUI/GUI.h"
 
+#include <memory>
+#include "Buildings/Building.h"
+
 #include <ostream>
 
 struct Resources
@@ -101,9 +104,11 @@ class City_Values
 
         // BAG GUI
 
-        void newDay();
+        void newDay(  const std::vector<std::shared_ptr<Building>>& buildings  );
 
     private:
+        void tryDoRates         ( int& rate, int amount );
+
         void setUpResourceGUI   ();
         void setUpStatisticGUI  ();
 

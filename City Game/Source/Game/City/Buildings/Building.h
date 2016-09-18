@@ -1,7 +1,9 @@
 #ifndef BUILDING_TYPE_H
 #define BUILDING_TYPE_H
 
-#include "Building_Data.h"
+#include <SFML/Graphics.hpp>
+
+class Building_Data;
 
 struct Building
 {

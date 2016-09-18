@@ -17,7 +17,7 @@ void City :: update( float dt)
     if ( m_dayTimer.getElapsedTime() >= m_dayLength )
     {
         m_dayTimer.restart();
-        m_values.newDay();
+        m_values.newDay( m_buildings );
     }
 
     m_builder.input();
