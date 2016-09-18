@@ -52,9 +52,12 @@ class City
         void init ();
         void loadFloatRectToVector ( std::vector<sf::FloatRect>& vect, std::ifstream& inFile );
 
-        void nextDay        ();
-        void tryGetMoveIns  ();
-        void tryAddWorkers  ();
+        void nextDay                ();
+        void tryGetMoveIns          ();
+        void tryGetHomelessHouses   ();
+        void tryAddWorkers          ();
+
+        void addPersonToHouse ( PersonPtr person, BuildingPtr house );
 
         sf::RectangleShape m_background;
 

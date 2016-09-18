@@ -153,24 +153,67 @@ void City :: nextDay ()
     m_dayTimer.restart();
     m_values.newDay( m_buildings );
 
+    tryGetHomelessHouses();
     tryGetMoveIns();
     tryAddWorkers();
+
     m_values.m_statistics.population = m_people.size();
 }
 
 void City::tryGetMoveIns()
 {
+    int& vacant = m_values.m_statistics.vacancy;
     //Add new people into the city if there are vacancies
     int people = Random::integer( 0, m_day + 5 );
-    if ( people > m_values.m_statistics.vacancy ) people = m_values.m_statistics.vacancy;
-    m_values.m_statistics.vacancy -= people;
+    if ( people > vacant ) {
+        people = vacant;
+    }
+    if ( people > 5 ) {
+        people = 5;
+    }
 
     for ( int i = 0 ; i < people ; i++ ) {
         addPerson ();
+        vacant --;
     }
 
     m_values.m_statistics.population = m_people.size();
 }
+
+void City::tryGetHomelessHouses()
+{
+    int& homeless = m_values.m_statistics.homeless;
+    if ( homeless == 0 ) return;
+    int people = Random::integer( 0, m_day + 2 );
+
+    if ( people > homeless ) {
+        people = homeless;
+    }
+    if ( people > 5 ) {
+        people = 5;
+    }
+
+    std::vector<PersonPtr> homelessList;
+    for ( auto& person : m_people )
+    {
+        if ( person->isHomeless() ) {
+            homelessList.push_back( person );
+        }
+    }
+    if ( homelessList.empty() ) {
+        return;
+    }
+
+    for ( int i = 0 ; i < people ; i++ ) {
+        for ( auto& house : m_houses ) {
+            if ( house->isSpacesAvalibleToLive() ) {
+                addPersonToHouse( homelessList.at( i ), house );
+                homeless --;
+            }
+        }
+    }
+}
+
 
 void City::tryAddWorkers()
 {
@@ -201,14 +244,18 @@ void City :: addPerson ()
         if ( house->isSpacesAvalibleToLive() ) {
             PersonPtr p = std::make_shared<Person>();
             m_people.push_back( p );
-            house->addPerson ( p );
-            p->setHouse ( *house );
+            addPersonToHouse( p, house );
             m_values.m_statistics.unemployedPopulation++;
             break;
         }
     }
 }
 
+void City :: addPersonToHouse( PersonPtr person, BuildingPtr house )
+{
+    house ->addPerson   ( person );
+    person->setHouse    ( *house  );
+}
 
 
 const FloatRect_Vector& City :: getWaterSections() const
