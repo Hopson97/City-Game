@@ -41,14 +41,14 @@ void Building_Data :: loadStats ( std::ifstream& inFile )
     {
         if ( identifier == "Vacancy" ) {
             inFile >> m_stats.vacancy;
-            m_maxOccupants += m_stats.vacancy;
+            m_maxOccupants = m_stats.vacancy;
         }
         else if ( identifier == "Happiness" ) {
             inFile >> m_stats.happiness;
         }
         else if ( identifier == "Jobs" ) {
             inFile >> m_stats.jobs;
-            m_maxOccupants += m_stats.jobs;
+            m_maxOccupants = m_stats.jobs;
         }
         else if ( identifier == "END" ) {
             return;

@@ -33,6 +33,19 @@ City::City( const std::string& name )
     m_actionGUI.setTitle( "Actions" );
 }
 
+void City::removeBuilding( BuildingPtr b )
+{
+    //Re add the resources and then get the group of people of whom were evicted
+    m_values.m_resources += b->data.getCost() / 4;
+
+    Person_Group group = b->destroy();
+    m_values.m_statistics.jobs                  += group.workers.size();
+    m_values.m_statistics.unemployedPopulation  += group.workers.size();
+    m_values.m_statistics.homeless              += group.occupants.size();
+    group.clear();
+}
+
+
 void City :: update( float dt)
 {
     if ( m_dayTimer.getElapsedTime() >= m_dayLength )
@@ -77,7 +90,7 @@ void City :: tryAddBuilding ( std::shared_ptr<Building> b )
     addBuilding( b );
 }
 
-void City :: addBuilding(std::shared_ptr<Building>b)
+void City :: addBuilding( std::shared_ptr<Building>b )
 {
     //Deduct/ Increase the player's resource values
     m_values.m_resources  -= b->data.getCost();
@@ -89,7 +102,8 @@ void City :: addBuilding(std::shared_ptr<Building>b)
             m_houses.push_back( b );
             break;
 
-        default:
+        case Building_Use::Work:
+            m_workPlaces.push_back( b );
             break;
     }
 
@@ -118,9 +132,10 @@ void City :: addPerson ()
 {
     for ( auto& house : m_houses ) {
         if ( house->isSpacesAvalibleToLive() ) {
-            Person p;
+            PersonPtr p = std::make_shared<Person>();
             m_people.push_back( p );
             house->addPerson ( p );
+            p->setHouse ( *house );
             m_values.m_statistics.unemployedPopulation++;
             break;
         }

@@ -61,6 +61,7 @@ enum class Texture_Name
     Stat_Vacancy,
     Stat_Happiness,
     Stat_Jobs,
+    Stat_Homeless,
 
     Building_Dwelling_Hut,
     Building_Dwelling_House,

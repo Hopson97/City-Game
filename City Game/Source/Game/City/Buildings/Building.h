@@ -2,9 +2,11 @@
 #define BUILDING_TYPE_H
 
 #include <SFML/Graphics.hpp>
+#include "Person_Group.h"
 
 class Building_Data;
-class Person;
+
+
 
 class Building
 {
@@ -22,10 +24,13 @@ class Building
 
         bool isSpacesAvalibleToLive () const;
 
-        void addPerson( Person& person );
+        void addPerson  ( PersonPtr person );
+        void addWorker  ( PersonPtr person );
+
+        Person_Group& destroy   ();
 
     private:
-        std::vector<Person*> m_occupants; //Is a vector of pointers, but not to dynamic memory so dw about memory leaks tbh
+        Person_Group    m_people;
 };
 
 #endif // BUILDING_TYPE_H

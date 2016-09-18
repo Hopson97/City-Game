@@ -11,7 +11,7 @@ Coins	0
 Wood  	0
 Stone 	0
 Metal 	0
-Food 	5
+Food 	2
 END
 
 STATS
@@ -22,5 +22,6 @@ END
 
 MISC
 Size 35 35 
-Use  4
+Use  1
+Description Where a lot of food is created.
 END

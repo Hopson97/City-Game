@@ -15,13 +15,13 @@ Food 	-1
 END
 
 STATS
-Population	0
 Vacancy		0
 Happiness	-1
+Jobs		2
 END
 
 MISC
 Size 25 25
-Use  2
+Use  1
 Description A mine for a couple miners to work in.
 END

@@ -4,10 +4,7 @@
 enum Building_Use
 {
     Housing = 0,
-    Wood    = 1,
-    Stone   = 2,
-    Metal   = 3,
-    Food    = 4
+    Work    = 1
 };
 
 #endif // E_BUILDING_USE_H_INCLUDED

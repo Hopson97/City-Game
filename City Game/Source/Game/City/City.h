@@ -15,6 +15,7 @@
 #include "Person.h"
 
 typedef std::vector<sf::FloatRect> FloatRect_Vector;
+typedef std::shared_ptr<Building> BuildingPtr;
 typedef std::vector<std::shared_ptr<Building>> Building_Ptr_Vector;
 
 class City
@@ -32,6 +33,8 @@ class City
         const FloatRect_Vector& getNoBuildSections  () const;
 
         const Building_Ptr_Vector& getBuildings     () const;
+
+        void removeBuilding ( BuildingPtr b );
 
     private:
         void addBuilding    ( std::shared_ptr<Building> b );
@@ -54,8 +57,8 @@ class City
         FloatRect_Vector m_noBuildSections;
 
         Building_Ptr_Vector m_buildings;
-
         Building_Ptr_Vector m_houses;
+        Building_Ptr_Vector m_workPlaces;
 
         sf::Time    m_dayLength = sf::seconds( 30 );
         sf::Clock   m_dayTimer;
@@ -64,7 +67,7 @@ class City
         GUI m_newDayGUI;
 
         int m_day = 0;
-        std::vector<Person> m_people;
+        std::vector<PersonPtr> m_people;
 
         static
         constexpr int   WIDTH  = 1280,

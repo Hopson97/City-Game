@@ -56,6 +56,17 @@ struct Resources
                 ( metal > other.metal  ) ||
                 ( food  > other.food   );
     }
+
+    Resources operator /( int division ) const
+    {
+        return {
+            coins   / division,
+            wood    / division,
+            stone   / division,
+            metal   / division,
+            food    / division,
+        };
+    }
 };
 
 struct Statistics
@@ -66,12 +77,14 @@ struct Statistics
                  int vacancy,
                  int happiness ,
                  int unemployedPopulation,
-                 int jobs )
+                 int jobs,
+                 int homeless )
     :   population              ( population           )
     ,   vacancy                 ( vacancy              )
     ,   happiness               ( happiness            )
     ,   unemployedPopulation    ( unemployedPopulation )
     ,   jobs                    ( jobs )
+    ,   homeless                ( homeless )
     {}
 
 
@@ -80,12 +93,14 @@ struct Statistics
     int happiness               = 0;
     int unemployedPopulation    = 0;
     int jobs                    = 0;
+    int homeless                = 0;
 
     void operator +=( const Statistics& other )
     {
         population              += other.population;
         vacancy                 += other.vacancy;
         happiness               += other.happiness;
+        jobs                    += other.jobs;
     }
 
 };

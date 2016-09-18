@@ -7,7 +7,7 @@ Food 	5
 END
 
 RATES
-Coins	5
+Coins	2
 Wood  	0
 Stone 	0
 Metal 	0
@@ -15,9 +15,9 @@ Food 	-2
 END
 
 STATS
-Population	0
 Vacancy		5
 Happiness	1
+Jobs		0
 END
 
 MISC

@@ -15,9 +15,9 @@ Food 	-1
 END
 
 STATS
-Population	0
 Vacancy		0
 Happiness	0
+Jobs		2
 END
 
 MISC

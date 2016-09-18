@@ -15,16 +15,34 @@ void Building :: draw ()
 
 int Building :: getOccupantCount() const
 {
-    return m_occupants.size();
+    return m_people.occupants.size();
 }
 
 bool Building :: isSpacesAvalibleToLive() const
 {
-    return ( m_occupants.size() < (size_t)data.getStats().vacancy );
+    return ( m_people.occupants.size() < (size_t)data.getStats().vacancy );
 }
 
-void Building::addPerson(Person& person)
+void Building :: addPerson ( PersonPtr person)
 {
-    m_occupants.push_back( &person );
+    m_people.occupants.push_back( person );
+}
+
+void Building::addWorker(PersonPtr person)
+{
+    m_people.workers.push_back( person );
+}
+
+
+Person_Group& Building :: destroy ()
+{
+    for ( auto& person : m_people.occupants ) {
+        person->evictHome();
+    }
+    for ( auto& person : m_people.workers ) {
+        person->sack();
+    }
+
+    return m_people;
 }
 

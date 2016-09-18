@@ -15,8 +15,8 @@ constexpr static int EXPLOIT_MODE = 9'999'999;
 City_Values::City_Values()
 :   m_resources     ( 200, 25, 25, 25, 25 )
 //:   m_resources     ( EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE, EXPLOIT_MODE )
-,   m_resourceGUI   ( { 100, 200 }, {Window::WIDTH - 100, 0} )
-,   m_statsGUI      ( { 100, 200 }, {0,0 } )
+,   m_resourceGUI   ( { 100, 34 * 6 }, {Window::WIDTH - 100, 0} )
+,   m_statsGUI      ( { 100, 34 * 7 }, {0,0 } )
 {
     m_resourceGUI   .setBgColour    ( { 100, 100, 100 } );
     m_statsGUI      .setBgColour    ( { 100, 100, 100 } );
@@ -61,6 +61,7 @@ void City_Values :: newDay( const std::vector<std::shared_ptr<Building>>& buildi
         tryDoRates  ( m_resources.stone,   building->data.getRates().stone );
         tryDoRates  ( m_resources.wood,    building->data.getRates().wood );
     }
+    m_statistics.happiness -= m_statistics.homeless;
 }
 
 void City_Values :: tryDoRates (int& rate, int amount)
@@ -73,10 +74,10 @@ void City_Values :: tryDoRates (int& rate, int amount)
     }
 }
 
+const int padding = 6;
 
 void City_Values :: setUpResourceGUI()
 {
-    const int padding = 4;
     const sf::Vector2f symbolSize ( 32, 32 );
     m_resourceGUI.beginColumn( { padding, 1 }, padding );
 
@@ -111,7 +112,6 @@ void City_Values :: setUpResourceGUI()
 
 void City_Values::setUpStatisticGUI()
 {
-    const int padding = 4;
     const sf::Vector2f symbolSize ( 32, 32 );
     m_statsGUI.beginColumn( { padding, 1 }, padding );
 
@@ -143,4 +143,9 @@ void City_Values::setUpStatisticGUI()
                                      Game::getTexture( Texture_Name::Stat_Jobs),
                                      m_statistics.jobs,
                                      "Jobs that are open for workers." );
+
+    m_statsGUI.addSymbolUpdateLabel( symbolSize,
+                                     Game::getTexture( Texture_Name::Stat_Homeless),
+                                     m_statistics.homeless,
+                                     "Homeless people living in your city." );
 }
