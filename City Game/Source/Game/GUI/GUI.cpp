@@ -154,3 +154,14 @@ void GUI :: reSize()
 {
     m_isHidden = !m_isHidden;
 }
+
+
+void GUI :: changeOutlineThickness(int thickness)
+{
+    m_background.setOutlineThickness(thickness);
+}
+
+void GUI :: changeOutlineColour(sf::Color color)
+{
+    m_background.setOutlineColor(color);
+}

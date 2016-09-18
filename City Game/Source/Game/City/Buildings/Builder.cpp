@@ -124,6 +124,9 @@ void Builder :: switchBuildType( Building_Data* data )
 
     m_cannotBuildText.setString( "" );
 
+    // TODO: Change Building Name via Building_Preview::setBuildingName();
+    // m_buildPreview.setBuildingName(data->)
+
     m_preview.setTexture( &data->getTexture ()  );
     m_currentData = data;
 }
