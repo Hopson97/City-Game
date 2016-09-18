@@ -99,6 +99,10 @@ class GUI
 
         void reSize();
 
+        // New GUI functions
+        void changeOutlineThickness(int thickness);
+        void changeOutlineColour(sf::Color color);
+
     private:
         bool stylersActive  () const;
 

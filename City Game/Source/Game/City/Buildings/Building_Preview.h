@@ -2,6 +2,7 @@
 #define BUILDING_PREVIEW_H
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 #include "../../GUI/GUI.h"
 #include "../../Util/Window.h"
@@ -23,12 +24,14 @@ class Building_Preview
 
         void changeState(PR_STATE state); // Change state
         void setImagePreview(const sf::Texture& texture);
+        void setBuildingName(std::string& str);
 
     private:
         void resetImagePreview();
 
         GUI     m_mainFrame;        // All the GUIs in the preview
         GUI     m_imagePreview;
+        GUI     m_nameLabel;
 
         PR_STATE state;
 
