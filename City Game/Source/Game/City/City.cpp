@@ -40,9 +40,9 @@ void City::removeBuilding( Building& b )
     m_values.m_resources += b.data.getCost() / 4;
 
     Person_Group group = b.destroy();
-    m_values.m_statistics.homeless += group.occupants.size();
-
-    m_values.m_statistics.vacancy += group.occupants.size();
+    m_values.m_statistics.homeless  += group.occupants.size ();
+    m_values.m_statistics.vacancy   += group.occupants.size ();
+    m_values.m_statistics.jobs      += group.workers.size   ();
 
     m_values.m_statistics -= b.data.getStats();
     group.clear();
@@ -150,6 +150,8 @@ void City::tryGetMoveIns()
 
 void City::tryAddWorkers()
 {
+    if ( m_workPlaces.size() == 0 ) return;
+
     for ( auto& person : m_people )
     {
         if ( person->isUnemployed() ) {

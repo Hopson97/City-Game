@@ -10,7 +10,7 @@
 
 #include "Buildings/Building_Data.h"
 
-constexpr static int EXPLOIT_MODE = 9'999'999;
+constexpr static int EXPLOIT_MODE = 1000;
 
 City_Values::City_Values()
 :   m_resources     ( 200, 25, 25, 25, 25 )

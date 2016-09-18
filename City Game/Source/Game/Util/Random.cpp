@@ -9,6 +9,7 @@ namespace Random
 
 	int integer(int low, int high)
 	{
+	    if ( low == high || low > high ) return low;
 		return rand() % (high - low + 1) + low;
 	}
 
